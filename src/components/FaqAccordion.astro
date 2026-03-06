@@ -66,4 +66,17 @@ const { faqs } = Astro.props;
     color: var(--text-light);
     line-height: 1.6;
   }
+  @media (max-width: 768px) {
+    .faq-question {
+      padding: 1rem 1.25rem;
+      font-size: 0.95rem;
+      min-height: 48px;
+    }
+    .faq-answer {
+      padding: 0 1.25rem 1rem;
+    }
+    .faq-answer p {
+      font-size: 0.9rem;
+    }
+  }
 </style>

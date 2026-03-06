@@ -93,13 +93,27 @@ import zonas from '../data/zonas.json';
     color: var(--text-light);
   }
   @media (max-width: 768px) {
+    .footer {
+      padding: 2rem 0 1.5rem;
+    }
     .footer-grid {
       grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+    .footer-col h3 {
+      font-size: 1rem;
+      margin-bottom: 0.75rem;
+    }
+    .footer-col a {
+      font-size: 0.85rem;
+      display: inline-block;
+      padding: 0.15rem 0;
     }
   }
   @media (max-width: 480px) {
     .footer-grid {
       grid-template-columns: 1fr;
+      gap: 1.25rem;
     }
   }
 </style>

@@ -90,12 +90,41 @@ const { title, subtitle, location = 'Mostoles', description, showButtons = false
     font-size: 0.9rem;
   }
   @media (max-width: 768px) {
+    .hero {
+      padding: 1.5rem 0 2rem;
+    }
     .hero-inner {
       grid-template-columns: 1fr;
-      gap: 2rem;
+      gap: 1.5rem;
     }
-    .hero {
-      padding: 2rem 0 3rem;
+    .hero-image {
+      order: -1;
+    }
+    .hero-image-placeholder {
+      aspect-ratio: 16/9;
+    }
+    .hero-image-placeholder span {
+      font-size: 3rem;
+    }
+    .hero-subtitle {
+      font-size: 1rem;
+    }
+    .hero-desc {
+      font-size: 0.95rem;
+      margin-bottom: 1.25rem;
+    }
+    .hero-buttons {
+      gap: 0.5rem;
+    }
+    .hero-buttons .btn {
+      font-size: 0.85rem;
+      padding: 0.6rem 1rem;
+    }
+    .hero-buttons .btn-cta {
+      width: 100%;
+      padding: 0.85rem 1rem;
+      font-size: 1rem;
+      order: -1;
     }
   }
 </style>

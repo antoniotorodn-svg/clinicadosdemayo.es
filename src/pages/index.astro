@@ -289,4 +289,32 @@ const schema = JSON.stringify({
     font-size: 0.9rem;
     color: var(--text-light);
   }
+
+  @media (max-width: 768px) {
+    .especialidades-grid {
+      grid-template-columns: repeat(2, 1fr) !important;
+      gap: 1.25rem;
+    }
+    .especialidad-card {
+      padding: 1.25rem;
+      padding-top: 2rem;
+    }
+    .especialidad-card h3 {
+      font-size: 0.95rem;
+    }
+    .especialidad-card p {
+      font-size: 0.8rem;
+    }
+    .equipo-avatar {
+      width: 60px;
+      height: 60px;
+      font-size: 1.25rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .especialidades-grid {
+      grid-template-columns: 1fr !important;
+    }
+  }
 </style>

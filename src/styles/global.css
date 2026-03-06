@@ -5,10 +5,10 @@
   --sand-dark: #EBE3D9;
   --cream: #FDF8F3;
 
-  /* Color primario */
-  --primary: #5B8DB8;
-  --primary-dark: #3A6B8C;
-  --primary-pale: #EBF3FA;
+  /* Color primario — verde Mentaris */
+  --primary: #7CB69D;
+  --primary-dark: #4A8B6F;
+  --primary-pale: #EEF6F1;
 
   /* Acentos */
   --gold: #C9982E;
@@ -38,6 +38,7 @@
 html {
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
+  overflow-x: hidden;
 }
 
 body {
@@ -47,6 +48,7 @@ body {
   background-color: var(--cream);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -55,9 +57,9 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--text);
 }
 
-h1 { font-size: clamp(2rem, 5vw, 3rem); }
-h2 { font-size: clamp(1.5rem, 4vw, 2.25rem); }
-h3 { font-size: clamp(1.2rem, 3vw, 1.5rem); }
+h1 { font-size: clamp(1.75rem, 5vw, 3rem); }
+h2 { font-size: clamp(1.4rem, 4vw, 2.25rem); }
+h3 { font-size: clamp(1.1rem, 3vw, 1.5rem); }
 
 a {
   color: var(--primary);
@@ -101,17 +103,20 @@ button {
   margin-bottom: 2.5rem;
 }
 
+/* Buttons — min 44px touch target */
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
   padding: 0.75rem 1.75rem;
+  min-height: 44px;
   border-radius: 100px;
   font-weight: 700;
   font-size: 1rem;
   transition: all var(--transition);
   text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .btn-pill {
@@ -176,28 +181,61 @@ button {
   gap: 1.5rem;
 }
 
-@media (max-width: 768px) {
-  .grid-2,
-  .grid-3,
-  .grid-4 {
-    grid-template-columns: 1fr;
-  }
-
-  .section {
-    padding: 3rem 0;
-  }
-
-  body {
-    padding-bottom: 70px;
-  }
-}
-
+/* Tablet — media queries from large to small (correct cascade) */
 @media (max-width: 1024px) {
   .grid-4 {
     grid-template-columns: repeat(2, 1fr);
   }
   .grid-3 {
     grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .container {
+    padding: 0 1rem;
+  }
+
+  .section {
+    padding: 2.5rem 0;
+  }
+
+  .section-title {
+    margin-bottom: 1.5rem;
+  }
+
+  .grid-2,
+  .grid-3,
+  .grid-4 {
+    grid-template-columns: 1fr;
+  }
+
+  .card {
+    padding: 1.25rem;
+  }
+
+  body {
+    padding-bottom: calc(60px + env(safe-area-inset-bottom, 0px));
+  }
+
+  .btn {
+    padding: 0.7rem 1.5rem;
+    font-size: 0.95rem;
+  }
+}
+
+/* Small mobile */
+@media (max-width: 480px) {
+  h1 { font-size: 1.6rem; }
+  h2 { font-size: 1.3rem; }
+
+  .section {
+    padding: 2rem 0;
+  }
+
+  .container {
+    padding: 0 0.875rem;
   }
 }
 
