@@ -1,0 +1,39 @@
+---
+interface Props {
+  titulo?: string;
+  subtitulo?: string;
+}
+
+const { titulo = 'Necesitas un podologo en Mostoles?', subtitulo = 'Pide tu cita en Clinica Dos de Mayo. Estamos en C/ Soria 2, Mostoles.' } = Astro.props;
+---
+<section class="cta-final">
+  <div class="container cta-inner">
+    <h2>{titulo}</h2>
+    <p>{subtitulo}</p>
+    <a href="tel:+34916146770" class="btn btn-cta btn-cta-large">📞 Llamar al 916 14 67 70</a>
+  </div>
+</section>
+
+<style>
+  .cta-final {
+    background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+    padding: 4rem 0;
+    text-align: center;
+  }
+  .cta-inner h2 {
+    color: var(--white);
+    margin-bottom: 1rem;
+  }
+  .cta-inner p {
+    color: rgba(255,255,255,0.85);
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .btn-cta-large {
+    padding: 1rem 2.5rem;
+    font-size: 1.15rem;
+  }
+</style>

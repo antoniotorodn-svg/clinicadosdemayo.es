@@ -1,0 +1,40 @@
+---
+import ResenaCard from './ResenaCard.astro';
+import resenas from '../data/resenas.json';
+
+interface Props {
+  limit?: number;
+  indices?: number[];
+}
+
+const { limit = 9, indices } = Astro.props;
+const items = indices ? indices.map(i => resenas[i]) : resenas.slice(0, limit);
+---
+<section class="section">
+  <div class="container">
+    <h2 class="section-title">Lo que dicen nuestros pacientes</h2>
+    <div class="resenas-grid">
+      {items.map(r => (
+        <ResenaCard nombre={r.nombre} inicial={r.inicial} estrellas={r.estrellas} texto={r.texto} />
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .resenas-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+  }
+  @media (max-width: 1024px) {
+    .resenas-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (max-width: 640px) {
+    .resenas-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

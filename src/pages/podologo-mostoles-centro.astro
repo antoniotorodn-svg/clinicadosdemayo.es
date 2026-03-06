@@ -1,0 +1,74 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
+import TrustBar from '../components/TrustBar.astro';
+import ServiciosGrid from '../components/ServiciosGrid.astro';
+import ResenasGrid from '../components/ResenasGrid.astro';
+import CtaFinal from '../components/CtaFinal.astro';
+
+const schema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "Clinica Dos de Mayo — Podologo en Mostoles Centro",
+  "@id": "https://clinicadosdemayo.com/#business",
+  "url": "https://clinicadosdemayo.com/podologo-mostoles-centro",
+  "telephone": "+34916146770",
+  "address": {"@type": "PostalAddress", "streetAddress": "Calle Soria 2", "addressLocality": "Mostoles", "addressRegion": "Madrid", "postalCode": "28934", "addressCountry": "ES"},
+  "areaServed": {"@type": "Place", "name": "Mostoles Centro, Mostoles"}
+});
+---
+<Layout
+  title="Podologo en Mostoles Centro | Clinica Dos de Mayo | 916 14 67 70"
+  description="Podologo en Mostoles Centro. Clinica Dos de Mayo en C/ Soria 2, junto a Plaza del Pradillo. +15 anos de experiencia. Pide cita: 916 14 67 70"
+  canonical="https://clinicadosdemayo.com/podologo-mostoles-centro"
+  schema={schema}
+>
+  <Hero
+    title="Podologo en Mostoles Centro"
+    subtitle="Clinica Dos de Mayo — C/ Soria 2"
+    description="Tu podologo de confianza en el corazon de Mostoles. Mas de 15 anos de experiencia cuidando los pies de nuestros vecinos."
+    location="Mostoles Centro"
+  />
+
+  <TrustBar />
+
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">Tu podologo en el centro de Mostoles</h2>
+      <div class="zona-content">
+        <p>El centro de Mostoles es el nucleo historico y comercial del municipio, con aproximadamente 52.000 habitantes que viven y trabajan en torno a sus calles mas emblematicas. La <strong>Plaza del Pradillo</strong>, corazon de la ciudad, la <strong>Avenida Dos de Mayo</strong> y la <strong>Avenida de la Constitucion</strong> configuran un entorno urbano dinamico donde miles de mostolenos realizan su vida diaria.</p>
+        <p>Clinica Dos de Mayo se encuentra precisamente aqui, en la <strong>Calle Soria 2</strong>, en pleno centro de Mostoles. Esta ubicacion privilegiada nos convierte en la opcion mas comoda para cualquier vecino del centro que necesite atencion podologica. No necesitas desplazarte lejos ni depender del transporte: puedes llegar caminando en pocos minutos desde cualquier punto del centro.</p>
+        <p>Ya sea que vivas cerca de la Plaza del Pradillo, en las inmediaciones de la Avenida Dos de Mayo o junto a la Avenida de la Constitucion, nuestra clinica esta a un paseo de distancia. Atendemos todo tipo de patologias del pie: quiropodia, unas encarnadas, papilomas plantares, juanetes, cirugia percutanea MIS, plantillas ortopedicas a medida y estudios biomecanicos de la pisada. Nuestro equipo de podologas cuenta con mas de 15 anos de experiencia y ofrece un trato cercano y profesional a cada paciente.</p>
+        <p>Si buscas un <strong>podologo en Mostoles Centro</strong>, estas en el lugar indicado. Somos tu clinica de barrio con tecnologia de vanguardia.</p>
+      </div>
+    </div>
+  </section>
+
+  <ServiciosGrid />
+
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">Como llegar desde Mostoles Centro</h2>
+      <div class="zona-content">
+        <p>Nuestra clinica esta en la <strong>Calle Soria 2</strong>, en pleno centro de Mostoles. Si te encuentras en la Plaza del Pradillo, solo tienes que caminar unos 2-3 minutos por la Avenida Dos de Mayo hasta llegar a nuestra calle. Desde la Avenida de la Constitucion, el recorrido a pie no supera los 5 minutos.</p>
+        <p>Si vienes en transporte publico, la estacion de Metrosur <strong>Mostoles Central</strong> esta a escasos metros. Tambien puedes llegar en autobus urbano con las lineas que tienen parada en el centro. Si prefieres venir en coche, hay aparcamiento regulado en las calles cercanas y varios parkings publicos en la zona.</p>
+      </div>
+    </div>
+  </section>
+
+  <ResenasGrid indices={[1, 2, 8]} />
+
+  <CtaFinal />
+</Layout>
+
+<style>
+  .zona-content {
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.8;
+  }
+  .zona-content p {
+    margin-bottom: 1rem;
+    color: var(--text);
+  }
+</style>

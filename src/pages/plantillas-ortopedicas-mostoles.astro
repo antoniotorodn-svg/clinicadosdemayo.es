@@ -1,0 +1,247 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
+import TrustBar from '../components/TrustBar.astro';
+import ResenasGrid from '../components/ResenasGrid.astro';
+import FaqAccordion from '../components/FaqAccordion.astro';
+import CtaFinal from '../components/CtaFinal.astro';
+
+const faqs = [
+  { pregunta: "Cuanto duran unas plantillas ortopedicas a medida?", respuesta: "La vida util de unas plantillas ortopedicas suele ser de 1 a 2 anos, dependiendo del uso, el peso del paciente y la actividad que realice. Recomendamos revisiones periodicas para comprobar su estado y ajustarlas si es necesario." },
+  { pregunta: "A que edad se pueden poner plantillas a un nino?", respuesta: "Generalmente se pueden prescribir plantillas a partir de los 3-4 anos, cuando el pie del nino ya tiene suficiente desarrollo. Antes de esa edad el pie plano suele ser fisiologico. Un estudio biomecanico infantil nos permite determinar si el nino necesita correccion." },
+  { pregunta: "Puedo usar las plantillas con cualquier calzado?", respuesta: "Las plantillas se disenan para adaptarse al tipo de calzado que mas uses. Es importante que el zapato tenga suficiente profundidad y una horma adecuada. En la consulta te asesoramos sobre el calzado mas compatible con tus plantillas." },
+  { pregunta: "Que diferencia hay entre plantillas de farmacia y plantillas a medida?", respuesta: "Las plantillas de farmacia son genericas y no se adaptan a la biomecanica individual de cada paciente. Las plantillas a medida se fabrican tras un estudio biomecanico completo, tomando molde de tu pie y disenando la correccion exacta que necesitas. La diferencia en resultados es significativa." },
+  { pregunta: "Las plantillas ortopedicas duelen al principio?", respuesta: "Es normal notar una ligera adaptacion durante los primeros dias, ya que el pie se esta acostumbrando a la nueva posicion. Recomendamos un uso progresivo las primeras semanas. Si hay molestias importantes, realizamos los ajustes necesarios sin coste adicional." }
+];
+
+const schema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Plantillas Ortopedicas a Medida en Mostoles",
+  "provider": {"@id": "https://clinicadosdemayo.com/#business"},
+  "serviceType": "Podologia",
+  "areaServed": {"@type": "City", "name": "Mostoles"},
+  "description": "Plantillas ortopedicas a medida para adultos y ninos en Mostoles. Fabricadas tras estudio biomecanico completo de la pisada. Clinica Dos de Mayo."
+});
+---
+<Layout
+  title="Plantillas Ortopedicas a Medida en Mostoles | Clinica Dos de Mayo"
+  description="Plantillas ortopedicas a medida para adultos y ninos en Mostoles. Fabricadas tras estudio biomecanico completo de la pisada. Clinica Dos de Mayo. Pide cita: 916 14 67 70"
+  canonical="https://clinicadosdemayo.com/plantillas-ortopedicas-mostoles"
+  schema={schema}
+>
+  <Hero
+    title="Plantillas Ortopedicas a Medida en Mostoles"
+    subtitle="Correccion personalizada basada en estudio biomecanico"
+    description="Disenamos y fabricamos plantillas ortopedicas a medida para adultos y ninos. Cada plantilla parte de un estudio biomecanico completo para ofrecer la correccion exacta que tu pie necesita."
+  />
+
+  <TrustBar />
+
+  <!-- Descripcion detallada -->
+  <section class="section">
+    <div class="container content-block">
+      <h2 class="section-title">Plantillas a medida: como las fabricamos</h2>
+
+      <p>Las plantillas ortopedicas a medida son uno de los tratamientos mas eficaces en podologia. A diferencia de las plantillas genericas, cada par que fabricamos en Clinica Dos de Mayo esta <strong>disenado especificamente para la anatomia y la biomecanica de cada paciente</strong>, lo que garantiza una correccion precisa y un confort superior.</p>
+
+      <p>El proceso comienza siempre con un <a href="/estudio-biomecanico-mostoles">estudio biomecanico de la pisada</a> completo. Analizamos como apoyas el pie en estatica, como se comporta tu postura y como caminas o corres. Con estos datos, nuestras podologas disenan la plantilla que mejor se adapta a tu caso.</p>
+
+      <h3>Materiales y tecnologia</h3>
+
+      <p>Trabajamos con <strong>materiales de ultima generacion</strong> que combinan resistencia, ligereza y capacidad de correccion. Utilizamos resinas termoconformadas, espumas de diferentes densidades, materiales de descarga (EVA, poron) y elementos correctores rigidos o semirigidos segun la necesidad. El resultado es una plantilla que corrige sin sacrificar la comodidad.</p>
+
+      <p>Las plantillas se fabrican a partir de un <strong>molde tridimensional de tu pie</strong>, tomado en la posicion neutra ideal. Esto nos permite reproducir con exactitud la morfologia de tu arco plantar y colocar los elementos correctores en el punto preciso.</p>
+
+      <h3>Patologias que tratamos con plantillas</h3>
+
+      <p>Las plantillas ortopedicas estan indicadas para una amplia variedad de problemas: <strong>pie plano, pie cavo, fascitis plantar, metatarsalgias, tendinitis de Aquiles, <a href="/espolon">espolon calcaneo</a></strong> y muchas otras patologias biomecanicas. Tambien son fundamentales para pacientes con artrosis de rodilla, cadera o columna, ya que una correcta alineacion del pie repercute en toda la cadena cinetica.</p>
+
+      <h3>Plantillas infantiles</h3>
+
+      <p>El pie del nino esta en desarrollo continuo y es el momento ideal para corregir alteraciones. Tratamos <strong>pie plano infantil, marcha en rotacion interna, genu valgo</strong> y otras alteraciones del crecimiento. Las plantillas infantiles se revisan con mayor frecuencia para adaptarlas al crecimiento del pie.</p>
+
+      <h3>Plantillas deportivas</h3>
+
+      <p>Para deportistas, fabricamos plantillas especificas que soportan las exigencias de cada disciplina. Analizamos el gesto deportivo mediante nuestro <a href="/estudio-biomecanico-mostoles">estudio biomecanico dinamico</a> y disenamos una plantilla que mejora el rendimiento y previene lesiones. Son especialmente utiles para corredores, futbolistas, jugadores de padel y senderistas.</p>
+
+      <p>Cada plantilla incluye un <strong>periodo de adaptacion supervisado</strong>. Si notas alguna molestia durante las primeras semanas, realizamos los ajustes necesarios hasta conseguir el encaje perfecto.</p>
+    </div>
+  </section>
+
+  <!-- Para quien -->
+  <section class="section section-alt">
+    <div class="container">
+      <h2 class="section-title">Para quien es este tratamiento?</h2>
+      <div class="grid-3">
+        <div class="card caso-card">
+          <h3>Pie plano o pie cavo</h3>
+          <p>Alteraciones del arco plantar que causan fatiga, dolor y problemas posturales.</p>
+        </div>
+        <div class="card caso-card">
+          <h3>Fascitis plantar</h3>
+          <p>Dolor en el talon o la planta del pie, especialmente al levantarte o tras estar de pie mucho tiempo.</p>
+        </div>
+        <div class="card caso-card">
+          <h3>Metatarsalgias</h3>
+          <p>Dolor en la zona delantera de la planta del pie por sobrecarga o mala distribucion de presiones.</p>
+        </div>
+        <div class="card caso-card">
+          <h3>Ninos con alteraciones</h3>
+          <p>Pie plano infantil, marcha en rotacion, genu valgo u otras alteraciones del desarrollo.</p>
+        </div>
+        <div class="card caso-card">
+          <h3>Deportistas</h3>
+          <p>Prevencion de lesiones y mejora del rendimiento con plantillas adaptadas a cada deporte.</p>
+        </div>
+        <div class="card caso-card">
+          <h3>Dolor de rodilla, cadera o espalda</h3>
+          <p>Muchos dolores articulares tienen origen en una mala pisada que se corrige con plantillas.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Proceso -->
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">Como es el proceso?</h2>
+      <div class="pasos-list">
+        <div class="paso">
+          <span class="paso-num">1</span>
+          <div>
+            <h3>Estudio biomecanico</h3>
+            <p>Analisis completo de tu pisada: estatica, postural y dinamica. Valoracion de la marcha y exploracion articular del pie y tobillo.</p>
+          </div>
+        </div>
+        <div class="paso">
+          <span class="paso-num">2</span>
+          <div>
+            <h3>Toma de molde</h3>
+            <p>Obtenemos un molde tridimensional de tu pie en posicion neutra para fabricar la plantilla con precision milimetrica.</p>
+          </div>
+        </div>
+        <div class="paso">
+          <span class="paso-num">3</span>
+          <div>
+            <h3>Diseno y fabricacion</h3>
+            <p>Seleccionamos los materiales y elementos correctores adecuados. Se fabrica la plantilla siguiendo el diseno personalizado.</p>
+          </div>
+        </div>
+        <div class="paso">
+          <span class="paso-num">4</span>
+          <div>
+            <h3>Entrega y ajuste</h3>
+            <p>Te entregamos las plantillas, comprobamos el encaje y te explicamos el periodo de adaptacion. Incluimos ajustes posteriores si son necesarios.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ventajas -->
+  <section class="section section-alt">
+    <div class="container">
+      <h2 class="section-title">Ventajas de tratarlo en Clinica Dos de Mayo</h2>
+      <div class="grid-3">
+        <div class="card ventaja-card">
+          <h3>Estudio biomecanico incluido</h3>
+          <p>Cada plantilla parte de un analisis completo de tu pisada. No fabricamos plantillas sin un diagnostico previo.</p>
+        </div>
+        <div class="card ventaja-card">
+          <h3>Materiales de primera calidad</h3>
+          <p>Trabajamos con los mejores materiales del mercado para garantizar durabilidad y confort.</p>
+        </div>
+        <div class="card ventaja-card">
+          <h3>Ajustes sin coste adicional</h3>
+          <p>Si necesitas algun retoque durante la adaptacion, lo hacemos sin cargo extra.</p>
+        </div>
+        <div class="card ventaja-card">
+          <h3>Especialistas en ninos</h3>
+          <p>Amplia experiencia en podologia infantil. Tratamientos adaptados al crecimiento del pie del nino.</p>
+        </div>
+        <div class="card ventaja-card">
+          <h3>Plantillas deportivas</h3>
+          <p>Fabricamos plantillas especificas para cada deporte, analizando el gesto deportivo particular.</p>
+        </div>
+        <div class="card ventaja-card">
+          <h3>Seguimiento continuo</h3>
+          <p>Revisiones periodicas para comprobar la evolucion y adaptar la plantilla si es necesario.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <FaqAccordion faqs={faqs} />
+
+  <ResenasGrid indices={[3, 7, 8]} />
+
+  <CtaFinal />
+</Layout>
+
+<style>
+  .content-block {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  .content-block p {
+    color: var(--text-light);
+    line-height: 1.7;
+    margin-bottom: 1rem;
+  }
+  .content-block h3 {
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+  }
+  .content-block a {
+    color: var(--primary);
+    text-decoration: underline;
+  }
+  .section-alt {
+    background: var(--cream);
+  }
+  .caso-card, .ventaja-card {
+    text-align: center;
+  }
+  .caso-card h3, .ventaja-card h3 {
+    font-size: 1.05rem;
+    margin-bottom: 0.5rem;
+  }
+  .caso-card p, .ventaja-card p {
+    font-size: 0.9rem;
+    color: var(--text-light);
+  }
+  .pasos-list {
+    max-width: 700px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  .paso {
+    display: flex;
+    gap: 1.25rem;
+    align-items: flex-start;
+  }
+  .paso-num {
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    border-radius: 50%;
+    background: var(--gold);
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1.1rem;
+  }
+  .paso h3 {
+    font-size: 1.05rem;
+    margin-bottom: 0.25rem;
+  }
+  .paso p {
+    font-size: 0.9rem;
+    color: var(--text-light);
+  }
+</style>

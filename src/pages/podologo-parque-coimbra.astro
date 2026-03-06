@@ -1,0 +1,74 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
+import TrustBar from '../components/TrustBar.astro';
+import ServiciosGrid from '../components/ServiciosGrid.astro';
+import ResenasGrid from '../components/ResenasGrid.astro';
+import CtaFinal from '../components/CtaFinal.astro';
+
+const schema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "Clinica Dos de Mayo — Podologo en Parque Coimbra",
+  "@id": "https://clinicadosdemayo.com/#business",
+  "url": "https://clinicadosdemayo.com/podologo-parque-coimbra",
+  "telephone": "+34916146770",
+  "address": {"@type": "PostalAddress", "streetAddress": "Calle Soria 2", "addressLocality": "Mostoles", "addressRegion": "Madrid", "postalCode": "28934", "addressCountry": "ES"},
+  "areaServed": {"@type": "Place", "name": "Parque Coimbra, Mostoles"}
+});
+---
+<Layout
+  title="Podologo en Parque Coimbra, Mostoles | Clinica Dos de Mayo"
+  description="Podologo para vecinos de Parque Coimbra y Colonia Guadarrama en Mostoles. Clinica Dos de Mayo, C/ Soria 2. Cita: 916 14 67 70"
+  canonical="https://clinicadosdemayo.com/podologo-parque-coimbra"
+  schema={schema}
+>
+  <Hero
+    title="Podologo en Parque Coimbra, Mostoles"
+    subtitle="Clinica Dos de Mayo — C/ Soria 2"
+    description="Atencion podologica de calidad para los vecinos de Parque Coimbra y Colonia Guadarrama. Tu clinica en el centro de Mostoles."
+    location="Parque Coimbra, Mostoles"
+  />
+
+  <TrustBar />
+
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">Podologo para Parque Coimbra y Colonia Guadarrama</h2>
+      <div class="zona-content">
+        <p><strong>Parque Coimbra</strong> y <strong>Colonia Guadarrama</strong> son dos de las zonas con mayor crecimiento urbanistico de Mostoles en los ultimos anos. Con aproximadamente 12.000 habitantes, esta area se ha consolidado como un barrio moderno y dinamico, con una poblacion joven y familiar que sigue en aumento. Su proximidad al centro comercial <strong>Madrid Xanadu</strong> y al eje de la <strong>M-50</strong> la convierten en una zona muy bien comunicada.</p>
+        <p>Aunque Parque Coimbra se encuentra en la periferia norte de Mostoles, el acceso al centro de la ciudad es rapido y comodo. Los vecinos de esta zona pueden llegar a Clinica Dos de Mayo, en la <strong>Calle Soria 2</strong>, en pocos minutos tanto en coche como en transporte publico. Esto es especialmente importante cuando se necesita atencion podologica de calidad sin tener que desplazarse a Madrid.</p>
+        <p>En nuestra clinica atendemos a familias de Parque Coimbra que buscan desde revisiones podologicas infantiles hasta tratamientos especializados para adultos. Realizamos quiropodias, tratamos unas encarnadas y papilomas, operamos juanetes y dedos en garra con cirugia percutanea MIS, y fabricamos plantillas ortopedicas a medida tras un completo estudio biomecanico.</p>
+        <p>Si vives en Parque Coimbra o Colonia Guadarrama y necesitas un <strong>podologo con experiencia</strong>, no hace falta que vayas a Madrid. En Clinica Dos de Mayo llevamos mas de 15 anos ofreciendo atencion podologica integral a los vecinos de Mostoles.</p>
+      </div>
+    </div>
+  </section>
+
+  <ServiciosGrid />
+
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">Como llegar desde Parque Coimbra</h2>
+      <div class="zona-content">
+        <p>Desde <strong>Parque Coimbra</strong>, la forma mas rapida de llegar a nuestra clinica es en coche por la carretera que conecta con el centro de Mostoles. El trayecto dura unos 8-10 minutos y hay opciones de aparcamiento en las calles cercanas a la Calle Soria.</p>
+        <p>En transporte publico, las <strong>lineas de autobus interurbano</strong> que pasan por Parque Coimbra y Colonia Guadarrama conectan con el centro de Mostoles. Tambien puedes desplazarte hasta la estacion de Metrosur mas cercana y bajar en <strong>Mostoles Central</strong>, desde donde nuestra clinica esta a solo 2 minutos caminando. Desde la M-50, el acceso es directo y muy rapido.</p>
+      </div>
+    </div>
+  </section>
+
+  <ResenasGrid indices={[0, 7, 8]} />
+
+  <CtaFinal />
+</Layout>
+
+<style>
+  .zona-content {
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.8;
+  }
+  .zona-content p {
+    margin-bottom: 1rem;
+    color: var(--text);
+  }
+</style>

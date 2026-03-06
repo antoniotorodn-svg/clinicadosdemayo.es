@@ -1,0 +1,12 @@
+[
+  { "emoji": "🦶", "titulo": "Quiropodia", "descripcion": "Tratamiento de durezas, callos y helomas. Cuidado integral del pie.", "url": "/quiropodia" },
+  { "emoji": "💅", "titulo": "Unas encarnadas", "descripcion": "Tratamiento conservador y quirurgico de la onicocriptosis.", "url": "/unas-encarnadas-mostoles" },
+  { "emoji": "🔬", "titulo": "Papilomas plantares", "descripcion": "Diagnostico y eliminacion de verrugas plantares (VPH).", "url": "/papilomas-plantares-mostoles" },
+  { "emoji": "🩺", "titulo": "Pie diabetico", "descripcion": "Prevencion, revision y tratamiento especializado del pie diabetico.", "url": "/pie-diabetico-mostoles" },
+  { "emoji": "🔧", "titulo": "Cirugia podologica", "descripcion": "Cirugia percutanea MIS con +15 anos de experiencia.", "url": "/cirugia-pie-mostoles" },
+  { "emoji": "🦴", "titulo": "Juanetes", "descripcion": "Tratamiento conservador y cirugia MIS de hallux valgus.", "url": "/juanetes-mostoles" },
+  { "emoji": "✋", "titulo": "Dedos en garra", "descripcion": "Correccion de deformidades digitales del pie.", "url": "/cirugia-pie-mostoles" },
+  { "emoji": "📐", "titulo": "Espolon de calcaneo", "descripcion": "Diagnostico y tratamiento del dolor en el talon.", "url": "/espolon-calcaneo-mostoles" },
+  { "emoji": "👟", "titulo": "Plantillas ortopedicas", "descripcion": "Plantillas a medida para adultos y ninos.", "url": "/plantillas-ortopedicas-mostoles" },
+  { "emoji": "⚽", "titulo": "Podologia deportiva", "descripcion": "Biomecanica y tratamiento especializado para deportistas.", "url": "/podologia-deportiva-mostoles" }
+]

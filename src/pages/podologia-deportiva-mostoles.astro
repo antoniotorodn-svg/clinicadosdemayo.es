@@ -1,0 +1,164 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
+import TrustBar from '../components/TrustBar.astro';
+import ResenasGrid from '../components/ResenasGrid.astro';
+import FaqAccordion from '../components/FaqAccordion.astro';
+import CtaFinal from '../components/CtaFinal.astro';
+
+const faqs = [
+  { pregunta: "Que es la podologia deportiva?", respuesta: "La podologia deportiva es la rama de la podologia que se especializa en la prevencion, diagnostico y tratamiento de las lesiones del pie y del miembro inferior relacionadas con la practica deportiva. Analiza la biomecanica del deportista para optimizar su rendimiento y prevenir lesiones." },
+  { pregunta: "Necesito plantillas deportivas aunque no tenga dolor?", respuesta: "No siempre. Sin embargo, un estudio biomecanico puede revelar alteraciones en la pisada que, con la carga de entrenamiento, pueden derivar en lesiones a medio plazo. Las plantillas deportivas no solo tratan el dolor, sino que tambien previenen lesiones y pueden mejorar el rendimiento deportivo." },
+  { pregunta: "Las plantillas deportivas son diferentes a las normales?", respuesta: "Si. Las plantillas deportivas se disenan teniendo en cuenta el tipo de deporte, el calzado utilizado, la superficie de entrenamiento y las cargas especificas que soporta el pie del deportista. Los materiales tambien son diferentes: mas finos, ligeros y resistentes a la transpiracion y el impacto." },
+  { pregunta: "Que deportistas se benefician mas de la podologia deportiva?", respuesta: "Cualquier deportista puede beneficiarse, pero es especialmente importante para corredores, futbolistas, jugadores de padel y tenis, ciclistas, senderistas y bailarines. Cualquier actividad que implique impacto repetitivo, cambios de direccion o carga prolongada sobre los pies." },
+  { pregunta: "Cuanto dura un estudio biomecanico deportivo?", respuesta: "El estudio completo dura entre 45 minutos y 1 hora. Incluye entrevista clinica, exploracion del pie y tobillo, analisis postural, estudio en plataforma de presiones y analisis dinamico de la marcha o la carrera. Los resultados se explican de forma detallada al paciente." }
+];
+
+const schema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Podologia Deportiva en Mostoles",
+  "provider": {"@id": "https://clinicadosdemayo.com/#business"},
+  "serviceType": "Podologia",
+  "areaServed": {"@type": "City", "name": "Mostoles"},
+  "description": "Podologia deportiva en Mostoles. Estudio biomecanico, plantillas deportivas a medida, prevencion y tratamiento de lesiones en deportistas. Clinica Dos de Mayo."
+});
+---
+<Layout
+  title="Podologia Deportiva en Mostoles | Clinica Dos de Mayo"
+  description="Podologia deportiva en Mostoles. Estudio biomecanico, plantillas deportivas a medida, prevencion y tratamiento de lesiones en deportistas. Clinica Dos de Mayo."
+  canonical="https://clinicadosdemayo.com/podologia-deportiva-mostoles"
+  schema={schema}
+>
+  <Hero
+    title="Podologia Deportiva en Mostoles"
+    subtitle="Biomecanica y tratamiento especializado para deportistas"
+    description="Analisis de la pisada, prevencion de lesiones y plantillas deportivas a medida. Mejora tu rendimiento y protege tus pies con el respaldo de profesionales especializados."
+  />
+
+  <TrustBar />
+
+  <!-- Descripcion detallada -->
+  <section class="section">
+    <div class="container" style="max-width:800px;">
+      <h2 class="section-title">Podologia deportiva: protege tus pies, mejora tu rendimiento</h2>
+      <p>Los pies son la base sobre la que se sustenta toda la actividad deportiva. Cada paso al correr genera un impacto de entre 2 y 4 veces el peso corporal sobre el pie, y en deportes con saltos o cambios de direccion las fuerzas son aun mayores. La <strong>podologia deportiva</strong> se especializa en entender como funcionan los pies del deportista durante la practica de su actividad para prevenir lesiones, tratar patologias existentes y optimizar el rendimiento.</p>
+
+      <p>En Clinica Dos de Mayo combinamos la exploracion clinica con la tecnologia mas avanzada en analisis biomecanico para ofrecer un servicio integral al deportista, ya sea amateur o profesional. No importa si corres para mantenerte en forma, juegas al padel los fines de semana o compites a nivel federado: tus pies merecen una atencion especializada.</p>
+
+      <h3>Lesiones deportivas mas frecuentes</h3>
+      <p>Las patologias que tratamos con mayor frecuencia en nuestra consulta de podologia deportiva incluyen:</p>
+      <ul>
+        <li><strong>Fascitis plantar:</strong> inflamacion de la fascia plantar que causa dolor intenso en el talon, especialmente al dar los primeros pasos por la manana. Es la lesion estrella del corredor. Muy relacionada con el <a href="/espolon-calcaneo-mostoles">espolon de calcaneo</a>.</li>
+        <li><strong>Fracturas por estres:</strong> microfracturas oseas causadas por la sobrecarga repetitiva, frecuentes en metatarsianos y calcaneo. Suelen producirse por aumentos bruscos del volumen de entrenamiento.</li>
+        <li><strong>Periostitis tibial (shin splints):</strong> dolor en la cara interna de la tibia muy comun en corredores, relacionado con alteraciones biomecanicas del pie y el tobillo.</li>
+        <li><strong>Tendinitis del tendon de Aquiles:</strong> inflamacion o degeneracion del tendon mas potente del cuerpo, frecuente en deportes de impacto y salto.</li>
+        <li><strong>Metatarsalgias:</strong> dolor en la zona del antepie por sobrecarga de las cabezas metatarsales.</li>
+        <li><strong>Unas negras y hematomas subungueales:</strong> frecuentes en corredores de fondo, senderistas y futbolistas.</li>
+      </ul>
+
+      <h3>El estudio biomecanico deportivo</h3>
+      <p>El <a href="/estudio-biomecanico-mostoles">estudio biomecanico</a> es la herramienta fundamental de la podologia deportiva. Mediante plataformas de presiones, analisis dinamico de la marcha y la carrera, y exploracion articular y muscular, podemos identificar las alteraciones que estan provocando o que pueden provocar lesiones. Este analisis es la base para disenar las <a href="/plantillas-ortopedicas-mostoles">plantillas deportivas a medida</a>, que se adaptan al tipo de deporte, al calzado y a las necesidades especificas de cada deportista.</p>
+
+      <h3>Plantillas deportivas a medida</h3>
+      <p>Las plantillas deportivas no son unas plantillas normales metidas en unas zapatillas de deporte. Se fabrican con materiales especificos (mas ligeros, finos y resistentes al impacto y la humedad) y se disenan teniendo en cuenta la biomecanica particular del deportista, el tipo de deporte que practica, las superficies en las que entrena y el calzado que utiliza. Un corredor de asfalto necesita una plantilla muy diferente a la de un jugador de padel o un futbolista.</p>
+
+      <h3>Prevencion de lesiones</h3>
+      <p>La prevencion es siempre el mejor tratamiento. Una valoracion podologica al inicio de la temporada, ante un cambio de calzado o al comenzar un nuevo deporte puede marcar la diferencia entre disfrutar de tu actividad o sufrir una lesion que te deje fuera durante semanas. En nuestra clinica te asesoramos tambien sobre la eleccion de calzado deportivo, ejercicios de fortalecimiento y pautas de entrenamiento seguras.</p>
+    </div>
+  </section>
+
+  <!-- Para quien es -->
+  <section class="section" style="background:var(--cream);">
+    <div class="container" style="max-width:800px;">
+      <h2 class="section-title">Para quien es este tratamiento?</h2>
+      <ul class="check-list">
+        <li>Corredores populares y de competicion con dolor o molestias recurrentes</li>
+        <li>Jugadores de padel, tenis, futbol y otros deportes de impacto</li>
+        <li>Ciclistas con molestias en el pie o la rodilla relacionadas con el apoyo</li>
+        <li>Senderistas y montaneros que recorren largas distancias</li>
+        <li>Bailarines con problemas en el antepie o los dedos</li>
+        <li>Deportistas que quieren prevenir lesiones y optimizar su rendimiento</li>
+        <li>Personas que retoman la actividad deportiva tras un periodo de inactividad</li>
+        <li>Cualquier deportista que necesite asesoramiento sobre calzado o plantillas</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Como es el proceso -->
+  <section class="section">
+    <div class="container" style="max-width:800px;">
+      <h2 class="section-title">Como es el proceso?</h2>
+      <ol class="steps-list">
+        <li><strong>Entrevista clinica deportiva:</strong> recogemos informacion sobre tu deporte, volumen de entrenamiento, historial de lesiones, calzado y objetivos.</li>
+        <li><strong>Exploracion del pie y miembro inferior:</strong> valoramos articulaciones, musculatura, flexibilidad y posibles alteraciones estructurales.</li>
+        <li><strong>Estudio biomecanico:</strong> analisis en plataforma de presiones, valoracion postural y estudio dinamico de la marcha o la carrera, adaptado a tu disciplina deportiva.</li>
+        <li><strong>Diagnostico y plan de tratamiento:</strong> te explicamos los hallazgos de forma detallada y proponemos el tratamiento mas adecuado: plantillas, ejercicios, pautas de entrenamiento o derivacion si es necesario.</li>
+        <li><strong>Fabricacion de plantillas:</strong> si son necesarias, disenamos y fabricamos plantillas deportivas a medida con materiales especificos para tu deporte.</li>
+        <li><strong>Revision y ajuste:</strong> tras unas semanas de uso, revisamos la adaptacion y realizamos los ajustes necesarios para garantizar el maximo confort y eficacia.</li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- Ventajas -->
+  <section class="section" style="background:var(--cream);">
+    <div class="container" style="max-width:800px;">
+      <h2 class="section-title">Ventajas de tratarlo en Clinica Dos de Mayo</h2>
+      <ul class="check-list">
+        <li>Tecnologia avanzada de analisis biomecanico con plataforma de presiones</li>
+        <li>Plantillas deportivas fabricadas con materiales especificos de alto rendimiento</li>
+        <li>Enfoque personalizado segun el deporte, nivel y objetivos de cada paciente</li>
+        <li>Mas de 15 anos de experiencia en podologia deportiva en Mostoles</li>
+        <li>Asesoramiento integral: tratamiento, prevencion, calzado y pautas de entrenamiento</li>
+        <li>Seguimiento continuado con ajustes incluidos para garantizar resultados optimos</li>
+      </ul>
+    </div>
+  </section>
+
+  <FaqAccordion faqs={faqs} />
+
+  <ResenasGrid indices={[3, 4, 7]} />
+
+  <CtaFinal />
+</Layout>
+
+<style>
+  .check-list {
+    list-style: none;
+    padding: 0;
+  }
+  .check-list li {
+    padding: 0.5rem 0 0.5rem 2rem;
+    position: relative;
+    line-height: 1.6;
+  }
+  .check-list li::before {
+    content: '\2713';
+    position: absolute;
+    left: 0;
+    color: var(--primary);
+    font-weight: 700;
+  }
+  .steps-list {
+    padding-left: 1.5rem;
+  }
+  .steps-list li {
+    padding: 0.5rem 0;
+    line-height: 1.6;
+  }
+  p {
+    line-height: 1.7;
+    margin-bottom: 1rem;
+  }
+  ul:not(.check-list) {
+    margin-bottom: 1rem;
+    padding-left: 1.5rem;
+  }
+  ul:not(.check-list) li {
+    padding: 0.35rem 0;
+    line-height: 1.6;
+  }
+  h3 {
+    margin: 1.5rem 0 0.75rem;
+  }
+</style>

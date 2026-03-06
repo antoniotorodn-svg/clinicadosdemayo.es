@@ -1,0 +1,101 @@
+---
+---
+<section class="section" id="contacto">
+  <div class="container">
+    <h2 class="section-title">Contacta con nosotros</h2>
+    <div class="contact-wrapper">
+      <form action="https://formsubmit.co/EMAIL_PLACEHOLDER" method="POST" class="contact-form card">
+        <input type="hidden" name="_subject" value="Nuevo contacto web - Clinica Dos de Mayo">
+        <input type="hidden" name="_captcha" value="false">
+        <div class="form-group">
+          <label for="nombre">Nombre *</label>
+          <input type="text" id="nombre" name="nombre" required>
+        </div>
+        <div class="form-group">
+          <label for="telefono">Telefono *</label>
+          <input type="tel" id="telefono" name="telefono" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email">
+        </div>
+        <div class="form-group">
+          <label for="mensaje">Mensaje</label>
+          <textarea id="mensaje" name="mensaje" rows="4"></textarea>
+        </div>
+        <div class="form-group form-check">
+          <input type="checkbox" id="privacidad" name="privacidad" required>
+          <label for="privacidad">
+            He leido y acepto la <a href="https://clinicadosdemayo.com/politica-de-privacidad/" target="_blank" rel="noopener">Politica de Privacidad</a> *
+          </label>
+        </div>
+        <button type="submit" class="btn btn-cta">Enviar mensaje</button>
+        <div class="form-rgpd">
+          <p><strong>Responsable:</strong> Centro de Podologia Dos de Mayo</p>
+          <p><strong>Finalidad:</strong> Responder dudas de nuestros pacientes</p>
+          <p><strong>Legitimacion:</strong> Tu consentimiento</p>
+          <p><strong>Comunicacion de datos:</strong> Siteground</p>
+          <p><strong>Derechos:</strong> Acceso, rectificacion, portabilidad, olvido</p>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<style>
+  .contact-wrapper {
+    max-width: 640px;
+    margin: 0 auto;
+  }
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+  .form-group label {
+    font-weight: 500;
+    font-size: 0.9rem;
+  }
+  .form-group input,
+  .form-group textarea {
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--sand-dark);
+    border-radius: 12px;
+    font-family: inherit;
+    font-size: 1rem;
+    background: var(--cream);
+    transition: border-color var(--transition);
+  }
+  .form-group input:focus,
+  .form-group textarea:focus {
+    outline: none;
+    border-color: var(--primary);
+  }
+  .form-check {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  .form-check input {
+    margin-top: 0.2rem;
+  }
+  .form-check label {
+    font-size: 0.85rem;
+    color: var(--text-light);
+  }
+  .form-rgpd {
+    margin-top: 0.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--sand-dark);
+  }
+  .form-rgpd p {
+    font-size: 0.75rem;
+    color: var(--text-light);
+    margin-bottom: 0.15rem;
+  }
+</style>

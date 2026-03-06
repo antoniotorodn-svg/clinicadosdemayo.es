@@ -1,0 +1,74 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
+import TrustBar from '../components/TrustBar.astro';
+import ServiciosGrid from '../components/ServiciosGrid.astro';
+import ResenasGrid from '../components/ResenasGrid.astro';
+import CtaFinal from '../components/CtaFinal.astro';
+
+const schema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "Clinica Dos de Mayo — Podologo en Villafontana",
+  "@id": "https://clinicadosdemayo.com/#business",
+  "url": "https://clinicadosdemayo.com/podologo-villafontana-mostoles",
+  "telephone": "+34916146770",
+  "address": {"@type": "PostalAddress", "streetAddress": "Calle Soria 2", "addressLocality": "Mostoles", "addressRegion": "Madrid", "postalCode": "28934", "addressCountry": "ES"},
+  "areaServed": {"@type": "Place", "name": "Villafontana, Mostoles"}
+});
+---
+<Layout
+  title="Podologo en Villafontana, Mostoles | Clinica Dos de Mayo"
+  description="Podologo en Villafontana, Mostoles. Clinica Dos de Mayo en el centro de Mostoles. Familias jovenes. Cita: 916 14 67 70"
+  canonical="https://clinicadosdemayo.com/podologo-villafontana-mostoles"
+  schema={schema}
+>
+  <Hero
+    title="Podologo en Villafontana, Mostoles"
+    subtitle="Clinica Dos de Mayo — C/ Soria 2"
+    description="Cuidado podologico integral para los vecinos de Villafontana. Tu clinica de confianza en el centro de Mostoles."
+    location="Villafontana, Mostoles"
+  />
+
+  <TrustBar />
+
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">Tu podologo para Villafontana</h2>
+      <div class="zona-content">
+        <p><strong>Villafontana</strong> es uno de los barrios mas representativos del distrito Sureste de Mostoles. Se trata de una zona residencial en constante evolucion, con un perfil demografico marcado por la presencia de <strong>familias jovenes</strong> que han elegido este barrio por sus viviendas amplias, sus zonas verdes y la buena calidad de vida que ofrece.</p>
+        <p>Las familias de Villafontana tienen necesidades podologicas muy concretas. Los mas pequenos requieren revisiones periodicas para vigilar el correcto desarrollo de sus pies y detectar precozmente problemas como el pie plano, el pie cavo o las alteraciones de la marcha. Los padres, muchos de ellos en edad laboral activa, necesitan soluciones para dolencias como fascitis plantar, metatarsalgias o problemas derivados del uso de calzado inadecuado. Y los abuelos del barrio precisan cuidados regulares de quiropodia y atencion al pie diabetico.</p>
+        <p>En <strong>Clinica Dos de Mayo</strong> ofrecemos respuesta a todas estas necesidades. Nuestro equipo de podologas, con mas de 15 anos de trayectoria profesional, combina la experiencia clinica con la tecnologia mas avanzada. Realizamos estudios biomecanicos computerizados, fabricamos plantillas ortopedicas a medida, tratamos unas encarnadas y papilomas, y somos especialistas en <strong>cirugia percutanea MIS</strong> para la correccion de juanetes y otras deformidades del pie.</p>
+        <p>Villafontana esta bien conectado con el centro de Mostoles, donde se encuentra nuestra clinica en la Calle Soria 2. Ven a conocernos y descubre por que somos la referencia en podologia de Mostoles.</p>
+      </div>
+    </div>
+  </section>
+
+  <ServiciosGrid />
+
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">Como llegar desde Villafontana</h2>
+      <div class="zona-content">
+        <p>Desde Villafontana, llegar a nuestra clinica en la Calle Soria 2 es facil y rapido. Las <strong>lineas de autobus urbano</strong> que recorren el barrio tienen conexion directa con el centro de Mostoles, con paradas a pocos metros de nuestra clinica. El trayecto en autobus es de unos 10 minutos.</p>
+        <p>Si prefieres venir en coche, el desplazamiento desde Villafontana hasta el centro no supera los 5-7 minutos. Encontraras aparcamiento regulado en las calles del entorno y parkings publicos cercanos. Tambien puedes combinar autobus o coche hasta una estacion de Metrosur y bajar en <strong>Mostoles Central</strong>, a 2 minutos de la clinica.</p>
+      </div>
+    </div>
+  </section>
+
+  <ResenasGrid indices={[1, 4, 8]} />
+
+  <CtaFinal />
+</Layout>
+
+<style>
+  .zona-content {
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.8;
+  }
+  .zona-content p {
+    margin-bottom: 1rem;
+    color: var(--text);
+  }
+</style>

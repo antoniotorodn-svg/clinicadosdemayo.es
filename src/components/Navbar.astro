@@ -1,0 +1,116 @@
+---
+---
+<nav class="navbar" id="navbar">
+  <div class="container navbar-inner">
+    <a href="/" class="navbar-brand">
+      <span class="navbar-brand-name">Clinica Dos de Mayo</span>
+      <span class="navbar-brand-sub">Centro de Podologia</span>
+    </a>
+    <div class="navbar-links" id="navLinks">
+      <a href="/#especialidades">Especialidades</a>
+      <a href="/#tratamientos">Tratamientos</a>
+      <a href="/#equipo">Equipo</a>
+      <a href="/#ubicacion">Ubicacion</a>
+      <a href="tel:+34916146770" class="btn btn-cta navbar-cta">916 14 67 70</a>
+    </div>
+    <button class="navbar-toggle" id="navToggle" aria-label="Abrir menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<style>
+  .navbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: rgba(253, 248, 243, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    padding: 0.75rem 0;
+  }
+  .navbar-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .navbar-brand {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: var(--text);
+  }
+  .navbar-brand-name {
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-size: 1.25rem;
+    line-height: 1.2;
+  }
+  .navbar-brand-sub {
+    font-size: 0.75rem;
+    color: var(--text-light);
+  }
+  .navbar-links {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+  .navbar-links a:not(.navbar-cta) {
+    color: var(--text);
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: color var(--transition);
+  }
+  .navbar-links a:not(.navbar-cta):hover {
+    color: var(--primary);
+  }
+  .navbar-cta {
+    padding: 0.5rem 1.25rem;
+    font-size: 0.9rem;
+  }
+  .navbar-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    padding: 0.5rem;
+  }
+  .navbar-toggle span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--text);
+    border-radius: 2px;
+    transition: all var(--transition);
+  }
+
+  @media (max-width: 768px) {
+    .navbar-links {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: var(--cream);
+      flex-direction: column;
+      padding: 1.5rem;
+      gap: 1rem;
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+      box-shadow: var(--shadow-md);
+    }
+    .navbar-links.active {
+      display: flex;
+    }
+    .navbar-toggle {
+      display: flex;
+    }
+  }
+</style>
+
+<script>
+  const toggle = document.getElementById('navToggle');
+  const links = document.getElementById('navLinks');
+  toggle?.addEventListener('click', () => {
+    links?.classList.toggle('active');
+  });
+</script>

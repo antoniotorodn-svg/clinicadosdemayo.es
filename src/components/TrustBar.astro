@@ -1,0 +1,60 @@
+---
+---
+<section class="trust-bar">
+  <div class="container">
+    <div class="trust-items">
+      <div class="trust-item">
+        <span class="trust-icon">🏥</span>
+        <div>
+          <strong>Mas de 15 anos de experiencia</strong>
+          <p>Especialistas en cirugia percutanea MIS del pie.</p>
+        </div>
+      </div>
+      <div class="trust-item">
+        <span class="trust-icon">⭐</span>
+        <div>
+          <strong>4.7★ con +133 valoraciones</strong>
+          <p>La confianza de nuestros pacientes nos avala.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .trust-bar {
+    padding: 2rem 0;
+  }
+  .trust-items {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+  .trust-item {
+    background: var(--white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+    padding: 1.5rem;
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+  .trust-icon {
+    font-size: 2rem;
+    flex-shrink: 0;
+  }
+  .trust-item strong {
+    display: block;
+    font-size: 1.05rem;
+    margin-bottom: 0.25rem;
+  }
+  .trust-item p {
+    font-size: 0.9rem;
+    color: var(--text-light);
+  }
+  @media (max-width: 768px) {
+    .trust-items {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

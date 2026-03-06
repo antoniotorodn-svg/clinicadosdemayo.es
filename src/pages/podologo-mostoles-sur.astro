@@ -1,0 +1,74 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
+import TrustBar from '../components/TrustBar.astro';
+import ServiciosGrid from '../components/ServiciosGrid.astro';
+import ResenasGrid from '../components/ResenasGrid.astro';
+import CtaFinal from '../components/CtaFinal.astro';
+
+const schema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "Clinica Dos de Mayo — Podologo en Mostoles Sur",
+  "@id": "https://clinicadosdemayo.com/#business",
+  "url": "https://clinicadosdemayo.com/podologo-mostoles-sur",
+  "telephone": "+34916146770",
+  "address": {"@type": "PostalAddress", "streetAddress": "Calle Soria 2", "addressLocality": "Mostoles", "addressRegion": "Madrid", "postalCode": "28934", "addressCountry": "ES"},
+  "areaServed": {"@type": "Place", "name": "Mostoles Sur, Mostoles"}
+});
+---
+<Layout
+  title="Podologo en Mostoles Sur | Clinica Dos de Mayo"
+  description="Podologo para vecinos de Mostoles Sur. Clinica Dos de Mayo en C/ Soria 2. Barrio joven y en crecimiento. Pide cita: 916 14 67 70"
+  canonical="https://clinicadosdemayo.com/podologo-mostoles-sur"
+  schema={schema}
+>
+  <Hero
+    title="Podologo en Mostoles Sur"
+    subtitle="Clinica Dos de Mayo — C/ Soria 2"
+    description="Cuidamos los pies de los vecinos de Mostoles Sur. Atencion podologica para familias jovenes y deportistas."
+    location="Mostoles Sur"
+  />
+
+  <TrustBar />
+
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">Tu podologo en Mostoles Sur</h2>
+      <div class="zona-content">
+        <p><strong>Mostoles Sur</strong> es el barrio mas joven de la ciudad, tanto por su reciente desarrollo urbanistico como por el perfil de sus habitantes. Con aproximadamente 16.000 vecinos, es la zona de Mostoles que ha experimentado un <strong>mayor crecimiento demografico</strong> en los ultimos anos, atrayendo sobre todo a familias jovenes y parejas que buscan una vivienda moderna a un precio mas accesible que en Madrid capital.</p>
+        <p>Este perfil demografico joven genera necesidades podologicas especificas. Las familias con ninos pequenos necesitan revisiones del desarrollo podologico infantil para detectar a tiempo problemas como el pie plano o la marcha en rotacion interna. Los adultos jovenes y deportistas requieren estudios biomecanicos de la pisada y plantillas a medida para prevenir lesiones. Y los mayores del barrio precisan cuidados regulares como quiropodias y tratamiento de unas encarnadas.</p>
+        <p>En <strong>Clinica Dos de Mayo</strong>, situada en la Calle Soria 2 en el centro de Mostoles, cubrimos todas estas necesidades. Nuestro equipo de podologas, con mas de 15 anos de experiencia, ofrece un servicio integral que incluye quiropodia, cirugia percutanea MIS, ortopodologia, biomecanica, tratamiento de papilomas y pie diabetico.</p>
+        <p>Mostoles Sur cuenta con buenas conexiones en autobus y metro hacia el centro, lo que hace que llegar a nuestra clinica sea rapido y sencillo. Si buscas un <strong>podologo cerca de Mostoles Sur</strong>, estamos a pocos minutos de tu casa.</p>
+      </div>
+    </div>
+  </section>
+
+  <ServiciosGrid />
+
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">Como llegar desde Mostoles Sur</h2>
+      <div class="zona-content">
+        <p>Desde Mostoles Sur puedes llegar a la Calle Soria 2 de varias formas. La opcion mas comoda en transporte publico es utilizar las <strong>lineas de autobus urbano</strong> que conectan el barrio con el centro, con paradas proximas a nuestra clinica. Tambien puedes acceder a traves de <strong>Metrosur</strong>, bajando en la estacion Mostoles Central.</p>
+        <p>En coche, el trayecto desde Mostoles Sur hasta el centro no supera los 7-8 minutos. Hay plazas de aparcamiento regulado en las calles cercanas y parkings publicos a pocos metros. Si prefieres venir en bicicleta o caminando, el recorrido es agradable y bien senalizado, de unos 20-25 minutos a pie.</p>
+      </div>
+    </div>
+  </section>
+
+  <ResenasGrid indices={[0, 4, 7]} />
+
+  <CtaFinal />
+</Layout>
+
+<style>
+  .zona-content {
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.8;
+  }
+  .zona-content p {
+    margin-bottom: 1rem;
+    color: var(--text);
+  }
+</style>

@@ -1,0 +1,57 @@
+---
+---
+<div class="bottom-nav">
+  <a href="tel:+34916146770" class="bottom-nav-item bottom-nav-call">
+    <span class="bottom-nav-icon">📞</span>
+    <span>Llamar</span>
+  </a>
+  <a href="https://maps.google.com/?q=Calle+Soria+2+Mostoles+Madrid" target="_blank" rel="noopener" class="bottom-nav-item">
+    <span class="bottom-nav-icon">📍</span>
+    <span>Como llegar</span>
+  </a>
+  <a href="#contacto" class="bottom-nav-item">
+    <span class="bottom-nav-icon">✉️</span>
+    <span>Contacto</span>
+  </a>
+</div>
+
+<style>
+  .bottom-nav {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 999;
+    background: var(--white);
+    border-top: 1px solid rgba(0,0,0,0.08);
+    box-shadow: 0 -2px 12px rgba(0,0,0,0.06);
+  }
+  .bottom-nav-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.2rem;
+    padding: 0.6rem 0.5rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text);
+    text-decoration: none;
+    transition: background var(--transition);
+  }
+  .bottom-nav-item:hover {
+    background: var(--sand);
+  }
+  .bottom-nav-call {
+    background: var(--gold-light);
+  }
+  .bottom-nav-icon {
+    font-size: 1.25rem;
+  }
+  @media (max-width: 768px) {
+    .bottom-nav {
+      display: flex;
+    }
+  }
+</style>

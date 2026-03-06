@@ -1,0 +1,74 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
+import TrustBar from '../components/TrustBar.astro';
+import ServiciosGrid from '../components/ServiciosGrid.astro';
+import ResenasGrid from '../components/ResenasGrid.astro';
+import CtaFinal from '../components/CtaFinal.astro';
+
+const schema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "Clinica Dos de Mayo — Podologo en Zona Sureste de Mostoles",
+  "@id": "https://clinicadosdemayo.com/#business",
+  "url": "https://clinicadosdemayo.com/podologo-sureste-mostoles",
+  "telephone": "+34916146770",
+  "address": {"@type": "PostalAddress", "streetAddress": "Calle Soria 2", "addressLocality": "Mostoles", "addressRegion": "Madrid", "postalCode": "28934", "addressCountry": "ES"},
+  "areaServed": {"@type": "Place", "name": "Zona Sureste, Mostoles"}
+});
+---
+<Layout
+  title="Podologo en Zona Sureste de Mostoles | Clinica Dos de Mayo"
+  description="Podologo en la zona Sureste de Mostoles. Clinica Dos de Mayo en C/ Soria 2, centro de Mostoles. Especialistas en podologia. Cita: 916 14 67 70"
+  canonical="https://clinicadosdemayo.com/podologo-sureste-mostoles"
+  schema={schema}
+>
+  <Hero
+    title="Podologo en Zona Sureste de Mostoles"
+    subtitle="Clinica Dos de Mayo — C/ Soria 2"
+    description="Especialistas en podologia para los vecinos del Sureste de Mostoles. Bien conectados con tu barrio."
+    location="Sureste, Mostoles"
+  />
+
+  <TrustBar />
+
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">Tu podologo para la zona Sureste</h2>
+      <div class="zona-content">
+        <p>La <strong>zona Sureste de Mostoles</strong> agrupa algunos de los barrios mas consolidados y populares de la ciudad, con una poblacion aproximada de 54.000 habitantes. Barrios como <strong>Villafontana, Estoril I, Cerro Prieto, Pinar de Mostoles y La Loma</strong> forman un amplio distrito residencial donde conviven familias de todas las edades.</p>
+        <p>Los vecinos del Sureste cuentan con buenas conexiones de autobus que enlazan directamente con el centro de Mostoles, lo que facilita el acceso a servicios como la atencion podologica especializada. Clinica Dos de Mayo, en la <strong>Calle Soria 2</strong>, esta a solo unos minutos en transporte publico o en coche desde cualquiera de estos barrios.</p>
+        <p>En nuestra clinica recibimos a muchos pacientes del Sureste que confian en nuestro equipo para el cuidado integral de sus pies. Desde la quiropodia habitual para tratar callos, durezas y helomas, hasta intervenciones mas especializadas como la cirugia percutanea MIS para juanetes y dedos en garra. Tambien realizamos estudios biomecanicos completos y fabricamos plantillas ortopedicas a medida, ideales para corregir problemas de pisada en adultos y ninos.</p>
+        <p>Tanto si necesitas una revision rutinaria como si tienes una dolencia concreta en los pies, en Clinica Dos de Mayo encontraras un equipo con <strong>mas de 15 anos de experiencia</strong> y la tecnologia mas avanzada del sector. Pide tu cita y dejanos cuidar tus pies.</p>
+      </div>
+    </div>
+  </section>
+
+  <ServiciosGrid />
+
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">Como llegar desde la zona Sureste</h2>
+      <div class="zona-content">
+        <p>Desde los barrios del Sureste puedes llegar a nuestra clinica de varias maneras. Las <strong>lineas de autobus urbano</strong> que recorren Villafontana, Estoril I y Cerro Prieto tienen parada en el centro de Mostoles, dejandote a pocos pasos de la Calle Soria 2.</p>
+        <p>Si vienes en coche desde Pinar de Mostoles o La Loma, el trayecto es de unos 5-10 minutos. Hay aparcamiento regulado en las calles del centro y parkings publicos cercanos. Tambien puedes utilizar la estacion de Metrosur <strong>Mostoles Central</strong> si primero enlazas con el metro desde tu zona.</p>
+      </div>
+    </div>
+  </section>
+
+  <ResenasGrid indices={[4, 5, 6]} />
+
+  <CtaFinal />
+</Layout>
+
+<style>
+  .zona-content {
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.8;
+  }
+  .zona-content p {
+    margin-bottom: 1rem;
+    color: var(--text);
+  }
+</style>

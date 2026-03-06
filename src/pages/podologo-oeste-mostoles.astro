@@ -1,0 +1,74 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
+import TrustBar from '../components/TrustBar.astro';
+import ServiciosGrid from '../components/ServiciosGrid.astro';
+import ResenasGrid from '../components/ResenasGrid.astro';
+import CtaFinal from '../components/CtaFinal.astro';
+
+const schema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "Clinica Dos de Mayo — Podologo en Zona Oeste de Mostoles",
+  "@id": "https://clinicadosdemayo.com/#business",
+  "url": "https://clinicadosdemayo.com/podologo-oeste-mostoles",
+  "telephone": "+34916146770",
+  "address": {"@type": "PostalAddress", "streetAddress": "Calle Soria 2", "addressLocality": "Mostoles", "addressRegion": "Madrid", "postalCode": "28934", "addressCountry": "ES"},
+  "areaServed": {"@type": "Place", "name": "Zona Oeste, Mostoles"}
+});
+---
+<Layout
+  title="Podologo en Zona Oeste de Mostoles | Clinica Dos de Mayo"
+  description="Podologo para vecinos de la zona Oeste de Mostoles. Clinica Dos de Mayo en el centro. Hospital U. Mostoles, El Soto. Cita: 916 14 67 70"
+  canonical="https://clinicadosdemayo.com/podologo-oeste-mostoles"
+  schema={schema}
+>
+  <Hero
+    title="Podologo en Zona Oeste de Mostoles"
+    subtitle="Clinica Dos de Mayo — C/ Soria 2"
+    description="Atencion podologica especializada para los vecinos del Oeste de Mostoles. Cerca del Hospital Universitario y El Soto."
+    location="Zona Oeste, Mostoles"
+  />
+
+  <TrustBar />
+
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">Podologo para la zona Oeste de Mostoles</h2>
+      <div class="zona-content">
+        <p>La <strong>zona Oeste de Mostoles</strong> es un distrito que alberga aproximadamente 40.000 habitantes repartidos en barrios como <strong>El Soto, San Fernando, Villaeuropa, Hospital y Pinares Llanos</strong>. Es una zona con una personalidad propia, marcada por la presencia del <strong>Hospital Universitario de Mostoles</strong> y amplias zonas verdes como el <strong>Parque El Soto</strong>, uno de los pulmones naturales de la ciudad.</p>
+        <p>Los vecinos del Oeste disfrutan de un entorno tranquilo y bien comunicado. Las conexiones de transporte publico, tanto en autobus como en metro, permiten llegar al centro de Mostoles en cuestion de minutos. Esto hace que visitar Clinica Dos de Mayo, en la <strong>Calle Soria 2</strong>, sea muy accesible para los residentes de toda la zona.</p>
+        <p>Muchos de nuestros pacientes vienen de barrios como El Soto y San Fernando, y valoran la proximidad y la calidad de nuestros servicios. En la clinica ofrecemos un abanico completo de tratamientos podologicos: quiropodia profesional, tratamiento de unas encarnadas y papilomas plantares, cirugia percutanea MIS para juanetes y otras deformidades, estudios biomecanicos de la pisada y plantillas ortopedicas personalizadas.</p>
+        <p>Ademas, trabajamos en coordinacion con otros profesionales sanitarios. Si tu medico del Hospital Universitario de Mostoles te ha recomendado valoracion podologica, en nuestra clinica encontraras el equipo y la experiencia necesarios para complementar tu tratamiento. <strong>Mas de 15 anos de experiencia</strong> nos avalan.</p>
+      </div>
+    </div>
+  </section>
+
+  <ServiciosGrid />
+
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">Como llegar desde la zona Oeste</h2>
+      <div class="zona-content">
+        <p>Desde la zona Oeste de Mostoles puedes llegar a nuestra clinica facilmente. Si vienes desde <strong>El Soto o San Fernando</strong>, las lineas de autobus urbano te dejan en el centro en unos 10 minutos. Tambien puedes utilizar Metrosur bajando en la estacion Mostoles Central.</p>
+        <p>Desde el entorno del <strong>Hospital Universitario</strong>, el desplazamiento en coche es de apenas 5 minutos. Hay aparcamiento regulado en las calles proximas a la Calle Soria y varios parkings publicos en el centro. Si vienes caminando desde Villaeuropa o Pinares Llanos, el paseo es de unos 15-20 minutos por calles bien senalizadas.</p>
+      </div>
+    </div>
+  </section>
+
+  <ResenasGrid indices={[1, 6, 8]} />
+
+  <CtaFinal />
+</Layout>
+
+<style>
+  .zona-content {
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.8;
+  }
+  .zona-content p {
+    margin-bottom: 1rem;
+    color: var(--text);
+  }
+</style>

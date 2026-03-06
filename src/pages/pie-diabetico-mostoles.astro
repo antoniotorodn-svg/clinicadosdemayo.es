@@ -1,0 +1,160 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
+import TrustBar from '../components/TrustBar.astro';
+import ResenasGrid from '../components/ResenasGrid.astro';
+import FaqAccordion from '../components/FaqAccordion.astro';
+import CtaFinal from '../components/CtaFinal.astro';
+
+const faqs = [
+  { pregunta: "Que es el pie diabetico?", respuesta: "El pie diabetico es una complicacion de la diabetes que afecta a los pies debido a la neuropatia (perdida de sensibilidad) y a problemas vasculares (mala circulacion). Esto aumenta el riesgo de heridas, ulceras e infecciones que, sin tratamiento adecuado, pueden derivar en complicaciones graves." },
+  { pregunta: "Con que frecuencia debe revisarse el pie un paciente diabetico?", respuesta: "Se recomienda una revision podologica al menos cada 6 meses para pacientes diabeticos sin complicaciones previas. Si ya existen factores de riesgo como neuropatia, deformidades o antecedentes de ulceras, las revisiones deben ser cada 1-3 meses." },
+  { pregunta: "Que sintomas deben alertarme?", respuesta: "Debes consultar urgentemente si notas cambios de color en la piel del pie, heridas que no cicatrizan, sensacion de hormigueo o perdida de sensibilidad, callos que se ulceran, hinchazon, enrojecimiento o aumento de temperatura en alguna zona. Tambien si sientes frio constante en los pies." },
+  { pregunta: "Un podologo puede tratar ulceras diabeticas?", respuesta: "Si, los podologos estamos formados en el tratamiento de ulceras del pie diabetico. Realizamos curas especializadas, desbridamiento del tejido danado y descarga de presion. Trabajamos en coordinacion con el endocrino y otros especialistas del paciente." },
+  { pregunta: "Las plantillas ayudan a prevenir complicaciones del pie diabetico?", respuesta: "Absolutamente. Las plantillas ortopedicas a medida redistribuyen las presiones del pie, reduciendo los puntos de hiperpresion que pueden causar callosidades y ulceras. Son una herramienta fundamental en la prevencion de complicaciones en pacientes diabeticos." }
+];
+
+const schema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Pie Diabetico en Mostoles",
+  "provider": {"@id": "https://clinicadosdemayo.com/#business"},
+  "serviceType": "Podologia",
+  "areaServed": {"@type": "City", "name": "Mostoles"},
+  "description": "Prevencion, revisiones y tratamiento especializado del pie diabetico en Mostoles. Programa de cuidados podologicos para pacientes diabeticos. Clinica Dos de Mayo."
+});
+---
+<Layout
+  title="Pie Diabetico en Mostoles | Clinica Dos de Mayo"
+  description="Prevencion, revisiones y tratamiento especializado del pie diabetico en Mostoles. Programa de cuidados podologicos para pacientes diabeticos. Clinica Dos de Mayo."
+  canonical="https://clinicadosdemayo.com/pie-diabetico-mostoles"
+  schema={schema}
+>
+  <Hero
+    title="Pie Diabetico en Mostoles — Prevencion y Tratamiento"
+    subtitle="Cuidado especializado del pie para pacientes diabeticos"
+    description="Programa de prevencion, revisiones periodicas y tratamiento de las complicaciones del pie diabetico. Protege tus pies con el seguimiento de profesionales especializados en Mostoles."
+  />
+
+  <TrustBar />
+
+  <!-- Descripcion detallada -->
+  <section class="section">
+    <div class="container" style="max-width:800px;">
+      <h2 class="section-title">El pie diabetico: riesgos y prevencion</h2>
+      <p>La diabetes mellitus es una enfermedad cronica que, con el tiempo, puede afectar gravemente a los pies. El <strong>pie diabetico</strong> es una de las complicaciones mas temidas de esta enfermedad y la primera causa de amputacion no traumatica en Espana. Sin embargo, con un programa de prevencion adecuado y revisiones periodicas, la gran mayoria de estas complicaciones pueden evitarse.</p>
+
+      <p>La diabetes provoca dos tipos de dano que afectan directamente a los pies. Por un lado, la <strong>neuropatia diabetica</strong> produce una perdida progresiva de la sensibilidad en los pies: el paciente deja de percibir dolor, temperatura y presion, lo que significa que pequenas heridas, rozaduras o puntos de presion excesiva pueden pasar completamente desapercibidos. Por otro lado, la <strong>vasculopatia diabetica</strong> reduce el flujo sanguineo hacia las extremidades, lo que dificulta la cicatrizacion de cualquier herida y aumenta el riesgo de infeccion.</p>
+
+      <h3>Por que es tan importante la prevencion?</h3>
+      <p>Un paciente diabetico puede desarrollar una ulcera a partir de algo tan simple como un callo mal tratado, un zapato inadecuado o un corte de unas demasiado agresivo. Al no sentir dolor, la lesion puede progresar durante dias o semanas sin que el paciente sea consciente. Cuando finalmente se detecta, la infeccion puede haberse extendido en profundidad, afectando a hueso y articulaciones.</p>
+
+      <p>Es por esto que las revisiones periodicas con un podologo son <strong>imprescindibles</strong> para cualquier persona con diabetes. En nuestro programa de prevencion del pie diabetico realizamos:</p>
+      <ul>
+        <li><strong>Exploracion neurologica:</strong> valoramos la sensibilidad tactil, termica y vibratoria mediante monofilamento y diapason para detectar neuropatia.</li>
+        <li><strong>Exploracion vascular:</strong> evaluamos el estado circulatorio del pie con palpacion de pulsos e indice tobillo-brazo.</li>
+        <li><strong>Valoracion dermatologica:</strong> revisamos el estado de la piel, unas, presencia de callosidades, grietas o lesiones.</li>
+        <li><strong>Valoracion biomecanica:</strong> identificamos puntos de hiperpresion que pueden derivar en ulceras.</li>
+        <li><strong>Educacion sanitaria:</strong> ensenamos al paciente habitos de higiene, cuidado diario del pie y eleccion de calzado adecuado.</li>
+      </ul>
+
+      <h3>Tratamiento especializado</h3>
+      <p>Cuando ya existe una lesion, actuamos de forma inmediata con <strong>curas especializadas</strong>, desbridamiento de tejido no viable y sistemas de descarga de presion. La <a href="/quiropodia-mostoles">quiropodia</a> regular es esencial para eliminar callosidades antes de que se conviertan en ulceras. Ademas, las <a href="/plantillas-ortopedicas-mostoles">plantillas ortopedicas a medida</a> son una herramienta clave para redistribuir las presiones plantares y proteger las zonas vulnerables del pie diabetico.</p>
+
+      <p>Nuestro objetivo es que cada paciente diabetico mantenga la integridad de sus pies y disfrute de la maxima calidad de vida posible. La prevencion siempre es mas eficaz y menos costosa que el tratamiento de las complicaciones.</p>
+    </div>
+  </section>
+
+  <!-- Para quien es -->
+  <section class="section" style="background:var(--cream);">
+    <div class="container" style="max-width:800px;">
+      <h2 class="section-title">Para quien es este tratamiento?</h2>
+      <ul class="check-list">
+        <li>Pacientes diagnosticados con diabetes tipo 1 o tipo 2</li>
+        <li>Personas con perdida de sensibilidad o sensacion de hormigueo en los pies</li>
+        <li>Pacientes con mala circulacion en las extremidades inferiores</li>
+        <li>Personas diabeticas con callosidades, durezas o deformidades en los pies</li>
+        <li>Pacientes con antecedentes de ulceras o heridas de dificil cicatrizacion</li>
+        <li>Personas diabeticas que notan cambios de color, temperatura o hinchazon en sus pies</li>
+        <li>Familiares de pacientes diabeticos que buscan orientacion sobre cuidados del pie</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Como es el proceso -->
+  <section class="section">
+    <div class="container" style="max-width:800px;">
+      <h2 class="section-title">Como es el proceso?</h2>
+      <ol class="steps-list">
+        <li><strong>Primera valoracion:</strong> realizamos una exploracion completa del pie que incluye valoracion neurologica, vascular, dermatologica y biomecanica. Clasificamos el nivel de riesgo del paciente.</li>
+        <li><strong>Plan de prevencion personalizado:</strong> segun el nivel de riesgo, establecemos un calendario de revisiones periodicas y las pautas de cuidado diario adaptadas a cada paciente.</li>
+        <li><strong>Tratamiento de lesiones existentes:</strong> si detectamos callosidades, unas problematicas u otras alteraciones, las tratamos de forma inmediata con tecnicas seguras y atraumaticas.</li>
+        <li><strong>Plantillas ortopedicas:</strong> cuando es necesario, prescribimos plantillas a medida para redistribuir presiones y proteger zonas vulnerables.</li>
+        <li><strong>Seguimiento continuado:</strong> mantenemos un programa de revisiones periodicas (entre 1 y 6 meses segun el riesgo) para detectar cualquier cambio de forma precoz.</li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- Ventajas -->
+  <section class="section" style="background:var(--cream);">
+    <div class="container" style="max-width:800px;">
+      <h2 class="section-title">Ventajas de tratarlo en Clinica Dos de Mayo</h2>
+      <ul class="check-list">
+        <li>Programa estructurado de prevencion del pie diabetico con protocolo clinico riguroso</li>
+        <li>Exploracion neurologica y vascular completa en cada revision</li>
+        <li>Tratamiento atraumatico adaptado a la fragilidad del pie diabetico</li>
+        <li>Coordinacion con el equipo medico del paciente (endocrino, vascular)</li>
+        <li>Mas de 15 anos de experiencia en el cuidado podologico del pie diabetico</li>
+        <li>Educacion sanitaria personalizada para el paciente y su entorno</li>
+        <li>Atencion urgente ante heridas, ulceras o cambios sospechosos</li>
+      </ul>
+    </div>
+  </section>
+
+  <FaqAccordion faqs={faqs} />
+
+  <ResenasGrid indices={[1, 5, 8]} />
+
+  <CtaFinal />
+</Layout>
+
+<style>
+  .check-list {
+    list-style: none;
+    padding: 0;
+  }
+  .check-list li {
+    padding: 0.5rem 0 0.5rem 2rem;
+    position: relative;
+    line-height: 1.6;
+  }
+  .check-list li::before {
+    content: '\2713';
+    position: absolute;
+    left: 0;
+    color: var(--primary);
+    font-weight: 700;
+  }
+  .steps-list {
+    padding-left: 1.5rem;
+  }
+  .steps-list li {
+    padding: 0.5rem 0;
+    line-height: 1.6;
+  }
+  p {
+    line-height: 1.7;
+    margin-bottom: 1rem;
+  }
+  ul:not(.check-list) {
+    margin-bottom: 1rem;
+    padding-left: 1.5rem;
+  }
+  ul:not(.check-list) li {
+    padding: 0.35rem 0;
+    line-height: 1.6;
+  }
+  h3 {
+    margin: 1.5rem 0 0.75rem;
+  }
+</style>

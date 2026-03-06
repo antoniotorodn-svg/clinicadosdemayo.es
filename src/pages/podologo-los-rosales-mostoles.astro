@@ -1,0 +1,74 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
+import TrustBar from '../components/TrustBar.astro';
+import ServiciosGrid from '../components/ServiciosGrid.astro';
+import ResenasGrid from '../components/ResenasGrid.astro';
+import CtaFinal from '../components/CtaFinal.astro';
+
+const schema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "Clinica Dos de Mayo — Podologo en Los Rosales",
+  "@id": "https://clinicadosdemayo.com/#business",
+  "url": "https://clinicadosdemayo.com/podologo-los-rosales-mostoles",
+  "telephone": "+34916146770",
+  "address": {"@type": "PostalAddress", "streetAddress": "Calle Soria 2", "addressLocality": "Mostoles", "addressRegion": "Madrid", "postalCode": "28934", "addressCountry": "ES"},
+  "areaServed": {"@type": "Place", "name": "Los Rosales, Mostoles"}
+});
+---
+<Layout
+  title="Podologo en Los Rosales, Mostoles | Clinica Dos de Mayo"
+  description="Podologo en Los Rosales, Mostoles. Clinica Dos de Mayo cerca de tu barrio. +15 anos de experiencia en podologia. Cita: 916 14 67 70"
+  canonical="https://clinicadosdemayo.com/podologo-los-rosales-mostoles"
+  schema={schema}
+>
+  <Hero
+    title="Podologo en Los Rosales, Mostoles"
+    subtitle="Clinica Dos de Mayo — C/ Soria 2"
+    description="Atencion podologica profesional para los vecinos de Los Rosales. A pocos minutos en metro desde tu barrio."
+    location="Los Rosales, Mostoles"
+  />
+
+  <TrustBar />
+
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">Podologo cerca del barrio de Los Rosales</h2>
+      <div class="zona-content">
+        <p><strong>Los Rosales</strong> es uno de los barrios mas emblematicos del distrito Norte-Universidad de Mostoles. Se trata de una zona residencial consolidada, con una poblacion estable y diversa que incluye desde familias que llevan decadas viviendo alli hasta nuevos vecinos que eligen el barrio por su tranquilidad y buenas comunicaciones.</p>
+        <p>Una de las grandes ventajas de Los Rosales es contar con su propia <strong>estacion de Metrosur</strong>, lo que facilita enormemente los desplazamientos dentro de Mostoles. Desde la estacion de metro del barrio, llegar a <strong>Mostoles Central</strong> es cuestion de pocos minutos, y desde alli nuestra clinica en la Calle Soria 2 esta a un paso.</p>
+        <p>Los vecinos de Los Rosales que nos visitan en Clinica Dos de Mayo encuentran un equipo de podologas experimentado y una clinica equipada con tecnologia de ultima generacion. Tratamos todo tipo de afecciones del pie: desde las mas habituales como callos, durezas y unas encarnadas, hasta patologias que requieren intervencion quirurgica como juanetes o dedos en garra, donde aplicamos la <strong>cirugia percutanea MIS</strong> con resultados excelentes y una recuperacion mucho mas rapida.</p>
+        <p>Tambien somos referencia en <strong>estudios biomecanicos</strong> y plantillas ortopedicas a medida, tanto para adultos como para ninos. Si tu hijo tiene problemas de pisada o tu necesitas corregir una alteracion biomecanica, en nuestra clinica encontraras la solucion adecuada. Llevamos mas de 15 anos cuidando los pies de Mostoles.</p>
+      </div>
+    </div>
+  </section>
+
+  <ServiciosGrid />
+
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">Como llegar desde Los Rosales</h2>
+      <div class="zona-content">
+        <p>Llegar a nuestra clinica desde Los Rosales es muy sencillo. La opcion mas rapida es tomar <strong>Metrosur</strong> en la estacion de tu barrio y bajar en <strong>Mostoles Central</strong>. Desde la salida del metro, nuestra clinica en la Calle Soria 2 esta a apenas 2 minutos caminando.</p>
+        <p>Tambien puedes utilizar las <strong>lineas de autobus urbano</strong> que recorren Los Rosales y tienen parada en el centro. En coche, el trayecto es de unos 5 minutos con aparcamiento disponible en las calles proximas. Si prefieres caminar, el paseo desde Los Rosales hasta el centro de Mostoles dura unos 15 minutos por calles bien iluminadas y accesibles.</p>
+      </div>
+    </div>
+  </section>
+
+  <ResenasGrid indices={[2, 3, 5]} />
+
+  <CtaFinal />
+</Layout>
+
+<style>
+  .zona-content {
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.8;
+  }
+  .zona-content p {
+    margin-bottom: 1rem;
+    color: var(--text);
+  }
+</style>

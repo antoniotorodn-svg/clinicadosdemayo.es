@@ -1,0 +1,10 @@
+[
+  { "nombre": "Mostoles Centro", "url": "/podologo-mostoles-centro" },
+  { "nombre": "Norte-Universidad", "url": "/podologo-norte-universidad" },
+  { "nombre": "Sureste", "url": "/podologo-sureste-mostoles" },
+  { "nombre": "Oeste", "url": "/podologo-oeste-mostoles" },
+  { "nombre": "Parque Coimbra", "url": "/podologo-parque-coimbra" },
+  { "nombre": "Mostoles Sur", "url": "/podologo-mostoles-sur" },
+  { "nombre": "Los Rosales", "url": "/podologo-los-rosales-mostoles" },
+  { "nombre": "Villafontana", "url": "/podologo-villafontana-mostoles" }
+]

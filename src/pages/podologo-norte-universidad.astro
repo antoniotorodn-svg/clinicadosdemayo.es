@@ -1,0 +1,74 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
+import TrustBar from '../components/TrustBar.astro';
+import ServiciosGrid from '../components/ServiciosGrid.astro';
+import ResenasGrid from '../components/ResenasGrid.astro';
+import CtaFinal from '../components/CtaFinal.astro';
+
+const schema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "Clinica Dos de Mayo — Podologo en Norte-Universidad",
+  "@id": "https://clinicadosdemayo.com/#business",
+  "url": "https://clinicadosdemayo.com/podologo-norte-universidad",
+  "telephone": "+34916146770",
+  "address": {"@type": "PostalAddress", "streetAddress": "Calle Soria 2", "addressLocality": "Mostoles", "addressRegion": "Madrid", "postalCode": "28934", "addressCountry": "ES"},
+  "areaServed": {"@type": "Place", "name": "Norte-Universidad, Mostoles"}
+});
+---
+<Layout
+  title="Podologo en Norte-Universidad, Mostoles | Clinica Dos de Mayo"
+  description="Podologo para vecinos de Norte-Universidad en Mostoles. Clinica Dos de Mayo a pocos minutos. Cirugia MIS, plantillas, biomecanica. Cita: 916 14 67 70"
+  canonical="https://clinicadosdemayo.com/podologo-norte-universidad"
+  schema={schema}
+>
+  <Hero
+    title="Podologo en Norte-Universidad, Mostoles"
+    subtitle="Clinica Dos de Mayo — C/ Soria 2"
+    description="Atencion podologica completa para los vecinos del distrito Norte-Universidad. A pocos minutos de tu barrio."
+    location="Norte-Universidad, Mostoles"
+  />
+
+  <TrustBar />
+
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">Podologo cerca de Norte-Universidad</h2>
+      <div class="zona-content">
+        <p>El distrito <strong>Norte-Universidad</strong> es el mas poblado de Mostoles, con aproximadamente 60.000 habitantes distribuidos en barrios tan conocidos como <strong>Los Rosales, Estoril II, Iviasa II, Las Nieves, Corona Verde, La Princesa, Parque Vosa y El Recreo</strong>. Es una zona residencial consolidada que combina viviendas familiares, zonas verdes y una importante actividad universitaria gracias a la presencia del campus de la <strong>Universidad Rey Juan Carlos (URJC)</strong>.</p>
+        <p>Los vecinos de Norte-Universidad cuentan con excelentes conexiones de transporte, incluyendo varias estaciones de <strong>Metrosur</strong> que facilitan el desplazamiento hacia el centro de Mostoles. Esto hace que llegar a Clinica Dos de Mayo, situada en la Calle Soria 2, sea rapido y sencillo.</p>
+        <p>En nuestra clinica atendemos a numerosos pacientes del distrito Norte-Universidad. Tanto estudiantes universitarios con necesidades de podologia deportiva como familias que buscan tratamiento para sus hijos o mayores que requieren cuidado especializado del pie. Ofrecemos quiropodia, cirugia percutanea MIS con mas de 15 anos de experiencia, plantillas ortopedicas a medida, estudios biomecanicos, tratamiento de unas encarnadas, papilomas y pie diabetico.</p>
+        <p>Si vives en cualquiera de los barrios de Norte-Universidad y necesitas un <strong>podologo de confianza</strong>, en Clinica Dos de Mayo te atenderemos con la profesionalidad y cercanía que mereces.</p>
+      </div>
+    </div>
+  </section>
+
+  <ServiciosGrid />
+
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">Como llegar desde Norte-Universidad</h2>
+      <div class="zona-content">
+        <p>Desde el distrito Norte-Universidad tienes varias opciones para llegar a nuestra clinica en C/ Soria 2. La forma mas rapida es utilizar <strong>Metrosur</strong>: baja en la estacion <strong>Mostoles Central</strong> y en 2 minutos a pie estaras en nuestra puerta.</p>
+        <p>Si vienes desde Los Rosales, puedes tomar el metro en la estacion Pradillo o Manuela Malasana y bajar en Mostoles Central. Desde barrios como Estoril II, Iviasa II o Las Nieves, las lineas de autobus urbano conectan directamente con el centro. En coche, el trayecto no supera los 5-8 minutos dependiendo del barrio, con opciones de aparcamiento en el centro.</p>
+      </div>
+    </div>
+  </section>
+
+  <ResenasGrid indices={[0, 3, 7]} />
+
+  <CtaFinal />
+</Layout>
+
+<style>
+  .zona-content {
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.8;
+  }
+  .zona-content p {
+    margin-bottom: 1rem;
+    color: var(--text);
+  }
+</style>

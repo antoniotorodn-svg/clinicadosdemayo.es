@@ -1,0 +1,157 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
+import TrustBar from '../components/TrustBar.astro';
+import ResenasGrid from '../components/ResenasGrid.astro';
+import FaqAccordion from '../components/FaqAccordion.astro';
+import CtaFinal from '../components/CtaFinal.astro';
+
+const faqs = [
+  { pregunta: "Que son los papilomas plantares?", respuesta: "Los papilomas plantares, tambien llamados verrugas plantares, son lesiones causadas por el virus del papiloma humano (VPH). Aparecen en la planta del pie y pueden causar dolor al caminar, especialmente cuando se localizan en zonas de apoyo." },
+  { pregunta: "Son contagiosos los papilomas?", respuesta: "Si, el VPH se transmite por contacto directo o indirecto. Es frecuente contagiarse en piscinas, duchas publicas, vestuarios y gimnasios. Se recomienda usar chanclas en estos espacios y mantener los pies secos e hidratados." },
+  { pregunta: "Cuanto tarda en eliminarse un papiloma plantar?", respuesta: "Depende del tamano, la profundidad y el tipo de tratamiento. Con crioterapia o tratamiento quimico, suelen necesitarse entre 2 y 5 sesiones espaciadas cada 1-2 semanas. En casos resistentes, la eliminacion quirurgica resuelve el problema en una sola sesion." },
+  { pregunta: "Cual es la diferencia entre un papiloma y un callo?", respuesta: "Aunque visualmente pueden confundirse, un callo es una acumulacion de piel muerta por friccion o presion, mientras que un papiloma es una lesion virica con puntos oscuros (capilares trombosados) y que duele al pellizco lateral. Un podologo puede diferenciarlos facilmente." },
+  { pregunta: "Puede un papiloma desaparecer solo?", respuesta: "En algunos casos, el sistema inmunologico puede eliminar el virus de forma espontanea, pero esto puede tardar meses o anos. Mientras tanto, el papiloma puede crecer, multiplicarse y contagiar a otras personas. Lo mas recomendable es tratarlo cuanto antes." }
+];
+
+const schema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Papilomas Plantares en Mostoles",
+  "provider": {"@id": "https://clinicadosdemayo.com/#business"},
+  "serviceType": "Podologia",
+  "areaServed": {"@type": "City", "name": "Mostoles"},
+  "description": "Diagnostico y eliminacion de papilomas plantares (verrugas por VPH) en Mostoles. Crioterapia, tratamiento quimico y cirugia. Clinica Dos de Mayo."
+});
+---
+<Layout
+  title="Papilomas Plantares en Mostoles | Clinica Dos de Mayo"
+  description="Diagnostico y eliminacion de papilomas plantares (verrugas por VPH) en Mostoles. Crioterapia, tratamiento quimico y cirugia. Clinica Dos de Mayo."
+  canonical="https://clinicadosdemayo.com/papilomas-plantares-mostoles"
+  schema={schema}
+>
+  <Hero
+    title="Papilomas Plantares en Mostoles"
+    subtitle="Diagnostico y eliminacion de verrugas plantares por VPH"
+    description="Tratamientos eficaces para eliminar los papilomas plantares de forma segura y definitiva. Crioterapia, tratamiento quimico y cirugia menor en nuestra clinica de Mostoles."
+  />
+
+  <TrustBar />
+
+  <!-- Descripcion detallada -->
+  <section class="section">
+    <div class="container" style="max-width:800px;">
+      <h2 class="section-title">Que son los papilomas plantares?</h2>
+      <p>Los papilomas plantares, conocidos popularmente como verrugas plantares, son lesiones cutaneas benignas causadas por el <strong>virus del papiloma humano (VPH)</strong>. Afectan a la planta del pie y son una de las consultas mas frecuentes en podologia, tanto en adultos como en ninos. Aunque no son una patologia grave, pueden resultar muy molestas e incluso dolorosas si no se tratan a tiempo.</p>
+
+      <p>El VPH penetra en la piel a traves de pequenas heridas o microlesiones, especialmente en ambientes humedos y calidos como piscinas, duchas publicas, gimnasios o vestuarios. Una vez instalado en la epidermis, el virus provoca un crecimiento anormal de las celulas de la piel, formando una lesion endurecida con un aspecto caracteristico: una zona de piel engrosada con pequenos puntos oscuros en su interior, que corresponden a capilares trombosados.</p>
+
+      <h3>Tipos de papilomas plantares</h3>
+      <p>Existen principalmente dos tipos de verrugas plantares. El <strong>papiloma unico o mirmecia</strong> es una lesion aislada, bien delimitada y profunda que suele provocar dolor al caminar. Por otro lado, los <strong>papilomas en mosaico</strong> son agrupaciones de multiples verrugas mas superficiales que cubren una zona mayor de la planta del pie. Aunque suelen ser menos dolorosos individualmente, su extension dificulta el tratamiento.</p>
+
+      <h3>Opciones de tratamiento</h3>
+      <p>En Clinica Dos de Mayo disponemos de varias tecnicas para eliminar los papilomas plantares, adaptando el tratamiento a cada caso particular:</p>
+      <ul>
+        <li><strong>Crioterapia:</strong> aplicacion de frio extremo (nitrogeno liquido) directamente sobre la lesion para destruir el tejido infectado. Es un metodo rapido y eficaz, especialmente indicado para papilomas superficiales.</li>
+        <li><strong>Tratamiento quimico:</strong> utilizamos acidos especificos (como acido nitrico o acido salicilico concentrado) que van eliminando el tejido afectado capa a capa en sesiones sucesivas.</li>
+        <li><strong>Eliminacion quirurgica:</strong> en papilomas resistentes, profundos o de gran tamano, realizamos una pequena intervencion con anestesia local para extirpar la lesion de forma completa en una sola sesion.</li>
+      </ul>
+
+      <h3>Prevencion y cuidados</h3>
+      <p>Para reducir el riesgo de contagio, es fundamental utilizar <strong>chanclas en piscinas y duchas publicas</strong>, mantener los pies limpios y secos, no compartir toallas ni calzado y evitar caminar descalzo en superficies humedas compartidas. Si ya has tenido un papiloma, el riesgo de recurrencia es mayor, por lo que conviene mantener revisiones periodicas con tu podologo.</p>
+
+      <p>Es importante no intentar eliminar los papilomas en casa con remedios caseros, ya que se corre el riesgo de extender la infeccion, danar el tejido sano circundante o generar cicatrices. Si sospechas que tienes un papiloma plantar, lo mejor es acudir a un profesional. En muchos casos, los pacientes que nos visitan para <a href="/quiropodia-mostoles">quiropodia</a> descubren un papiloma que confundian con un callo. Tambien realizamos revisiones especificas para pacientes con <a href="/pie-diabetico-mostoles">pie diabetico</a>, ya que las infecciones viricas requieren especial atencion en estos casos.</p>
+    </div>
+  </section>
+
+  <!-- Para quien es -->
+  <section class="section" style="background:var(--cream);">
+    <div class="container" style="max-width:800px;">
+      <h2 class="section-title">Para quien es este tratamiento?</h2>
+      <ul class="check-list">
+        <li>Personas con verrugas o lesiones dolorosas en la planta del pie</li>
+        <li>Ninos y adolescentes que practican natacion u otros deportes en zonas humedas</li>
+        <li>Pacientes con papilomas recurrentes que no responden a tratamientos caseros</li>
+        <li>Personas que han notado una lesion con puntos oscuros en el pie</li>
+        <li>Deportistas que frecuentan vestuarios y duchas compartidas</li>
+        <li>Pacientes inmunodeprimidos con mayor susceptibilidad al VPH</li>
+        <li>Cualquier persona que sienta dolor al caminar por una lesion en la planta del pie</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Como es el proceso -->
+  <section class="section">
+    <div class="container" style="max-width:800px;">
+      <h2 class="section-title">Como es el proceso?</h2>
+      <ol class="steps-list">
+        <li><strong>Diagnostico:</strong> realizamos una exploracion visual y dermatoscopica de la lesion para confirmar que se trata de un papiloma y descartar otras patologias.</li>
+        <li><strong>Eleccion del tratamiento:</strong> segun el tipo, tamano, profundidad y localizacion del papiloma, recomendamos el tratamiento mas adecuado (crioterapia, quimico o quirurgico).</li>
+        <li><strong>Sesiones de tratamiento:</strong> en el caso de crioterapia o tratamiento quimico, se programan varias sesiones cada 1-2 semanas. Si se opta por cirugia, se resuelve en una unica intervencion.</li>
+        <li><strong>Seguimiento:</strong> tras la eliminacion, realizamos revisiones para asegurar la desaparicion completa del papiloma y prevenir recurrencias.</li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- Ventajas -->
+  <section class="section" style="background:var(--cream);">
+    <div class="container" style="max-width:800px;">
+      <h2 class="section-title">Ventajas de tratarlo en Clinica Dos de Mayo</h2>
+      <ul class="check-list">
+        <li>Diagnostico preciso que diferencia papilomas de callos, helomas u otras lesiones</li>
+        <li>Multiples opciones terapeuticas adaptadas a cada paciente y tipo de verruga</li>
+        <li>Tecnicas seguras y minimamente dolorosas</li>
+        <li>Mas de 15 anos de experiencia en podologia en Mostoles</li>
+        <li>Seguimiento personalizado hasta la completa resolucion</li>
+        <li>Atencion especial a ninos y pacientes con condiciones de riesgo</li>
+      </ul>
+    </div>
+  </section>
+
+  <FaqAccordion faqs={faqs} />
+
+  <ResenasGrid indices={[2, 5, 6]} />
+
+  <CtaFinal />
+</Layout>
+
+<style>
+  .check-list {
+    list-style: none;
+    padding: 0;
+  }
+  .check-list li {
+    padding: 0.5rem 0 0.5rem 2rem;
+    position: relative;
+    line-height: 1.6;
+  }
+  .check-list li::before {
+    content: '\2713';
+    position: absolute;
+    left: 0;
+    color: var(--primary);
+    font-weight: 700;
+  }
+  .steps-list {
+    padding-left: 1.5rem;
+  }
+  .steps-list li {
+    padding: 0.5rem 0;
+    line-height: 1.6;
+  }
+  p {
+    line-height: 1.7;
+    margin-bottom: 1rem;
+  }
+  ul:not(.check-list) {
+    margin-bottom: 1rem;
+    padding-left: 1.5rem;
+  }
+  ul:not(.check-list) li {
+    padding: 0.35rem 0;
+    line-height: 1.6;
+  }
+  h3 {
+    margin: 1.5rem 0 0.75rem;
+  }
+</style>

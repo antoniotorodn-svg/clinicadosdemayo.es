@@ -1,0 +1,86 @@
+---
+---
+<section class="section" id="ubicacion">
+  <div class="container">
+    <h2 class="section-title">Donde estamos</h2>
+    <div class="ubicacion-grid">
+      <div class="ubicacion-info card">
+        <h3>Clinica Dos de Mayo</h3>
+        <p class="ubicacion-address">📍 Calle Soria 2, 28934 Mostoles, Madrid</p>
+        <p class="ubicacion-phone">📞 <a href="tel:+34916146770">916 14 67 70</a></p>
+        <div class="ubicacion-horario">
+          <h4>Horario</h4>
+          <table>
+            <tbody>
+              <tr><td>Lunes</td><td>9:30 - 14:00 / 16:30 - 19:30</td></tr>
+              <tr><td>Martes</td><td>Cerrado</td></tr>
+              <tr><td>Miercoles</td><td>9:30 - 14:00 / 16:30 - 19:30</td></tr>
+              <tr><td>Jueves</td><td>9:30 - 13:30</td></tr>
+              <tr><td>Viernes</td><td>9:30 - 14:00 / 16:30 - 19:30</td></tr>
+              <tr><td>Sabado</td><td>Cerrado</td></tr>
+              <tr><td>Domingo</td><td>Cerrado</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <a href="tel:+34916146770" class="btn btn-cta" style="margin-top:1.5rem;">📞 Llamar ahora</a>
+      </div>
+      <div class="ubicacion-mapa">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3040.8!2d-3.8657!3d40.3228!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDDCsDE5JzIyLjEiTiAzwrA1MScyNi41Ilc!5e0!3m2!1ses!2ses!4v1"
+          width="100%"
+          height="100%"
+          style="border:0; border-radius: var(--radius); min-height: 400px;"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Ubicacion Clinica Dos de Mayo en Mostoles"
+        ></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .ubicacion-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    align-items: start;
+  }
+  .ubicacion-info h3 {
+    margin-bottom: 1rem;
+  }
+  .ubicacion-address,
+  .ubicacion-phone {
+    margin-bottom: 0.5rem;
+  }
+  .ubicacion-phone a {
+    font-weight: 600;
+    color: var(--primary);
+  }
+  .ubicacion-horario {
+    margin-top: 1.25rem;
+  }
+  .ubicacion-horario h4 {
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+  }
+  .ubicacion-horario table {
+    width: 100%;
+    font-size: 0.9rem;
+  }
+  .ubicacion-horario td {
+    padding: 0.3rem 0;
+    color: var(--text-light);
+  }
+  .ubicacion-horario td:first-child {
+    font-weight: 500;
+    color: var(--text);
+    width: 100px;
+  }
+  @media (max-width: 768px) {
+    .ubicacion-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

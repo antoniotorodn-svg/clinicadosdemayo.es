@@ -1,0 +1,251 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
+import TrustBar from '../components/TrustBar.astro';
+import ResenasGrid from '../components/ResenasGrid.astro';
+import FaqAccordion from '../components/FaqAccordion.astro';
+import CtaFinal from '../components/CtaFinal.astro';
+
+const faqs = [
+  { pregunta: "Como se si tengo una una encarnada?", respuesta: "Los sintomas mas comunes son dolor en el lateral de la una (generalmente del dedo gordo), enrojecimiento, hinchazon y sensibilidad al tacto o al roce con el calzado. En fases avanzadas puede aparecer infeccion con supuracion y tejido de granulacion (carne sobresaliente). Si tienes alguno de estos sintomas, es recomendable acudir al podologo." },
+  { pregunta: "Las unas encarnadas se curan solas?", respuesta: "No es recomendable esperar a que se curen solas. Una una encarnada puede empeorar progresivamente, pasando de una molestia leve a una infeccion seria. Cuanto antes se trate, mas sencillo y rapido sera el tratamiento. El podologo puede resolverlo de forma conservadora si se acude a tiempo." },
+  { pregunta: "Duele la cirugia de una encarnada?", respuesta: "La intervencion se realiza con anestesia local, por lo que no sentiras dolor durante el procedimiento. Despues de la cirugia es normal notar molestias leves que se controlan con analgesia basica. La mayoria de pacientes refieren mucho menos dolor del que esperaban." },
+  { pregunta: "Cuanto tarda en curarse una una encarnada operada?", respuesta: "La recuperacion completa de una cirugia de una encarnada (matricectomia parcial) suele ser de 2 a 4 semanas. Durante los primeros dias se realizan curas locales. Puedes caminar desde el primer dia, aunque con calzado abierto o amplio durante las primeras semanas." },
+  { pregunta: "Puede volver a encarnarse la una despues de la cirugia?", respuesta: "La cirugia de matricectomia parcial tiene una tasa de recidiva muy baja (inferior al 5%). Al eliminar la porcion de matriz responsable del crecimiento anomalo, la una crece de forma normal sin volver a clavarse. Es la solucion definitiva para unas encarnadas recurrentes." }
+];
+
+const schema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Unas Encarnadas en Mostoles",
+  "provider": {"@id": "https://clinicadosdemayo.com/#business"},
+  "serviceType": "Podologia",
+  "areaServed": {"@type": "City", "name": "Mostoles"},
+  "description": "Tratamiento conservador y quirurgico de unas encarnadas en Mostoles. Solucion rapida y definitiva para la onicocriptosis. Clinica Dos de Mayo."
+});
+---
+<Layout
+  title="Unas Encarnadas en Mostoles | Clinica Dos de Mayo"
+  description="Tratamiento conservador y quirurgico de unas encarnadas en Mostoles. Solucion rapida y definitiva para la onicocriptosis. Clinica Dos de Mayo. Pide cita: 916 14 67 70"
+  canonical="https://clinicadosdemayo.com/unas-encarnadas-mostoles"
+  schema={schema}
+>
+  <Hero
+    title="Unas Encarnadas en Mostoles — Tratamiento y Cirugia"
+    subtitle="Solucion rapida y definitiva para la onicocriptosis"
+    description="Tratamos unas encarnadas de forma conservadora o quirurgica segun la gravedad. Si te duele la una del pie, no esperes: cuanto antes actues, mas sencillo sera el tratamiento."
+  />
+
+  <TrustBar />
+
+  <!-- Descripcion detallada -->
+  <section class="section">
+    <div class="container content-block">
+      <h2 class="section-title">Unas encarnadas: causas, sintomas y tratamiento</h2>
+
+      <p>La una encarnada (onicocriptosis) es una de las patologias mas frecuentes que atendemos en nuestra consulta. Se produce cuando <strong>el borde lateral de la una penetra en la piel circundante</strong>, causando dolor, inflamacion y, en muchos casos, infeccion. Afecta principalmente al dedo gordo del pie, aunque puede aparecer en cualquier dedo.</p>
+
+      <p>Es un problema que puede afectar a personas de cualquier edad, desde adolescentes hasta personas mayores. En Clinica Dos de Mayo ofrecemos <strong>tratamiento tanto conservador como quirurgico</strong>, adaptando la solucion a la gravedad de cada caso.</p>
+
+      <h3>Causas de las unas encarnadas</h3>
+
+      <p>Las causas mas habituales son el <strong>corte incorrecto de las unas</strong> (cortarlas demasiado cortas o redondeando las esquinas), el uso de calzado demasiado estrecho o puntiagudo, traumatismos repetidos en la una (frecuente en deportistas), la sudoracion excesiva, la predisposicion genetica a unas curvadas y las alteraciones biomecanicas del pie.</p>
+
+      <p>En adolescentes, el crecimiento rapido del pie combinado con calzado inadecuado es una causa muy frecuente. En personas mayores, el engrosamiento de las unas y la dificultad para cortarlas correctamente favorece la aparicion de onicocriptosis.</p>
+
+      <h3>Tratamiento conservador</h3>
+
+      <p>Cuando la una encarnada se detecta en fases iniciales, el <strong>tratamiento conservador</strong> suele ser suficiente. Consiste en la extraccion cuidadosa de la espiga (el fragmento de una clavado), limpieza de la zona, aplicacion de antisepticos y, en algunos casos, la colocacion de correctores ungueales que guian el crecimiento de la una. Este procedimiento se realiza durante una sesion de <a href="/quiropodia">quiropodia</a> y el alivio es inmediato.</p>
+
+      <h3>Tratamiento quirurgico</h3>
+
+      <p>Cuando la una encarnada es recurrente, esta muy infectada o la curvatura de la una es excesiva, la mejor opcion es la <strong>matricectomia parcial</strong>. Esta <a href="/cirugia-pie-mostoles">cirugia menor</a> se realiza con anestesia local y consiste en eliminar la porcion de matriz ungueal que produce el borde problematico de la una. El resultado es definitivo: la una crece de forma normal sin volver a encarnarse, con un aspecto estetico satisfactorio.</p>
+
+      <p>La intervencion dura aproximadamente 20-30 minutos, se realiza en la clinica y el paciente vuelve a casa caminando. Las curas postoperatorias son sencillas y la recuperacion completa se alcanza en 2-4 semanas.</p>
+
+      <h3>Prevencion</h3>
+
+      <p>Para prevenir las unas encarnadas recomendamos <strong>cortar las unas rectas</strong> sin redondear las esquinas, usar calzado con puntera amplia, mantener una buena higiene del pie y acudir al podologo ante las primeras molestias. Si tienes tendencia a que se encarnen, las revisiones periodicas con quiropodia son la mejor prevencion.</p>
+
+      <h3>Cuando acudir al podologo</h3>
+
+      <p>No esperes a que la una encarnada se infecte. Si notas <strong>dolor, enrojecimiento o hinchazon</strong> en el lateral de la una, pide cita lo antes posible. Intentamos darte cita urgente llamando al 916 14 67 70. Un tratamiento precoz es siempre mas sencillo, rapido y menos doloroso que una intervencion sobre una infeccion establecida.</p>
+    </div>
+  </section>
+
+  <!-- Para quien -->
+  <section class="section section-alt">
+    <div class="container">
+      <h2 class="section-title">Para quien es este tratamiento?</h2>
+      <div class="grid-3">
+        <div class="card caso-card">
+          <h3>Dolor en la una del pie</h3>
+          <p>Si te duele el borde de la una al caminar, al ponerte zapatos o al rozar con la sabana.</p>
+        </div>
+        <div class="card caso-card">
+          <h3>Una encarnada con infeccion</h3>
+          <p>Enrojecimiento, hinchazon, pus o carne sobresaliente alrededor de la una. Necesita tratamiento urgente.</p>
+        </div>
+        <div class="card caso-card">
+          <h3>Unas encarnadas recurrentes</h3>
+          <p>Si la una se te encarna repetidamente y los tratamientos caseros no funcionan. La cirugia ofrece solucion definitiva.</p>
+        </div>
+        <div class="card caso-card">
+          <h3>Adolescentes</h3>
+          <p>Periodo de crecimiento con cambios frecuentes de talla de calzado. Muy comun la onicocriptosis a esta edad.</p>
+        </div>
+        <div class="card caso-card">
+          <h3>Deportistas</h3>
+          <p>Traumatismos repetidos en la una por el deporte (correr, futbol, padel) que favorecen el encarnamiento.</p>
+        </div>
+        <div class="card caso-card">
+          <h3>Personas con unas curvadas</h3>
+          <p>Predisposicion genetica a unas en pinza o con curvatura excesiva que tienden a clavarse.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Proceso -->
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">Como es el proceso?</h2>
+      <div class="pasos-list">
+        <div class="paso">
+          <span class="paso-num">1</span>
+          <div>
+            <h3>Valoracion inicial</h3>
+            <p>Exploramos la una afectada, evaluamos la gravedad de la onicocriptosis y determinamos si hay infeccion. Te explicamos las opciones de tratamiento.</p>
+          </div>
+        </div>
+        <div class="paso">
+          <span class="paso-num">2</span>
+          <div>
+            <h3>Tratamiento conservador o quirurgico</h3>
+            <p>Si es leve, extraemos la espiga y aplicamos correctores. Si es recurrente o grave, realizamos matricectomia parcial con anestesia local.</p>
+          </div>
+        </div>
+        <div class="paso">
+          <span class="paso-num">3</span>
+          <div>
+            <h3>Curas postoperatorias</h3>
+            <p>En caso de cirugia, realizamos las curas en la clinica durante las primeras semanas. Son rapidas e indoloras.</p>
+          </div>
+        </div>
+        <div class="paso">
+          <span class="paso-num">4</span>
+          <div>
+            <h3>Seguimiento y prevencion</h3>
+            <p>Revisamos la evolucion hasta la curacion completa y te damos consejos de prevencion para evitar recidivas futuras.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ventajas -->
+  <section class="section section-alt">
+    <div class="container">
+      <h2 class="section-title">Ventajas de tratarlo en Clinica Dos de Mayo</h2>
+      <div class="grid-3">
+        <div class="card ventaja-card">
+          <h3>Cita urgente disponible</h3>
+          <p>Las unas encarnadas pueden ser urgentes. Intentamos darte cita en 24-48 horas.</p>
+        </div>
+        <div class="card ventaja-card">
+          <h3>Tratamiento conservador primero</h3>
+          <p>Siempre priorizamos el tratamiento menos invasivo. Solo operamos cuando es realmente necesario.</p>
+        </div>
+        <div class="card ventaja-card">
+          <h3>Cirugia definitiva</h3>
+          <p>Matricectomia parcial con tasa de recidiva inferior al 5%. Solucion permanente para unas que se encarnan.</p>
+        </div>
+        <div class="card ventaja-card">
+          <h3>Anestesia local indolora</h3>
+          <p>La intervencion se realiza con anestesia local. No sentiras dolor durante el procedimiento.</p>
+        </div>
+        <div class="card ventaja-card">
+          <h3>Curas incluidas</h3>
+          <p>Las curas postoperatorias se realizan en la clinica sin coste adicional hasta la curacion completa.</p>
+        </div>
+        <div class="card ventaja-card">
+          <h3>Buen resultado estetico</h3>
+          <p>La tecnica de matricectomia parcial preserva la mayor parte de la una con un resultado estetico natural.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <FaqAccordion faqs={faqs} />
+
+  <ResenasGrid indices={[0, 6, 8]} />
+
+  <CtaFinal />
+</Layout>
+
+<style>
+  .content-block {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  .content-block p {
+    color: var(--text-light);
+    line-height: 1.7;
+    margin-bottom: 1rem;
+  }
+  .content-block h3 {
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+  }
+  .content-block a {
+    color: var(--primary);
+    text-decoration: underline;
+  }
+  .section-alt {
+    background: var(--cream);
+  }
+  .caso-card, .ventaja-card {
+    text-align: center;
+  }
+  .caso-card h3, .ventaja-card h3 {
+    font-size: 1.05rem;
+    margin-bottom: 0.5rem;
+  }
+  .caso-card p, .ventaja-card p {
+    font-size: 0.9rem;
+    color: var(--text-light);
+  }
+  .pasos-list {
+    max-width: 700px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  .paso {
+    display: flex;
+    gap: 1.25rem;
+    align-items: flex-start;
+  }
+  .paso-num {
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    border-radius: 50%;
+    background: var(--gold);
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1.1rem;
+  }
+  .paso h3 {
+    font-size: 1.05rem;
+    margin-bottom: 0.25rem;
+  }
+  .paso p {
+    font-size: 0.9rem;
+    color: var(--text-light);
+  }
+</style>

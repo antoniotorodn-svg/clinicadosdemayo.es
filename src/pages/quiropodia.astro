@@ -1,0 +1,243 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
+import TrustBar from '../components/TrustBar.astro';
+import ResenasGrid from '../components/ResenasGrid.astro';
+import FaqAccordion from '../components/FaqAccordion.astro';
+import CtaFinal from '../components/CtaFinal.astro';
+
+const faqs = [
+  { pregunta: "Que es exactamente una quiropodia?", respuesta: "La quiropodia es un tratamiento podologico que consiste en la eliminacion de callosidades, durezas, helomas (ojos de gallo) y el cuidado general de las unas y la piel del pie. Es un procedimiento indoloro que mejora la salud y el confort de tus pies de forma inmediata." },
+  { pregunta: "Cada cuanto tiempo debo hacerme una quiropodia?", respuesta: "Lo recomendable es realizar una quiropodia cada 4 a 8 semanas, dependiendo de cada paciente. Las personas con mayor tendencia a formar callosidades o con problemas circulatorios pueden necesitar sesiones mas frecuentes." },
+  { pregunta: "Duele el tratamiento de quiropodia?", respuesta: "No, la quiropodia es un tratamiento completamente indoloro. Se utilizan instrumentos especializados y esterilizados que eliminan las durezas y callos sin causar molestias. La mayoria de pacientes describen la experiencia como muy agradable." },
+  { pregunta: "Puedo caminar normalmente despues de una quiropodia?", respuesta: "Si, puedes caminar con total normalidad inmediatamente despues del tratamiento. De hecho, la mayoria de pacientes notan un alivio instantaneo y una mejora significativa en la comodidad al caminar." },
+  { pregunta: "Que diferencia hay entre un callo y un heloma?", respuesta: "Un callo (hiperqueratosis) es un engrosamiento difuso de la piel causado por presion o friccion repetida. Un heloma (ojo de gallo) es una lesion mas localizada con un nucleo central duro que penetra en capas mas profundas de la piel, causando dolor punzante. Ambos se tratan eficazmente con quiropodia." }
+];
+
+const schema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Quiropodia en Mostoles",
+  "provider": {"@id": "https://clinicadosdemayo.com/#business"},
+  "serviceType": "Podologia",
+  "areaServed": {"@type": "City", "name": "Mostoles"},
+  "description": "Tratamiento profesional de callosidades, durezas, helomas y cuidado integral del pie en Mostoles. Quiropodia indolora con resultados inmediatos en Clinica Dos de Mayo."
+});
+---
+<Layout
+  title="Quiropodia en Mostoles | Clinica Dos de Mayo | 916 14 67 70"
+  description="Tratamiento profesional de callosidades, durezas, helomas y cuidado integral del pie en Mostoles. Quiropodia indolora con resultados inmediatos en Clinica Dos de Mayo."
+  canonical="https://clinicadosdemayo.com/quiropodia"
+  schema={schema}
+>
+  <Hero
+    title="Quiropodia en Mostoles"
+    subtitle="Cuidado profesional para tus pies"
+    description="Eliminamos callosidades, durezas y helomas de forma indolora. Un tratamiento esencial para mantener la salud de tus pies y caminar sin molestias."
+  />
+
+  <TrustBar />
+
+  <!-- Descripcion detallada -->
+  <section class="section">
+    <div class="container content-block">
+      <h2 class="section-title">Que es la quiropodia y por que es importante</h2>
+
+      <p>La quiropodia es el tratamiento podologico mas demandado en nuestra clinica y constituye la base del cuidado preventivo del pie. Consiste en la <strong>eliminacion profesional de callosidades, durezas (hiperqueratosis), helomas y el cuidado integral de las unas</strong>, devolviendo al pie su estado optimo de salud y confort.</p>
+
+      <p>En Clinica Dos de Mayo realizamos quiropodias completas que incluyen el corte y fresado de unas, la eliminacion de durezas plantares y dorsales, el tratamiento de helomas interdigitales (conocidos como ojos de gallo) y la aplicacion de cremas hidratantes especificas. Todo el procedimiento se realiza con instrumental esterilizado y tecnicas actualizadas.</p>
+
+      <h3>Tipos de lesiones que tratamos</h3>
+
+      <p>Las <strong>callosidades o hiperqueratosis</strong> son engrosamientos de la piel que aparecen como respuesta a la presion o friccion repetida. Suelen formarse en la planta del pie, en los talones y en la zona metatarsal. Aunque no siempre causan dolor, si no se tratan pueden derivar en molestias importantes.</p>
+
+      <p>Los <strong>helomas</strong> son lesiones mas localizadas que presentan un nucleo central endurecido. Pueden aparecer entre los dedos (helomas interdigitales) o en zonas de presion osea. A diferencia de las callosidades difusas, los helomas suelen provocar dolor punzante al caminar.</p>
+
+      <p>Las <strong>unas engrosadas u onicogrifoticas</strong> tambien se tratan durante la quiropodia. Con el paso de los anos o debido a traumatismos repetidos, las unas pueden volverse gruesas, amarillentas y dificiles de cortar. Nuestras podologas las fresan y moldean para devolverles un aspecto saludable.</p>
+
+      <h3>Prevencion y cuidado continuo</h3>
+
+      <p>Ademas del tratamiento en consulta, en cada sesion de quiropodia ofrecemos <strong>consejos personalizados de higiene podal</strong>: como hidratar correctamente los pies, que tipo de calzado es mas adecuado y como prevenir la reaparicion de callosidades.</p>
+
+      <p>Si tus pies presentan problemas recurrentes de durezas, es posible que necesites un <a href="/plantillas-ortopedicas-mostoles">estudio para plantillas ortopedicas a medida</a> que redistribuyan las presiones y eviten la formacion de nuevas callosidades. Tambien es importante descartar problemas como <a href="/unas-encarnadas-mostoles">unas encarnadas</a> que requieran un tratamiento especifico.</p>
+
+      <p>Para pacientes con diabetes u otras patologias vasculares, la quiropodia regular es especialmente importante. El <strong>pie diabetico</strong> requiere un cuidado profesional frecuente para prevenir ulceras y complicaciones graves. En nuestra clinica seguimos protocolos especificos para estos pacientes.</p>
+    </div>
+  </section>
+
+  <!-- Para quien -->
+  <section class="section section-alt">
+    <div class="container">
+      <h2 class="section-title">Para quien es este tratamiento?</h2>
+      <div class="grid-3">
+        <div class="card caso-card">
+          <h3>Personas con callos y durezas</h3>
+          <p>Si tienes engrosamientos en la planta del pie, talones o dedos que causan molestias al caminar.</p>
+        </div>
+        <div class="card caso-card">
+          <h3>Helomas interdigitales</h3>
+          <p>Ojos de gallo entre los dedos que provocan dolor punzante con el calzado.</p>
+        </div>
+        <div class="card caso-card">
+          <h3>Personas mayores</h3>
+          <p>Cuidado regular del pie para quienes tienen dificultad para cortarse las unas o mantener la higiene podal.</p>
+        </div>
+        <div class="card caso-card">
+          <h3>Pacientes diabeticos</h3>
+          <p>Control periodico imprescindible para prevenir ulceras y complicaciones del pie diabetico.</p>
+        </div>
+        <div class="card caso-card">
+          <h3>Unas engrosadas</h3>
+          <p>Unas gruesas, deformadas o dificiles de cortar que necesitan fresado profesional.</p>
+        </div>
+        <div class="card caso-card">
+          <h3>Mantenimiento preventivo</h3>
+          <p>Cualquier persona que quiera mantener sus pies sanos y prevenir problemas futuros.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Proceso -->
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">Como es el proceso?</h2>
+      <div class="pasos-list">
+        <div class="paso">
+          <span class="paso-num">1</span>
+          <div>
+            <h3>Exploracion inicial</h3>
+            <p>Examinamos el estado general de tus pies, identificando callosidades, helomas, estado de las unas y cualquier alteracion cutanea.</p>
+          </div>
+        </div>
+        <div class="paso">
+          <span class="paso-num">2</span>
+          <div>
+            <h3>Tratamiento de unas</h3>
+            <p>Cortamos y fresamos las unas con instrumental esterilizado, dando forma adecuada para prevenir problemas como las unas encarnadas.</p>
+          </div>
+        </div>
+        <div class="paso">
+          <span class="paso-num">3</span>
+          <div>
+            <h3>Eliminacion de durezas y callos</h3>
+            <p>Retiramos las hiperqueratosis y helomas con bisturi podologico de forma indolora, eliminando las zonas de presion.</p>
+          </div>
+        </div>
+        <div class="paso">
+          <span class="paso-num">4</span>
+          <div>
+            <h3>Hidratacion y consejos</h3>
+            <p>Aplicamos cremas especificas y te damos recomendaciones personalizadas de cuidado diario y calzado adecuado.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ventajas -->
+  <section class="section section-alt">
+    <div class="container">
+      <h2 class="section-title">Ventajas de tratarlo en Clinica Dos de Mayo</h2>
+      <div class="grid-3">
+        <div class="card ventaja-card">
+          <h3>Equipo con experiencia</h3>
+          <p>Mas de 15 anos realizando quiropodias. Nuestras podologas conocen cada tipo de pie y adaptan el tratamiento.</p>
+        </div>
+        <div class="card ventaja-card">
+          <h3>Instrumental esterilizado</h3>
+          <p>Todo nuestro instrumental pasa por ciclos de autoclave. Maxima seguridad e higiene en cada sesion.</p>
+        </div>
+        <div class="card ventaja-card">
+          <h3>Enfoque integral</h3>
+          <p>No solo tratamos el sintoma: buscamos la causa. Si es necesario, recomendamos plantillas o estudios biomecanicos.</p>
+        </div>
+        <div class="card ventaja-card">
+          <h3>Atencion personalizada</h3>
+          <p>Dedicamos el tiempo necesario a cada paciente. Sin prisas, con trato cercano y profesional.</p>
+        </div>
+        <div class="card ventaja-card">
+          <h3>Ubicacion centrica</h3>
+          <p>En pleno centro de Mostoles, junto a la Plaza del Pradillo. Facil acceso en transporte publico.</p>
+        </div>
+        <div class="card ventaja-card">
+          <h3>Citas rapidas</h3>
+          <p>Intentamos darte cita en la misma semana. Llama al 916 14 67 70 y te buscamos el primer hueco disponible.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <FaqAccordion faqs={faqs} />
+
+  <ResenasGrid indices={[0, 5, 8]} />
+
+  <CtaFinal />
+</Layout>
+
+<style>
+  .content-block {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  .content-block p {
+    color: var(--text-light);
+    line-height: 1.7;
+    margin-bottom: 1rem;
+  }
+  .content-block h3 {
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+  }
+  .content-block a {
+    color: var(--primary);
+    text-decoration: underline;
+  }
+  .section-alt {
+    background: var(--cream);
+  }
+  .caso-card, .ventaja-card {
+    text-align: center;
+  }
+  .caso-card h3, .ventaja-card h3 {
+    font-size: 1.05rem;
+    margin-bottom: 0.5rem;
+  }
+  .caso-card p, .ventaja-card p {
+    font-size: 0.9rem;
+    color: var(--text-light);
+  }
+  .pasos-list {
+    max-width: 700px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  .paso {
+    display: flex;
+    gap: 1.25rem;
+    align-items: flex-start;
+  }
+  .paso-num {
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    border-radius: 50%;
+    background: var(--gold);
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1.1rem;
+  }
+  .paso h3 {
+    font-size: 1.05rem;
+    margin-bottom: 0.25rem;
+  }
+  .paso p {
+    font-size: 0.9rem;
+    color: var(--text-light);
+  }
+</style>

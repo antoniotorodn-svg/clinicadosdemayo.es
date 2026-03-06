@@ -1,0 +1,105 @@
+---
+import servicios from '../data/servicios.json';
+import zonas from '../data/zonas.json';
+---
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h3>Contacto</h3>
+        <p><a href="tel:+34916146770">916 14 67 70</a></p>
+        <p>C/ Soria 2, 28934<br>Mostoles, Madrid</p>
+        <div class="footer-horario">
+          <p><strong>Horario:</strong></p>
+          <p>L, X, V: 9:30-14:00 / 16:30-19:30</p>
+          <p>J: 9:30-13:30</p>
+          <p>M, S, D: Cerrado</p>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h3>Servicios</h3>
+        <ul>
+          {servicios.slice(0, 8).map(s => (
+            <li><a href={s.url}>{s.titulo}</a></li>
+          ))}
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3>Zonas de Mostoles</h3>
+        <ul>
+          {zonas.map(z => (
+            <li><a href={z.url}>{z.nombre}</a></li>
+          ))}
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3>Legal</h3>
+        <ul>
+          <li><a href="https://clinicadosdemayo.com/politica-de-privacidad/">Politica de Privacidad</a></li>
+          <li><a href="https://clinicadosdemayo.com/politica-de-privacidad/">Aviso Legal</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2010 - 2026 Clinica Dos de Mayo &mdash; Centro de Podologia en Mostoles</p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background: var(--sand-dark);
+    padding: 3rem 0 1.5rem;
+    margin-top: 2rem;
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+  }
+  .footer-col h3 {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    color: var(--text);
+  }
+  .footer-col ul {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+  .footer-col a {
+    color: var(--text-light);
+    font-size: 0.9rem;
+  }
+  .footer-col a:hover {
+    color: var(--primary);
+  }
+  .footer-col p {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    margin-bottom: 0.25rem;
+  }
+  .footer-horario {
+    margin-top: 0.75rem;
+  }
+  .footer-bottom {
+    border-top: 1px solid rgba(0,0,0,0.08);
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    text-align: center;
+  }
+  .footer-bottom p {
+    font-size: 0.85rem;
+    color: var(--text-light);
+  }
+  @media (max-width: 768px) {
+    .footer-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  @media (max-width: 480px) {
+    .footer-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

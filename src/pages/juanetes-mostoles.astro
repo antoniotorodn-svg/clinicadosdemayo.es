@@ -1,0 +1,162 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
+import TrustBar from '../components/TrustBar.astro';
+import ResenasGrid from '../components/ResenasGrid.astro';
+import FaqAccordion from '../components/FaqAccordion.astro';
+import CtaFinal from '../components/CtaFinal.astro';
+
+const faqs = [
+  { pregunta: "Que es un juanete exactamente?", respuesta: "Un juanete o hallux valgus es una deformidad del primer dedo del pie en la que el hueso metatarsiano se desvía hacia dentro y el dedo gordo se inclina hacia los demas dedos. Esto produce una prominencia osea en la parte interna del pie que puede inflamarse y causar dolor." },
+  { pregunta: "Se pueden corregir los juanetes sin cirugia?", respuesta: "En fases iniciales, el tratamiento conservador puede frenar la progresion y aliviar los sintomas. Esto incluye plantillas ortopedicas, correctores nocturnos, calzado adecuado y ejercicios especificos. Sin embargo, la unica forma de corregir la deformidad osea de forma definitiva es mediante cirugia." },
+  { pregunta: "Que ventajas tiene la cirugia MIS para juanetes?", respuesta: "La cirugia MIS (Minimally Invasive Surgery) se realiza a traves de incisiones de 2-3 mm, sin tornillos ni material de osteosintesis en la mayoria de los casos. Las ventajas son: menos dolor postoperatorio, menor inflamacion, recuperacion mas rapida, se puede caminar desde el primer dia con un zapato especial y las cicatrices son practicamente invisibles." },
+  { pregunta: "Cuanto dura la recuperacion tras la cirugia de juanetes?", respuesta: "Con la tecnica MIS, el paciente camina desde el primer dia con un zapato postquirurgico especial. Las primeras 2-3 semanas requieren reposo relativo. A las 4-6 semanas la mayoria de pacientes pueden usar calzado normal. La recuperacion completa se alcanza entre los 2 y 3 meses." },
+  { pregunta: "A que edad es recomendable operar un juanete?", respuesta: "No existe una edad ideal. Se recomienda operar cuando el juanete causa dolor persistente, dificulta el uso de calzado, afecta a la calidad de vida o esta progresando rapidamente. En adolescentes se valora de forma individualizada. En personas mayores, la cirugia MIS es especialmente ventajosa por su baja agresividad." }
+];
+
+const schema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Juanetes en Mostoles",
+  "provider": {"@id": "https://clinicadosdemayo.com/#business"},
+  "serviceType": "Podologia",
+  "areaServed": {"@type": "City", "name": "Mostoles"},
+  "description": "Tratamiento conservador y cirugia MIS de juanetes (hallux valgus) en Mostoles. Recuperacion rapida y minima cicatriz. Clinica Dos de Mayo."
+});
+---
+<Layout
+  title="Juanetes en Mostoles | Cirugia MIS | Clinica Dos de Mayo"
+  description="Tratamiento conservador y cirugia MIS de juanetes (hallux valgus) en Mostoles. Recuperacion rapida y minima cicatriz. Clinica Dos de Mayo."
+  canonical="https://clinicadosdemayo.com/juanetes-mostoles"
+  schema={schema}
+>
+  <Hero
+    title="Juanetes en Mostoles — Tratamiento y Cirugia MIS"
+    subtitle="Correccion del hallux valgus con cirugia minimamente invasiva"
+    description="Tratamiento integral de los juanetes: desde el enfoque conservador hasta la cirugia percutanea MIS con mas de 15 anos de experiencia. Camina desde el primer dia."
+  />
+
+  <TrustBar />
+
+  <!-- Descripcion detallada -->
+  <section class="section">
+    <div class="container" style="max-width:800px;">
+      <h2 class="section-title">Que son los juanetes (hallux valgus)?</h2>
+      <p>El juanete, denominado medicamente <strong>hallux valgus</strong>, es una de las deformidades mas comunes del pie. Se produce cuando el primer metatarsiano se desvia hacia el lado interno del pie, mientras que el dedo gordo se inclina progresivamente hacia los demas dedos. El resultado visible es una prominencia osea en la cara interna del pie, a la altura de la articulacion metatarsofalangica del primer dedo.</p>
+
+      <p>Esta deformidad no es solo un problema estetico. Con el tiempo, la articulacion se inflama, aparece dolor al caminar y al usar calzado cerrado, y pueden desarrollarse complicaciones como <strong>bursitis</strong> (inflamacion de la bolsa sinovial), callosidades por la friccion con el zapato y alteraciones en los demas dedos del pie (dedos en garra, metatarsalgias).</p>
+
+      <h3>Causas del hallux valgus</h3>
+      <p>Los juanetes tienen un componente hereditario importante: existe una predisposicion genetica a desarrollar esta deformidad. Sin embargo, hay factores que aceleran su aparicion y progresion:</p>
+      <ul>
+        <li><strong>Calzado inadecuado:</strong> zapatos estrechos, tacones altos y puntas estrechas comprimen el antepie y favorecen la desviacion del dedo gordo.</li>
+        <li><strong>Alteraciones biomecanicas:</strong> el pie plano, la hiperlaxitud ligamentosa o un patron de pisada pronador aumentan el riesgo. Un <a href="/estudio-biomecanico-mostoles">estudio biomecanico</a> permite identificar estos factores.</li>
+        <li><strong>Sexo:</strong> los juanetes son mucho mas frecuentes en mujeres (proporcion 9:1 respecto a hombres), en parte por el tipo de calzado.</li>
+        <li><strong>Edad:</strong> la deformidad tiende a progresar con los anos, aunque puede aparecer en la adolescencia.</li>
+      </ul>
+
+      <h3>Tratamiento conservador</h3>
+      <p>En las fases iniciales del hallux valgus, o cuando la cirugia no es viable, el tratamiento conservador puede frenar la progresion y aliviar significativamente los sintomas. Las <a href="/plantillas-ortopedicas-mostoles">plantillas ortopedicas a medida</a> ayudan a corregir la biomecanica del pie y reducir la presion sobre la articulacion afectada. Complementariamente, se recomienda el uso de separadores interdigitales, calzado ancho y de horma fisiologica, y ejercicios de movilidad y fortalecimiento del pie.</p>
+
+      <h3>Cirugia percutanea MIS</h3>
+      <p>Cuando el tratamiento conservador no es suficiente, la <a href="/cirugia-pie-mostoles">cirugia percutanea MIS</a> (Minimally Invasive Surgery) es la solucion definitiva. En Clinica Dos de Mayo contamos con <strong>mas de 15 anos de experiencia</strong> en esta tecnica avanzada que permite corregir el juanete a traves de incisiones de apenas 2-3 mm.</p>
+      <p>A diferencia de la cirugia abierta tradicional, la cirugia MIS no requiere tornillos ni placas en la mayoria de los casos, produce menos dolor postoperatorio, genera una inflamacion minima y permite al paciente caminar desde el mismo dia de la intervencion con un zapato postquirurgico especial. Las cicatrices resultantes son practicamente invisibles.</p>
+
+      <h3>Prevencion</h3>
+      <p>Si tienes antecedentes familiares de juanetes, es importante acudir a revisiones podologicas periodicas, utilizar calzado amplio y fisiologico, y considerar el uso de plantillas preventivas. Detectar el hallux valgus en sus primeras fases nos permite aplicar tratamientos conservadores mas eficaces y retrasar o evitar la necesidad de cirugia.</p>
+    </div>
+  </section>
+
+  <!-- Para quien es -->
+  <section class="section" style="background:var(--cream);">
+    <div class="container" style="max-width:800px;">
+      <h2 class="section-title">Para quien es este tratamiento?</h2>
+      <ul class="check-list">
+        <li>Personas con una prominencia osea visible en la base del dedo gordo del pie</li>
+        <li>Pacientes con dolor al caminar o al usar calzado cerrado</li>
+        <li>Personas con juanetes que han probado tratamientos conservadores sin exito</li>
+        <li>Pacientes con deformidades asociadas como dedos en garra o en martillo</li>
+        <li>Personas con antecedentes familiares de hallux valgus que quieren prevenirlo</li>
+        <li>Deportistas cuyo rendimiento se ve afectado por la deformidad</li>
+        <li>Personas mayores que buscan una cirugia poco agresiva con recuperacion rapida</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Como es el proceso -->
+  <section class="section">
+    <div class="container" style="max-width:800px;">
+      <h2 class="section-title">Como es el proceso?</h2>
+      <ol class="steps-list">
+        <li><strong>Valoracion clinica y radiologica:</strong> exploramos el pie, medimos el grado de deformidad y realizamos radiografias para planificar el tratamiento.</li>
+        <li><strong>Tratamiento conservador:</strong> si es viable, comenzamos con plantillas, calzado adecuado y medidas de descarga para aliviar los sintomas y frenar la progresion.</li>
+        <li><strong>Cirugia MIS (si es necesaria):</strong> la intervencion se realiza con anestesia local, dura entre 20 y 40 minutos y el paciente sale caminando del quirofano con un zapato postquirurgico.</li>
+        <li><strong>Postoperatorio:</strong> las primeras semanas se utiliza el zapato especial. Se realizan curas minimas y revisiones periodicas. A las 4-6 semanas se puede usar calzado normal progresivamente.</li>
+        <li><strong>Seguimiento y prevencion de recidiva:</strong> controlamos la evolucion y, si es necesario, prescribimos plantillas para mantener la correccion a largo plazo.</li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- Ventajas -->
+  <section class="section" style="background:var(--cream);">
+    <div class="container" style="max-width:800px;">
+      <h2 class="section-title">Ventajas de tratarlo en Clinica Dos de Mayo</h2>
+      <ul class="check-list">
+        <li>Mas de 15 anos de experiencia en cirugia percutanea MIS de juanetes</li>
+        <li>Tecnica minimamente invasiva: incisiones de 2-3 mm y sin tornillos en la mayoria de casos</li>
+        <li>El paciente camina desde el primer dia de la intervencion</li>
+        <li>Recuperacion significativamente mas rapida que la cirugia abierta tradicional</li>
+        <li>Enfoque integral: tratamiento conservador cuando es posible, cirugia cuando es necesaria</li>
+        <li>Seguimiento postoperatorio cercano y personalizado</li>
+        <li>Cicatrices practicamente invisibles</li>
+      </ul>
+    </div>
+  </section>
+
+  <FaqAccordion faqs={faqs} />
+
+  <ResenasGrid indices={[0, 2, 4]} />
+
+  <CtaFinal />
+</Layout>
+
+<style>
+  .check-list {
+    list-style: none;
+    padding: 0;
+  }
+  .check-list li {
+    padding: 0.5rem 0 0.5rem 2rem;
+    position: relative;
+    line-height: 1.6;
+  }
+  .check-list li::before {
+    content: '\2713';
+    position: absolute;
+    left: 0;
+    color: var(--primary);
+    font-weight: 700;
+  }
+  .steps-list {
+    padding-left: 1.5rem;
+  }
+  .steps-list li {
+    padding: 0.5rem 0;
+    line-height: 1.6;
+  }
+  p {
+    line-height: 1.7;
+    margin-bottom: 1rem;
+  }
+  ul:not(.check-list) {
+    margin-bottom: 1rem;
+    padding-left: 1.5rem;
+  }
+  ul:not(.check-list) li {
+    padding: 0.35rem 0;
+    line-height: 1.6;
+  }
+  h3 {
+    margin: 1.5rem 0 0.75rem;
+  }
+</style>

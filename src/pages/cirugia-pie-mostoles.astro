@@ -1,0 +1,245 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
+import TrustBar from '../components/TrustBar.astro';
+import ResenasGrid from '../components/ResenasGrid.astro';
+import FaqAccordion from '../components/FaqAccordion.astro';
+import CtaFinal from '../components/CtaFinal.astro';
+
+const faqs = [
+  { pregunta: "Que es la cirugia percutanea MIS?", respuesta: "La cirugia MIS (Minimally Invasive Surgery) es una tecnica quirurgica que permite corregir deformidades del pie a traves de incisiones de apenas 2-3 milimetros. Se utilizan fresas especiales bajo control radiologico, lo que reduce drasticamente el dolor postoperatorio, la inflamacion y el tiempo de recuperacion en comparacion con la cirugia abierta tradicional." },
+  { pregunta: "Cuanto dura la recuperacion de una cirugia MIS?", respuesta: "La recuperacion es mucho mas rapida que en la cirugia convencional. La mayoria de pacientes pueden caminar con un calzado postquirurgico desde el mismo dia de la intervencion. La recuperacion completa suele oscilar entre 3 y 6 semanas dependiendo del procedimiento realizado." },
+  { pregunta: "Se necesita anestesia general?", respuesta: "No, la cirugia percutanea MIS se realiza con anestesia local en el pie. No es necesaria anestesia general ni raquidea, lo que reduce los riesgos y permite que el paciente vuelva a casa el mismo dia de la intervencion." },
+  { pregunta: "Que patologias se pueden operar con cirugia MIS?", respuesta: "Con cirugia percutanea se pueden tratar juanetes (hallux valgus), dedos en garra, dedos en martillo, metatarsalgias, espolones calcaneos, neuroma de Morton y deformidades oseas del pie. Nuestro equipo evaluara tu caso para determinar si eres candidato a esta tecnica." },
+  { pregunta: "Es segura la cirugia percutanea?", respuesta: "Si, es una tecnica ampliamente validada con decadas de desarrollo. En Clinica Dos de Mayo contamos con mas de 15 anos de experiencia realizando cirugia MIS. La tasa de complicaciones es inferior a la de la cirugia abierta tradicional gracias al menor traumatismo en los tejidos." }
+];
+
+const schema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Cirugia del Pie en Mostoles",
+  "provider": {"@id": "https://clinicadosdemayo.com/#business"},
+  "serviceType": "Podologia",
+  "areaServed": {"@type": "City", "name": "Mostoles"},
+  "description": "Cirugia percutanea MIS del pie en Mostoles. Tecnica minimamente invasiva con mas de 15 anos de experiencia. Recuperacion rapida y sin ingreso hospitalario."
+});
+---
+<Layout
+  title="Cirugia del Pie en Mostoles | Cirugia MIS | Clinica Dos de Mayo"
+  description="Cirugia percutanea MIS del pie en Mostoles. Tecnica minimamente invasiva con mas de 15 anos de experiencia. Recuperacion rapida y sin ingreso hospitalario."
+  canonical="https://clinicadosdemayo.com/cirugia-pie-mostoles"
+  schema={schema}
+>
+  <Hero
+    title="Cirugia del Pie en Mostoles — Cirugia Percutanea MIS"
+    subtitle="Tecnica minimamente invasiva con mas de 15 anos de experiencia"
+    description="Corregimos deformidades del pie mediante cirugia percutanea MIS: incisiones minimas, anestesia local y recuperacion rapida. Vuelve a caminar sin dolor."
+  />
+
+  <TrustBar />
+
+  <!-- Descripcion detallada -->
+  <section class="section">
+    <div class="container content-block">
+      <h2 class="section-title">Que es la cirugia percutanea MIS del pie</h2>
+
+      <p>La cirugia percutanea MIS (Minimally Invasive Surgery) representa un avance fundamental en el tratamiento quirurgico de las patologias del pie. A diferencia de la cirugia abierta tradicional, la tecnica MIS permite <strong>corregir deformidades oseas a traves de incisiones de apenas 2-3 milimetros</strong>, utilizando microfresas especializadas bajo control radiologico continuo.</p>
+
+      <p>En Clinica Dos de Mayo llevamos <strong>mas de 15 anos practicando cirugia percutanea del pie</strong>, acumulando una amplia experiencia que nos permite ofrecer resultados predecibles y una recuperacion significativamente mas rapida que con las tecnicas convencionales.</p>
+
+      <h3>Ventajas frente a la cirugia tradicional</h3>
+
+      <p>La principal diferencia con la cirugia abierta es el <strong>minimo traumatismo sobre los tejidos blandos</strong>. Al no necesitar grandes incisiones, se reduce drasticamente la inflamacion postoperatoria, el dolor y el riesgo de infeccion. Ademas, no se utilizan tornillos ni material de osteosintesis en la mayoria de los casos, lo que simplifica la recuperacion.</p>
+
+      <p>La intervencion se realiza con <strong>anestesia local</strong>, sin necesidad de anestesia general ni ingreso hospitalario. El paciente entra y sale de la clinica el mismo dia, pudiendo caminar con un calzado postquirurgico especial desde las primeras horas.</p>
+
+      <h3>Patologias que tratamos con cirugia MIS</h3>
+
+      <p>La cirugia percutanea es especialmente eficaz para el tratamiento de <a href="/juanetes">juanetes (hallux valgus)</a>, una de las deformidades mas frecuentes del pie. Tambien operamos dedos en garra, dedos en martillo, metatarsalgias por sobrecarga, <a href="/espolon">espolones calcaneos</a> resistentes al tratamiento conservador y el neuroma de Morton.</p>
+
+      <p>En los casos de <a href="/unas-encarnadas-mostoles">unas encarnadas cronicas o recidivantes</a>, la cirugia de matricectomia parcial ofrece una solucion definitiva. Este procedimiento elimina la porcion de matriz ungueal responsable del crecimiento anomalo de la una.</p>
+
+      <h3>Experiencia y tecnologia</h3>
+
+      <p>Nuestro equipo quirurgico cuenta con formacion especifica en tecnicas MIS y se mantiene actualizado con los ultimos avances del sector. Disponemos del instrumental necesario para realizar las intervenciones con la maxima precision y seguridad, incluyendo control radiologico intraoperatorio.</p>
+
+      <p>Antes de cualquier intervencion, realizamos una <strong>valoracion completa del paciente</strong> que incluye exploracion clinica, estudio radiologico y, cuando es necesario, un <a href="/estudio-biomecanico-mostoles">estudio biomecanico de la pisada</a> para planificar la cirugia de forma personalizada.</p>
+    </div>
+  </section>
+
+  <!-- Para quien -->
+  <section class="section section-alt">
+    <div class="container">
+      <h2 class="section-title">Para quien es este tratamiento?</h2>
+      <div class="grid-3">
+        <div class="card caso-card">
+          <h3>Juanetes (hallux valgus)</h3>
+          <p>Deformidad del primer dedo con desviacion y prominencia osea que causa dolor y dificultad con el calzado.</p>
+        </div>
+        <div class="card caso-card">
+          <h3>Dedos en garra o martillo</h3>
+          <p>Deformidades de los dedos menores que provocan roces, callosidades y dolor al caminar.</p>
+        </div>
+        <div class="card caso-card">
+          <h3>Metatarsalgias</h3>
+          <p>Dolor en la planta del pie por sobrecarga metatarsal que no responde al tratamiento conservador.</p>
+        </div>
+        <div class="card caso-card">
+          <h3>Espolon calcaneo</h3>
+          <p>Calcificacion en el talon que causa dolor intenso y no mejora con plantillas ni fisioterapia.</p>
+        </div>
+        <div class="card caso-card">
+          <h3>Neuroma de Morton</h3>
+          <p>Engrosamiento del nervio interdigital que provoca dolor, ardor y sensacion de descarga electrica.</p>
+        </div>
+        <div class="card caso-card">
+          <h3>Unas encarnadas cronicas</h3>
+          <p>Unas que se encarnan repetidamente y necesitan una solucion quirurgica definitiva.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Proceso -->
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">Como es el proceso?</h2>
+      <div class="pasos-list">
+        <div class="paso">
+          <span class="paso-num">1</span>
+          <div>
+            <h3>Consulta de valoracion</h3>
+            <p>Exploracion clinica completa, estudio radiologico y analisis de tu caso. Te explicamos las opciones de tratamiento y resolvemos todas tus dudas.</p>
+          </div>
+        </div>
+        <div class="paso">
+          <span class="paso-num">2</span>
+          <div>
+            <h3>Planificacion quirurgica</h3>
+            <p>Disenamos la estrategia quirurgica personalizada. Se solicitan las pruebas preoperatorias necesarias.</p>
+          </div>
+        </div>
+        <div class="paso">
+          <span class="paso-num">3</span>
+          <div>
+            <h3>Intervencion con cirugia MIS</h3>
+            <p>La cirugia se realiza con anestesia local en nuestra clinica. Incisiones minimas de 2-3 mm bajo control radiologico. Dura entre 15 y 45 minutos segun la complejidad.</p>
+          </div>
+        </div>
+        <div class="paso">
+          <span class="paso-num">4</span>
+          <div>
+            <h3>Recuperacion y seguimiento</h3>
+            <p>Vuelves a casa el mismo dia caminando con calzado postquirurgico. Revisiones periodicas hasta la recuperacion completa en 3-6 semanas.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ventajas -->
+  <section class="section section-alt">
+    <div class="container">
+      <h2 class="section-title">Ventajas de tratarlo en Clinica Dos de Mayo</h2>
+      <div class="grid-3">
+        <div class="card ventaja-card">
+          <h3>+15 anos de experiencia en MIS</h3>
+          <p>Somos pioneros en cirugia percutanea del pie en Mostoles. Miles de intervenciones realizadas con exito.</p>
+        </div>
+        <div class="card ventaja-card">
+          <h3>Sin ingreso hospitalario</h3>
+          <p>La intervencion se realiza en nuestra clinica y vuelves a casa el mismo dia. Sin hospitalizacion.</p>
+        </div>
+        <div class="card ventaja-card">
+          <h3>Anestesia local</h3>
+          <p>Sin riesgos de anestesia general. Mayor seguridad y comodidad para el paciente.</p>
+        </div>
+        <div class="card ventaja-card">
+          <h3>Recuperacion rapida</h3>
+          <p>Caminas desde el primer dia con calzado especial. Vuelta a la normalidad en semanas, no meses.</p>
+        </div>
+        <div class="card ventaja-card">
+          <h3>Seguimiento completo</h3>
+          <p>Revisiones postquirurgicas incluidas. Te acompanamos hasta tu recuperacion total.</p>
+        </div>
+        <div class="card ventaja-card">
+          <h3>Tecnologia de precision</h3>
+          <p>Control radiologico intraoperatorio para una cirugia mas precisa y segura.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <FaqAccordion faqs={faqs} />
+
+  <ResenasGrid indices={[0, 2, 3]} />
+
+  <CtaFinal />
+</Layout>
+
+<style>
+  .content-block {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  .content-block p {
+    color: var(--text-light);
+    line-height: 1.7;
+    margin-bottom: 1rem;
+  }
+  .content-block h3 {
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+  }
+  .content-block a {
+    color: var(--primary);
+    text-decoration: underline;
+  }
+  .section-alt {
+    background: var(--cream);
+  }
+  .caso-card, .ventaja-card {
+    text-align: center;
+  }
+  .caso-card h3, .ventaja-card h3 {
+    font-size: 1.05rem;
+    margin-bottom: 0.5rem;
+  }
+  .caso-card p, .ventaja-card p {
+    font-size: 0.9rem;
+    color: var(--text-light);
+  }
+  .pasos-list {
+    max-width: 700px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  .paso {
+    display: flex;
+    gap: 1.25rem;
+    align-items: flex-start;
+  }
+  .paso-num {
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    border-radius: 50%;
+    background: var(--gold);
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1.1rem;
+  }
+  .paso h3 {
+    font-size: 1.05rem;
+    margin-bottom: 0.25rem;
+  }
+  .paso p {
+    font-size: 0.9rem;
+    color: var(--text-light);
+  }
+</style>

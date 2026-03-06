@@ -1,0 +1,22 @@
+---
+import zonas from '../data/zonas.json';
+---
+<section class="section">
+  <div class="container">
+    <h2 class="section-title">Zonas de Mostoles que atendemos</h2>
+    <div class="zonas-pills">
+      {zonas.map(z => (
+        <a href={z.url} class="btn btn-pill">{z.nombre}</a>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .zonas-pills {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.75rem;
+  }
+</style>

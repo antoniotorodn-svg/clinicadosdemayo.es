@@ -1,0 +1,247 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
+import TrustBar from '../components/TrustBar.astro';
+import ResenasGrid from '../components/ResenasGrid.astro';
+import FaqAccordion from '../components/FaqAccordion.astro';
+import CtaFinal from '../components/CtaFinal.astro';
+
+const faqs = [
+  { pregunta: "En que consiste un estudio biomecanico de la pisada?", respuesta: "Es un analisis completo que evalua como funcionan tus pies y tu marcha. Incluye una exploracion estatica (apoyo del pie en reposo), un analisis postural (alineacion de piernas, rodillas y cadera) y un estudio dinamico (como caminas o corres). Utilizamos tecnologia computerizada para obtener datos objetivos y precisos." },
+  { pregunta: "Cuanto dura el estudio biomecanico?", respuesta: "El estudio completo dura aproximadamente 45-60 minutos. Incluye la exploracion, las pruebas con plataforma de presiones, el analisis de la marcha y la explicacion detallada de los resultados y el plan de tratamiento." },
+  { pregunta: "Necesito hacerme un estudio biomecanico?", respuesta: "Es recomendable si tienes dolor en los pies, rodillas, caderas o espalda baja, si practicas deporte de forma regular, si vas a usar plantillas ortopedicas, si tienes deformidades en los pies o si quieres prevenir lesiones. Tambien es muy util en ninos con alteraciones de la marcha." },
+  { pregunta: "El estudio biomecanico duele o es invasivo?", respuesta: "No, es un estudio completamente indoloro y no invasivo. Consiste en caminar, correr (si es necesario) y permanecer de pie sobre una plataforma de presiones. No se utilizan agujas ni ningun procedimiento molesto." },
+  { pregunta: "Que pasa despues del estudio biomecanico?", respuesta: "Tras analizar los resultados, te explicamos los hallazgos y te proponemos un plan de tratamiento personalizado. Puede incluir plantillas ortopedicas a medida, ejercicios especificos, recomendaciones de calzado o derivacion a otros especialistas si es necesario." }
+];
+
+const schema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Estudio Biomecanico de la Pisada en Mostoles",
+  "provider": {"@id": "https://clinicadosdemayo.com/#business"},
+  "serviceType": "Podologia",
+  "areaServed": {"@type": "City", "name": "Mostoles"},
+  "description": "Estudio biomecanico computerizado de la pisada en Mostoles. Analisis estatico, postural y dinamico para diagnostico y tratamiento de alteraciones del pie."
+});
+---
+<Layout
+  title="Estudio Biomecanico de la Pisada en Mostoles | Clinica Dos de Mayo"
+  description="Estudio biomecanico computerizado de la pisada en Mostoles. Analisis estatico, postural y dinamico para diagnostico y tratamiento de alteraciones del pie. Clinica Dos de Mayo."
+  canonical="https://clinicadosdemayo.com/estudio-biomecanico-mostoles"
+  schema={schema}
+>
+  <Hero
+    title="Estudio Biomecanico de la Pisada en Mostoles"
+    subtitle="Analisis computerizado estatico, postural y dinamico"
+    description="Descubre como pisas y por que te duele. Nuestro estudio biomecanico completo analiza tu pisada con tecnologia avanzada para ofrecerte un diagnostico preciso y un tratamiento personalizado."
+  />
+
+  <TrustBar />
+
+  <!-- Descripcion detallada -->
+  <section class="section">
+    <div class="container content-block">
+      <h2 class="section-title">Que es un estudio biomecanico de la pisada</h2>
+
+      <p>El estudio biomecanico de la pisada es un <strong>analisis exhaustivo del funcionamiento mecanico del pie, el tobillo y su relacion con el resto del aparato locomotor</strong>. Permite detectar alteraciones en la forma de pisar que pueden ser la causa de dolores no solo en los pies, sino tambien en rodillas, caderas y espalda.</p>
+
+      <p>En Clinica Dos de Mayo realizamos estudios biomecanicos completos que combinan la <strong>exploracion clinica del podologo con tecnologia computerizada de medicion</strong>. El objetivo es obtener un mapa preciso de como se comporta tu pie en diferentes situaciones para disenar el tratamiento mas adecuado.</p>
+
+      <h3>Tipos de analisis que realizamos</h3>
+
+      <p>El <strong>analisis estatico</strong> estudia como se distribuyen las presiones cuando estas de pie sin movimiento. Utilizamos una plataforma de presiones que genera un mapa detallado de los puntos de apoyo del pie, identificando zonas de sobrecarga y deficit de apoyo.</p>
+
+      <p>El <strong>analisis postural</strong> evalua la alineacion global del cuerpo: posicion de los pies, angulacion de las rodillas (valgo/varo), basculacion de la pelvis y equilibrio de la columna. Muchas patologias del pie tienen repercusion ascendente en toda la cadena cinetica, y viceversa.</p>
+
+      <p>El <strong>analisis dinamico</strong> es quiza el mas importante. Estudiamos como caminas y, si eres deportista, como corres. Observamos las fases de la marcha, el contacto del talon, el despegue del antepie, la pronacion o supinacion del pie y la simetria entre ambos pies. Este analisis revela alteraciones que no son visibles en estatica.</p>
+
+      <h3>Quien necesita un estudio biomecanico</h3>
+
+      <p>Es especialmente recomendable para personas con <strong>dolor recurrente en los pies, fascitis plantar, <a href="/espolon">espolon calcaneo</a>, metatarsalgias o tendinitis</strong>. Tambien para deportistas que quieran prevenir lesiones y mejorar su rendimiento, y para ninos con alteraciones de la marcha como pie plano, rotacion interna o genu valgo.</p>
+
+      <p>El estudio biomecanico es el paso previo imprescindible para la prescripcion de <a href="/plantillas-ortopedicas-mostoles">plantillas ortopedicas a medida</a>. Sin un diagnostico biomecanico preciso, no es posible disenar una plantilla que realmente corrija el problema.</p>
+
+      <h3>Como utilizamos los resultados</h3>
+
+      <p>Los datos del estudio se traducen en un <strong>plan de tratamiento personalizado</strong> que puede incluir plantillas ortopedicas, ejercicios de fortalecimiento y estiramiento, recomendaciones de calzado especificas o, en casos que lo requieran, derivacion a <a href="/podologia-deportiva">podologia deportiva</a> o valoracion quirurgica.</p>
+
+      <p>Cada paciente recibe una <strong>explicacion detallada de los resultados</strong>. Nos aseguramos de que entiendas que alteraciones tiene tu pisada, como afectan a tu salud y que podemos hacer para corregirlas.</p>
+    </div>
+  </section>
+
+  <!-- Para quien -->
+  <section class="section section-alt">
+    <div class="container">
+      <h2 class="section-title">Para quien es este tratamiento?</h2>
+      <div class="grid-3">
+        <div class="card caso-card">
+          <h3>Dolor en pies o talones</h3>
+          <p>Fascitis plantar, metatarsalgias, espolon calcaneo y dolor cronico al caminar o estar de pie.</p>
+        </div>
+        <div class="card caso-card">
+          <h3>Deportistas</h3>
+          <p>Corredores, futbolistas, jugadores de padel y cualquier deportista que quiera prevenir lesiones.</p>
+        </div>
+        <div class="card caso-card">
+          <h3>Ninos con alteraciones</h3>
+          <p>Pie plano, marcha en puntas, rotacion interna, caidas frecuentes o genu valgo infantil.</p>
+        </div>
+        <div class="card caso-card">
+          <h3>Dolor de rodillas o espalda</h3>
+          <p>Muchos problemas articulares tienen origen en una alteracion de la pisada que se puede detectar y corregir.</p>
+        </div>
+        <div class="card caso-card">
+          <h3>Antes de usar plantillas</h3>
+          <p>El estudio biomecanico es imprescindible para disenar plantillas ortopedicas a medida realmente efectivas.</p>
+        </div>
+        <div class="card caso-card">
+          <h3>Lesiones recurrentes</h3>
+          <p>Esguinces repetidos, tendinitis cronicas o sobrecargas musculares que no terminan de resolverse.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Proceso -->
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">Como es el proceso?</h2>
+      <div class="pasos-list">
+        <div class="paso">
+          <span class="paso-num">1</span>
+          <div>
+            <h3>Entrevista clinica</h3>
+            <p>Recogemos tu historial medico, habitos de actividad, tipo de calzado, sintomas y objetivos del estudio.</p>
+          </div>
+        </div>
+        <div class="paso">
+          <span class="paso-num">2</span>
+          <div>
+            <h3>Exploracion fisica</h3>
+            <p>Valoramos la movilidad articular del pie y tobillo, la fuerza muscular, la flexibilidad y la alineacion de las extremidades.</p>
+          </div>
+        </div>
+        <div class="paso">
+          <span class="paso-num">3</span>
+          <div>
+            <h3>Analisis computerizado</h3>
+            <p>Estudio en plataforma de presiones (estatico), analisis postural y estudio de la marcha en dinamica. Todo registrado digitalmente.</p>
+          </div>
+        </div>
+        <div class="paso">
+          <span class="paso-num">4</span>
+          <div>
+            <h3>Diagnostico y plan de tratamiento</h3>
+            <p>Te explicamos los resultados de forma clara y te proponemos el tratamiento mas adecuado: plantillas, ejercicios, calzado o derivacion.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ventajas -->
+  <section class="section section-alt">
+    <div class="container">
+      <h2 class="section-title">Ventajas de tratarlo en Clinica Dos de Mayo</h2>
+      <div class="grid-3">
+        <div class="card ventaja-card">
+          <h3>Tecnologia computerizada</h3>
+          <p>Plataforma de presiones y sistemas de analisis digital para obtener datos objetivos y precisos.</p>
+        </div>
+        <div class="card ventaja-card">
+          <h3>Estudio integral</h3>
+          <p>Analizamos estatica, postura y dinamica. No nos limitamos a un solo tipo de prueba.</p>
+        </div>
+        <div class="card ventaja-card">
+          <h3>Explicacion detallada</h3>
+          <p>Dedicamos el tiempo necesario a que entiendas los resultados y el plan de tratamiento propuesto.</p>
+        </div>
+        <div class="card ventaja-card">
+          <h3>Vinculacion con tratamiento</h3>
+          <p>Si necesitas plantillas, las fabricamos en la misma clinica basandonos en los datos del estudio.</p>
+        </div>
+        <div class="card ventaja-card">
+          <h3>Experiencia en deporte</h3>
+          <p>Evaluamos deportistas de diferentes disciplinas adaptando el estudio al gesto deportivo especifico.</p>
+        </div>
+        <div class="card ventaja-card">
+          <h3>Especialistas en ninos</h3>
+          <p>Estudios biomecanicos infantiles adaptados a la edad y al desarrollo del nino.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <FaqAccordion faqs={faqs} />
+
+  <ResenasGrid indices={[3, 7, 4]} />
+
+  <CtaFinal />
+</Layout>
+
+<style>
+  .content-block {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  .content-block p {
+    color: var(--text-light);
+    line-height: 1.7;
+    margin-bottom: 1rem;
+  }
+  .content-block h3 {
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+  }
+  .content-block a {
+    color: var(--primary);
+    text-decoration: underline;
+  }
+  .section-alt {
+    background: var(--cream);
+  }
+  .caso-card, .ventaja-card {
+    text-align: center;
+  }
+  .caso-card h3, .ventaja-card h3 {
+    font-size: 1.05rem;
+    margin-bottom: 0.5rem;
+  }
+  .caso-card p, .ventaja-card p {
+    font-size: 0.9rem;
+    color: var(--text-light);
+  }
+  .pasos-list {
+    max-width: 700px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  .paso {
+    display: flex;
+    gap: 1.25rem;
+    align-items: flex-start;
+  }
+  .paso-num {
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    border-radius: 50%;
+    background: var(--gold);
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1.1rem;
+  }
+  .paso h3 {
+    font-size: 1.05rem;
+    margin-bottom: 0.25rem;
+  }
+  .paso p {
+    font-size: 0.9rem;
+    color: var(--text-light);
+  }
+</style>

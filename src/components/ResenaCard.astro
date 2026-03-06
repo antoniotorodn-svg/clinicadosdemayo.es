@@ -1,0 +1,58 @@
+---
+interface Props {
+  nombre: string;
+  inicial: string;
+  estrellas: number;
+  texto: string;
+}
+
+const { nombre, inicial, estrellas, texto } = Astro.props;
+---
+<div class="resena-card card">
+  <div class="resena-header">
+    <div class="resena-avatar">{inicial}</div>
+    <div>
+      <strong class="resena-nombre">{nombre}</strong>
+      <div class="resena-stars">{'★'.repeat(estrellas)}{'☆'.repeat(5 - estrellas)}</div>
+    </div>
+  </div>
+  <p class="resena-texto">{texto}</p>
+</div>
+
+<style>
+  .resena-card {
+    padding: 1.5rem;
+  }
+  .resena-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+  }
+  .resena-avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--primary-pale);
+    color: var(--primary-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+  }
+  .resena-nombre {
+    font-size: 0.95rem;
+  }
+  .resena-stars {
+    color: var(--gold);
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+  }
+  .resena-texto {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    line-height: 1.5;
+  }
+</style>

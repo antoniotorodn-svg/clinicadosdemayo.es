@@ -1,0 +1,51 @@
+---
+import servicios from '../data/servicios.json';
+---
+<section class="section" id="tratamientos">
+  <div class="container">
+    <h2 class="section-title">Tratamientos de podologia</h2>
+    <div class="servicios-grid">
+      {servicios.map(s => (
+        <a href={s.url} class="servicio-card card">
+          <span class="servicio-emoji">{s.emoji}</span>
+          <h3>{s.titulo}</h3>
+          <p>{s.descripcion}</p>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .servicios-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+  }
+  .servicio-card {
+    text-decoration: none;
+    color: var(--text);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1.5rem;
+  }
+  .servicio-card:hover {
+    color: var(--text);
+  }
+  .servicio-emoji {
+    font-size: 2rem;
+  }
+  .servicio-card h3 {
+    font-size: 1.1rem;
+  }
+  .servicio-card p {
+    font-size: 0.9rem;
+    color: var(--text-light);
+  }
+  @media (max-width: 640px) {
+    .servicios-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

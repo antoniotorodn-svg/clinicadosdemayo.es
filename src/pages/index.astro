@@ -1,0 +1,292 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
+import TrustBar from '../components/TrustBar.astro';
+import ProofBar from '../components/ProofBar.astro';
+import ServiciosGrid from '../components/ServiciosGrid.astro';
+import ResenasGrid from '../components/ResenasGrid.astro';
+import FaqAccordion from '../components/FaqAccordion.astro';
+import Ubicacion from '../components/Ubicacion.astro';
+import ContactForm from '../components/ContactForm.astro';
+import CtaFinal from '../components/CtaFinal.astro';
+import ZonasPills from '../components/ZonasPills.astro';
+
+const faqs = [
+  { pregunta: "Cuando debo ir al podologo?", respuesta: "Es recomendable visitar al podologo al menos una vez al ano como revision preventiva. Si sientes dolor en los pies, tienes callos, durezas, unas encarnadas, verrugas plantares o cualquier molestia al caminar, deberias pedir cita lo antes posible." },
+  { pregunta: "Cuanto cuesta una consulta de podologia?", respuesta: "El precio depende del tratamiento necesario. En Clinica Dos de Mayo ofrecemos una primera valoracion para determinar el tratamiento mas adecuado. Llama al 916 14 67 70 para informarte." },
+  { pregunta: "Trabajais con seguros medicos?", respuesta: "Si, atendemos a pacientes a traves de Sanitas, entre otros. Contacta con nosotros para confirmar tu aseguradora." },
+  { pregunta: "Que es la cirugia percutanea MIS?", respuesta: "La cirugia percutanea MIS (Minimally Invasive Surgery) es una tecnica quirurgica que permite operar el pie a traves de pequenas incisiones, reduciendo el dolor postoperatorio, la inflamacion y el tiempo de recuperacion. Contamos con mas de 15 anos de experiencia en esta tecnica." },
+  { pregunta: "Haceis plantillas a medida?", respuesta: "Si, realizamos estudios biomecanicos completos de la pisada (estatico, postural y dinamico) para disenar plantillas ortopedicas personalizadas tanto para adultos como para ninos." },
+  { pregunta: "Cuanto tarda en curarse una una encarnada?", respuesta: "Depende de la gravedad. Un tratamiento conservador puede resolverse en una o dos sesiones. Si es necesaria una intervencion quirurgica menor, la recuperacion suele ser de unos 7-10 dias." },
+  { pregunta: "Atendeis urgencias podologicas?", respuesta: "Si, intentamos dar cita lo antes posible ante urgencias como unas encarnadas infectadas, dolor agudo o lesiones deportivas. Llama al 916 14 67 70 y te buscaremos el primer hueco disponible." },
+  { pregunta: "Donde esta la clinica exactamente?", respuesta: "Estamos en la Calle Soria 2, 28934 Mostoles, Madrid, en pleno centro de Mostoles, muy cerca de la Plaza del Pradillo y la Avenida Dos de Mayo." }
+];
+
+const schema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "name": "Podologo en Mostoles | Clinica Dos de Mayo",
+      "url": "https://clinicadosdemayo.com",
+      "description": "Clinica de podologia en Mostoles con mas de 15 anos de experiencia. Especialistas en cirugia percutanea MIS, plantillas ortopedicas, quiropodia y biomecanica."
+    },
+    {
+      "@type": ["Podiatrist", "MedicalBusiness", "LocalBusiness"],
+      "@id": "https://clinicadosdemayo.com/#business",
+      "name": "Clinica Dos de Mayo — Centro de Podologia",
+      "url": "https://clinicadosdemayo.com",
+      "telephone": "+34916146770",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Calle Soria 2",
+        "addressLocality": "Mostoles",
+        "addressRegion": "Madrid",
+        "postalCode": "28934",
+        "addressCountry": "ES"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 40.3228,
+        "longitude": -3.8657
+      },
+      "openingHoursSpecification": [
+        { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Wednesday", "Friday"], "opens": "09:30", "closes": "14:00" },
+        { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Wednesday", "Friday"], "opens": "16:30", "closes": "19:30" },
+        { "@type": "OpeningHoursSpecification", "dayOfWeek": "Thursday", "opens": "09:30", "closes": "13:30" }
+      ],
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.7",
+        "reviewCount": "133",
+        "bestRating": "5"
+      },
+      "areaServed": { "@type": "City", "name": "Mostoles" },
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Servicios de Podologia",
+        "itemListElement": [
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Quiropodia" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Cirugia percutanea MIS" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Plantillas ortopedicas" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Estudio biomecanico" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Unas encarnadas" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Papilomas plantares" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Pie diabetico" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Juanetes" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Podologia deportiva" } }
+        ]
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": faqs.map(f => ({
+        "@type": "Question",
+        "name": f.pregunta,
+        "acceptedAnswer": { "@type": "Answer", "text": f.respuesta }
+      }))
+    }
+  ]
+});
+---
+<Layout
+  title="Podologo en Mostoles | Clinica Dos de Mayo | 916 14 67 70"
+  description="Clinica de podologia en Mostoles con mas de 15 anos de experiencia. Especialistas en cirugia percutanea MIS, plantillas ortopedicas, quiropodia y biomecanica. Pide cita: 916 14 67 70"
+  canonical="https://clinicadosdemayo.com"
+  schema={schema}
+>
+  <Hero
+    title="Podologo en Mostoles | Clinica Dos de Mayo"
+    subtitle="Centro de Podologia en Mostoles"
+    description="Un centro en continua renovacion tecnologica, lo que nos permite permanecer en la vanguardia del sector y ofrecerle un servicio de primer orden tanto en Mostoles como en toda la provincia. Mas de 15 anos cuidando los pies de nuestros pacientes."
+    showButtons={true}
+  />
+
+  <TrustBar />
+
+  <!-- Especialidades -->
+  <section class="section" id="especialidades">
+    <div class="container">
+      <h2 class="section-title">Nuestras especialidades</h2>
+      <div class="grid-4 especialidades-grid">
+        <div class="card especialidad-card">
+          <span class="especialidad-num">1</span>
+          <h3>Quiropodia</h3>
+          <p>Tratamiento del dolor y afecciones habituales del pie.</p>
+        </div>
+        <div class="card especialidad-card">
+          <span class="especialidad-num">2</span>
+          <h3>Cirugia percutanea (MIS)</h3>
+          <p>+15 anos de experiencia en cirugia minimamente invasiva.</p>
+        </div>
+        <div class="card especialidad-card">
+          <span class="especialidad-num">3</span>
+          <h3>Ortopodologia</h3>
+          <p>Plantillas ortopedicas a medida.</p>
+        </div>
+        <div class="card especialidad-card">
+          <span class="especialidad-num">4</span>
+          <h3>Biomecanica</h3>
+          <p>Exploracion computerizada estatica, postural y dinamica.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <ProofBar />
+
+  <ServiciosGrid />
+
+  <!-- Equipo -->
+  <section class="section" id="equipo">
+    <div class="container">
+      <h2 class="section-title">Nuestro equipo</h2>
+      <div class="grid-3">
+        <div class="card equipo-card">
+          <div class="equipo-avatar">L</div>
+          <h3>Laura</h3>
+          <span class="equipo-rol">Podologa</span>
+          <p>Especialista en quiropodia y cirugia del pie. Trato cercano y profesional.</p>
+        </div>
+        <div class="card equipo-card">
+          <div class="equipo-avatar">G</div>
+          <h3>Gema</h3>
+          <span class="equipo-rol">Podologa</span>
+          <p>Mas de 20 anos de experiencia. Tratamiento integral de patologias del pie.</p>
+        </div>
+        <div class="card equipo-card">
+          <div class="equipo-avatar">A</div>
+          <h3>Ana</h3>
+          <span class="equipo-rol">Podologa</span>
+          <p>Especialista en biomecanica y plantillas ortopedicas a medida.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- En que te puede ayudar -->
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">En que te puede ayudar un podologo?</h2>
+      <div class="grid-3">
+        <div class="card ayuda-card">
+          <span class="ayuda-icon">🦶</span>
+          <h3>Dolor en los pies</h3>
+          <p>Diagnosticamos y tratamos el origen del dolor: fascitis, metatarsalgias, tendinitis y mas.</p>
+        </div>
+        <div class="card ayuda-card">
+          <span class="ayuda-icon">🏃</span>
+          <h3>Lesiones deportivas</h3>
+          <p>Analisis de la pisada y tratamiento de lesiones relacionadas con la practica deportiva.</p>
+        </div>
+        <div class="card ayuda-card">
+          <span class="ayuda-icon">👶</span>
+          <h3>Pies de ninos</h3>
+          <p>Revision del desarrollo podologico infantil, pie plano, marcha en rotacion interna.</p>
+        </div>
+        <div class="card ayuda-card">
+          <span class="ayuda-icon">🩺</span>
+          <h3>Enfermedades del pie</h3>
+          <p>Tratamiento de hongos, verrugas, unas encarnadas y patologias dermatologicas del pie.</p>
+        </div>
+        <div class="card ayuda-card">
+          <span class="ayuda-icon">🦴</span>
+          <h3>Deformidades</h3>
+          <p>Correccion de juanetes, dedos en garra, dedos en martillo mediante cirugia MIS.</p>
+        </div>
+        <div class="card ayuda-card">
+          <span class="ayuda-icon">❤️</span>
+          <h3>Pie diabetico</h3>
+          <p>Programa de prevencion y cuidado especializado para pacientes diabeticos.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Ubicacion />
+
+  <ContactForm />
+
+  <FaqAccordion faqs={faqs} />
+
+  <ResenasGrid />
+
+  <ZonasPills />
+
+  <CtaFinal />
+</Layout>
+
+<style>
+  .especialidad-card {
+    text-align: center;
+    position: relative;
+    padding-top: 2.5rem;
+  }
+  .especialidad-num {
+    position: absolute;
+    top: -0.75rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--gold);
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1rem;
+  }
+  .especialidad-card h3 {
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+  }
+  .especialidad-card p {
+    font-size: 0.9rem;
+    color: var(--text-light);
+  }
+  .equipo-card {
+    text-align: center;
+  }
+  .equipo-avatar {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background: var(--primary-pale);
+    color: var(--primary-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1.5rem;
+    margin: 0 auto 1rem;
+  }
+  .equipo-rol {
+    display: inline-block;
+    font-size: 0.85rem;
+    color: var(--primary);
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+  .equipo-card p {
+    font-size: 0.9rem;
+    color: var(--text-light);
+  }
+  .ayuda-card {
+    text-align: center;
+  }
+  .ayuda-icon {
+    font-size: 2.5rem;
+    display: block;
+    margin-bottom: 0.75rem;
+  }
+  .ayuda-card h3 {
+    font-size: 1.05rem;
+    margin-bottom: 0.5rem;
+  }
+  .ayuda-card p {
+    font-size: 0.9rem;
+    color: var(--text-light);
+  }
+</style>

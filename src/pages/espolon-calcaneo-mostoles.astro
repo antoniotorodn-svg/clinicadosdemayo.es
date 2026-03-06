@@ -1,0 +1,170 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
+import TrustBar from '../components/TrustBar.astro';
+import ResenasGrid from '../components/ResenasGrid.astro';
+import FaqAccordion from '../components/FaqAccordion.astro';
+import CtaFinal from '../components/CtaFinal.astro';
+
+const faqs = [
+  { pregunta: "Que es un espolon de calcaneo?", respuesta: "Un espolon calcaneo es una calcificacion osea en forma de punta o gancho que se forma en la parte inferior del hueso calcaneo (talon). Se produce por la traccion repetida de la fascia plantar o del tendon de Aquiles sobre el hueso. Aunque suena alarmante, muchos espolones no causan dolor por si mismos: es la inflamacion del tejido circundante la que genera las molestias." },
+  { pregunta: "Espolon y fascitis plantar son lo mismo?", respuesta: "No, aunque estan muy relacionados. La fascitis plantar es la inflamacion de la fascia plantar que causa dolor en el talon. El espolon es una calcificacion osea que puede aparecer como consecuencia de esa traccion cronica. Muchos pacientes tienen espolon sin dolor y muchos tienen fascitis sin espolon. El tratamiento se dirige a la inflamacion, no al espolon en si." },
+  { pregunta: "Se puede eliminar un espolon sin cirugia?", respuesta: "En la gran mayoria de los casos (mas del 90%), el dolor del espolon calcaneo se resuelve con tratamiento conservador: plantillas ortopedicas, estiramientos, terapia fisica y calzado adecuado. La cirugia solo se considera cuando el dolor persiste tras 6-12 meses de tratamiento conservador correctamente aplicado." },
+  { pregunta: "Cuanto tiempo tarda en mejorar el dolor del espolon?", respuesta: "Con un tratamiento adecuado, la mayoria de pacientes notan mejoria significativa en las primeras 4-6 semanas. La resolucion completa puede tardar entre 3 y 6 meses. Es importante ser constante con los estiramientos y usar las plantillas de forma regular para obtener buenos resultados." },
+  { pregunta: "Las plantillas pueden curar un espolon?", respuesta: "Las plantillas no eliminan la calcificacion osea, pero si tratan la causa del dolor. Al redistribuir las presiones del pie, amortiguar el impacto en el talon y reducir la tension sobre la fascia plantar, las plantillas ortopedicas a medida son el tratamiento mas eficaz para aliviar el dolor del espolon calcaneo y prevenir recaidas." }
+];
+
+const schema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Espolon de Calcaneo en Mostoles",
+  "provider": {"@id": "https://clinicadosdemayo.com/#business"},
+  "serviceType": "Podologia",
+  "areaServed": {"@type": "City", "name": "Mostoles"},
+  "description": "Diagnostico y tratamiento del espolon calcaneo y dolor de talon en Mostoles. Plantillas a medida, estiramientos y terapia fisica. Clinica Dos de Mayo."
+});
+---
+<Layout
+  title="Espolon de Calcaneo en Mostoles | Clinica Dos de Mayo"
+  description="Diagnostico y tratamiento del espolon calcaneo y dolor de talon en Mostoles. Plantillas a medida, estiramientos y terapia fisica. Clinica Dos de Mayo."
+  canonical="https://clinicadosdemayo.com/espolon-calcaneo-mostoles"
+  schema={schema}
+>
+  <Hero
+    title="Espolon de Calcaneo en Mostoles"
+    subtitle="Diagnostico y tratamiento del dolor de talon"
+    description="Tratamiento efectivo del espolon calcaneo y la fascitis plantar. Plantillas ortopedicas a medida, estiramientos guiados y terapia fisica para recuperar tu movilidad sin dolor."
+  />
+
+  <TrustBar />
+
+  <!-- Descripcion detallada -->
+  <section class="section">
+    <div class="container" style="max-width:800px;">
+      <h2 class="section-title">Que es el espolon de calcaneo?</h2>
+      <p>El espolon calcaneo es una <strong>calcificacion osea</strong> que se forma en la parte inferior del hueso del talon (calcaneo), en el punto donde se inserta la fascia plantar. Tiene forma de pequena punta o gancho y se produce como resultado de la traccion repetida y prolongada de la fascia y los musculos de la planta del pie sobre el hueso. Es una de las causas mas frecuentes de dolor de talon, conocido medicamente como <strong>talalgia plantar</strong>.</p>
+
+      <p>Es importante aclarar un malentendido comun: el espolon en si mismo no es siempre la causa directa del dolor. Muchas personas tienen espolones calcaneoss en sus radiografias sin experimentar ninguna molestia. El dolor suele estar provocado por la <strong>fascitis plantar</strong>, es decir, la inflamacion de la fascia plantar que acompana al espolon. Por eso, el tratamiento se centra en resolver la inflamacion y las causas biomecanicas que la producen, no en eliminar la calcificacion.</p>
+
+      <h3>Relacion con la fascitis plantar</h3>
+      <p>La fascitis plantar y el espolon calcaneo son dos caras de la misma moneda. La fascia plantar es una banda fibrosa que recorre la planta del pie desde el talon hasta los dedos, actuando como un amortiguador natural. Cuando se somete a una tension excesiva y repetida, se inflama (fascitis) y, con el tiempo, esa traccion constante sobre el calcaneo puede producir la calcificacion que llamamos espolon.</p>
+
+      <h3>Causas y factores de riesgo</h3>
+      <p>Existen multiples factores que predisponen a desarrollar un espolon calcaneo:</p>
+      <ul>
+        <li><strong>Alteraciones biomecanicas:</strong> el pie plano, el pie cavo, la pronacion excesiva y otras alteraciones del apoyo aumentan la tension sobre la fascia. Un <a href="/estudio-biomecanico-mostoles">estudio biomecanico</a> permite identificar estos factores con precision.</li>
+        <li><strong>Sobrecarga:</strong> permanecer de pie muchas horas, caminar sobre superficies duras, el sobrepeso o un aumento brusco de la actividad fisica son desencadenantes frecuentes.</li>
+        <li><strong>Calzado inadecuado:</strong> zapatos planos sin soporte, suelas rigidas o calzado desgastado aumentan el impacto sobre el talon.</li>
+        <li><strong>Edad:</strong> a partir de los 40-50 anos, la almohadilla grasa del talon pierde espesor y capacidad de amortiguacion.</li>
+        <li><strong>Practica deportiva:</strong> especialmente en corredores y deportistas de impacto. La <a href="/podologia-deportiva-mostoles">podologia deportiva</a> aborda estas lesiones de forma especifica.</li>
+      </ul>
+
+      <h3>Sintomas</h3>
+      <p>El sintoma principal es un <strong>dolor punzante en el talon</strong>, especialmente intenso al dar los primeros pasos por la manana o tras un periodo prolongado de reposo. El dolor puede mejorar con la actividad ligera, pero empeora de nuevo al final del dia o tras periodos largos de bipedestacion. A la palpacion, se localiza un punto de dolor muy concreto en la parte inferior e interna del talon.</p>
+
+      <h3>Opciones de tratamiento</h3>
+      <p>El tratamiento conservador resuelve el dolor del espolon calcaneo en mas del 90% de los casos:</p>
+      <ul>
+        <li><strong>Plantillas ortopedicas a medida:</strong> las <a href="/plantillas-ortopedicas-mostoles">plantillas personalizadas</a> son el pilar del tratamiento. Redistribuyen las presiones, amortiguan el impacto en el talon y reducen la tension sobre la fascia plantar.</li>
+        <li><strong>Estiramientos:</strong> un programa de estiramientos especificos de la fascia plantar, el tendon de Aquiles y la musculatura posterior de la pierna es fundamental para la recuperacion.</li>
+        <li><strong>Terapia fisica:</strong> tecnicas como la terapia manual, el vendaje funcional y la electroterapia pueden acelerar la resolucion de la inflamacion.</li>
+        <li><strong>Calzado adecuado:</strong> recomendamos calzado con buen soporte, amortiguacion en el talon y una ligera elevacion que reduzca la tension de la fascia.</li>
+      </ul>
+      <p>La cirugia se reserva exclusivamente para los casos en los que el dolor persiste tras <strong>6 a 12 meses de tratamiento conservador</strong> correctamente aplicado, algo que ocurre en una minoria de pacientes.</p>
+    </div>
+  </section>
+
+  <!-- Para quien es -->
+  <section class="section" style="background:var(--cream);">
+    <div class="container" style="max-width:800px;">
+      <h2 class="section-title">Para quien es este tratamiento?</h2>
+      <ul class="check-list">
+        <li>Personas con dolor en el talon, especialmente al levantarse por la manana</li>
+        <li>Pacientes diagnosticados con espolon calcaneo o fascitis plantar</li>
+        <li>Personas que pasan muchas horas de pie por su trabajo</li>
+        <li>Corredores y deportistas con dolor en la planta del pie o el talon</li>
+        <li>Pacientes con sobrepeso que experimentan dolor al caminar</li>
+        <li>Personas mayores con perdida de la almohadilla grasa del talon</li>
+        <li>Pacientes que han probado antiinflamatorios sin resultado duradero</li>
+        <li>Cualquier persona con dolor cronico en el talon que busque una solucion definitiva</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Como es el proceso -->
+  <section class="section">
+    <div class="container" style="max-width:800px;">
+      <h2 class="section-title">Como es el proceso?</h2>
+      <ol class="steps-list">
+        <li><strong>Diagnostico clinico:</strong> exploramos el pie, localizamos los puntos de dolor y realizamos pruebas funcionales para confirmar el diagnostico. Si es necesario, solicitamos una radiografia para visualizar el espolon.</li>
+        <li><strong>Estudio biomecanico:</strong> analizamos la pisada en plataforma de presiones para identificar las alteraciones que estan generando la sobrecarga en el talon.</li>
+        <li><strong>Plan de tratamiento:</strong> disenamos un protocolo personalizado que combina plantillas a medida, programa de estiramientos, recomendaciones de calzado y, si es necesario, terapia fisica.</li>
+        <li><strong>Fabricacion de plantillas:</strong> creamos plantillas ortopedicas personalizadas con materiales de amortiguacion y soporte adaptados a tu caso.</li>
+        <li><strong>Seguimiento:</strong> revisamos la evolucion a las 4-6 semanas y ajustamos el tratamiento si es necesario hasta la completa resolucion del dolor.</li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- Ventajas -->
+  <section class="section" style="background:var(--cream);">
+    <div class="container" style="max-width:800px;">
+      <h2 class="section-title">Ventajas de tratarlo en Clinica Dos de Mayo</h2>
+      <ul class="check-list">
+        <li>Diagnostico preciso con exploracion clinica y estudio biomecanico avanzado</li>
+        <li>Plantillas ortopedicas a medida fabricadas con materiales de ultima generacion</li>
+        <li>Enfoque integral: no solo tratamos el sintoma, sino la causa biomecanica</li>
+        <li>Programa de estiramientos y ejercicios personalizado para cada paciente</li>
+        <li>Mas de 15 anos de experiencia tratando dolor de talon en Mostoles</li>
+        <li>Tasa de exito superior al 90% con tratamiento conservador</li>
+        <li>Seguimiento cercano hasta la resolucion completa del dolor</li>
+      </ul>
+    </div>
+  </section>
+
+  <FaqAccordion faqs={faqs} />
+
+  <ResenasGrid indices={[2, 5, 7]} />
+
+  <CtaFinal />
+</Layout>
+
+<style>
+  .check-list {
+    list-style: none;
+    padding: 0;
+  }
+  .check-list li {
+    padding: 0.5rem 0 0.5rem 2rem;
+    position: relative;
+    line-height: 1.6;
+  }
+  .check-list li::before {
+    content: '\2713';
+    position: absolute;
+    left: 0;
+    color: var(--primary);
+    font-weight: 700;
+  }
+  .steps-list {
+    padding-left: 1.5rem;
+  }
+  .steps-list li {
+    padding: 0.5rem 0;
+    line-height: 1.6;
+  }
+  p {
+    line-height: 1.7;
+    margin-bottom: 1rem;
+  }
+  ul:not(.check-list) {
+    margin-bottom: 1rem;
+    padding-left: 1.5rem;
+  }
+  ul:not(.check-list) li {
+    padding: 0.35rem 0;
+    line-height: 1.6;
+  }
+  h3 {
+    margin: 1.5rem 0 0.75rem;
+  }
+</style>

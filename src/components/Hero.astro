@@ -1,0 +1,101 @@
+---
+interface Props {
+  title: string;
+  subtitle?: string;
+  location?: string;
+  description?: string;
+  showButtons?: boolean;
+}
+
+const { title, subtitle, location = 'Mostoles', description, showButtons = false } = Astro.props;
+---
+<section class="hero">
+  <div class="container hero-inner">
+    <div class="hero-content">
+      {location && <span class="hero-location">📍 {location}</span>}
+      <h1>{title}</h1>
+      {subtitle && <p class="hero-subtitle">{subtitle}</p>}
+      {description && <p class="hero-desc">{description}</p>}
+      {showButtons && (
+        <div class="hero-buttons">
+          <a href="#tratamientos" class="btn btn-pill">Tratamientos</a>
+          <a href="#equipo" class="btn btn-pill">Equipo</a>
+          <a href="#ubicacion" class="btn btn-pill">Ubicacion</a>
+          <a href="tel:+34916146770" class="btn btn-cta">📞 916 14 67 70</a>
+        </div>
+      )}
+    </div>
+    <div class="hero-image">
+      <!-- Placeholder: foto fachada o interior de la clinica -->
+      <div class="hero-image-placeholder">
+        <span>🏥</span>
+        <p>Clinica Dos de Mayo</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    background: linear-gradient(135deg, var(--primary-pale) 0%, var(--cream) 100%);
+    padding: 3rem 0 4rem;
+  }
+  .hero-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+  }
+  .hero-location {
+    display: inline-block;
+    font-size: 0.9rem;
+    color: var(--primary-dark);
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+  }
+  .hero h1 {
+    margin-bottom: 1rem;
+  }
+  .hero-subtitle {
+    font-size: 1.15rem;
+    color: var(--text-light);
+    margin-bottom: 0.75rem;
+  }
+  .hero-desc {
+    color: var(--text-light);
+    margin-bottom: 1.5rem;
+    max-width: 540px;
+  }
+  .hero-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+  .hero-image-placeholder {
+    background: var(--white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-md);
+    aspect-ratio: 4/3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+  .hero-image-placeholder span {
+    font-size: 4rem;
+  }
+  .hero-image-placeholder p {
+    color: var(--text-light);
+    font-size: 0.9rem;
+  }
+  @media (max-width: 768px) {
+    .hero-inner {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+    .hero {
+      padding: 2rem 0 3rem;
+    }
+  }
+</style>
