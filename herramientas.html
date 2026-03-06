@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Herramientas - Planificador NUVIA</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        body { font-family: 'Segoe UI', Helvetica, Arial, sans-serif; background: #FAF8F5; min-height: 100vh; padding-bottom: 40px; color: #3d3d3d; overflow-x: hidden; line-height: 1.5; }
+        .main-container { max-width: 1400px; margin: 0 auto; padding: 20px; }
+        .hero-header { background: linear-gradient(135deg, #FFF9EE 0%, #F7DDAB 50%, #F5D99A 100%); border-radius: 28px; padding: 48px 32px 44px; margin-bottom: 32px; text-align: center; position: relative; overflow: hidden; }
+        .hero-header::before { content: ''; position: absolute; top: -60px; right: -60px; width: 200px; height: 200px; background: rgba(255,255,255,0.25); border-radius: 50%; }
+        .hero-header::after { content: ''; position: absolute; bottom: -40px; left: -40px; width: 150px; height: 150px; background: rgba(255,255,255,0.15); border-radius: 50%; }
+        .hero-icon { font-size: 3.2em; margin-bottom: 12px; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1)); position: relative; z-index: 1; }
+        .hero-title { font-size: 2em; font-weight: 800; color: #2d2d2d; margin-bottom: 10px; line-height: 1.15; position: relative; z-index: 1; }
+        .hero-subtitle { color: #5a5040; font-size: 1em; max-width: 600px; margin: 0 auto; opacity: 0.85; position: relative; z-index: 1; line-height: 1.6; }
+        .hero-chips { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 18px; position: relative; z-index: 1; }
+        .hero-chip { background: rgba(255,255,255,0.65); backdrop-filter: blur(4px); padding: 6px 16px; border-radius: 50px; font-size: 0.78em; font-weight: 700; color: #5a5040; letter-spacing: 0.3px; }
+        
+        .step-card { background: white; border-radius: 20px; padding: 28px; margin-bottom: 20px; box-shadow: 0 2px 12px rgba(0,0,0,0.04); border: 1px solid #eee; }
+        .step-header { display: flex; align-items: center; gap: 14px; margin-bottom: 18px; }
+        .step-number { width: 40px; height: 40px; border-radius: 12px; background: linear-gradient(135deg, #f7ddab, #F5D99A); display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 1.1em; color: #5a4520; flex-shrink: 0; }
+        .step-title { font-size: 1.15em; font-weight: 700; color: #3d3d3d; }
+        .step-desc { font-size: 0.88em; color: #888; margin-bottom: 18px; padding-left: 54px; margin-top: -10px; }
+        
+        .kcal-section { margin-bottom: 20px; padding-left: 54px; }
+        .kcal-section-label { font-size: 0.9em; font-weight: 700; color: #5a5040; margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
+        
+        .kcal-selector { display: flex; gap: 10px; justify-content: flex-start; flex-wrap: wrap; }
+        .kcal-option { flex: 1; min-width: 140px; max-width: 200px; padding: 16px 14px; border: 2px solid #e8e4de; background: white; cursor: pointer; transition: all 0.3s ease; text-align: center; user-select: none; border-radius: 14px; position: relative; }
+        .kcal-option.active { background: linear-gradient(135deg, #FFF9EE, #f7ddab); border-color: #f7ddab; box-shadow: 0 4px 12px rgba(247,221,171,0.4); transform: translateY(-2px); }
+        .kcal-option:hover:not(.active) { background: #FFFBF5; border-color: #f7ddab; transform: translateY(-1px); }
+        .kcal-option .kcal-icon { font-size: 1.4em; margin-bottom: 4px; }
+        .kcal-option .kcal-number { font-size: 1.25em; font-weight: 800; color: #3d3d3d; line-height: 1.2; }
+        .kcal-option .kcal-label { font-size: 0.7em; color: #aaa; font-weight: 600; margin-top: 2px; }
+        .kcal-option.active .kcal-label { color: #7a6840; }
+        .kcal-option.active::after { content: '\2713'; position: absolute; top: 8px; right: 10px; font-size: 0.85em; color: #7a6840; font-weight: 800; }
+
+        .recetario-grid { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+        .recetario-card { flex: 1; min-width: 180px; max-width: 240px; background: white; border: 2px solid #e8e4de; border-radius: 16px; padding: 20px 16px; text-align: center; cursor: pointer; transition: all 0.3s ease; position: relative; user-select: none; }
+        .recetario-card:hover { border-color: #f7ddab; transform: translateY(-2px); box-shadow: 0 4px 16px rgba(0,0,0,0.06); }
+        .recetario-card:has(input:checked) { border-color: #f7ddab; background: linear-gradient(135deg, #FFF9EE, #FFF3DC); box-shadow: 0 4px 16px rgba(247,221,171,0.35); }
+        .recetario-card:has(input:checked)::after { content: '\2713'; position: absolute; top: 10px; right: 12px; width: 22px; height: 22px; background: #f7ddab; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.7em; font-weight: 800; color: #5a4520; }
+        .recetario-card input { display: none; }
+        .recetario-icon { font-size: 2.2em; margin-bottom: 8px; }
+        .recetario-name { font-weight: 700; font-size: 0.95em; color: #3d3d3d; margin-bottom: 4px; }
+        .recetario-desc { font-size: 0.75em; color: #aaa; line-height: 1.4; }
+        
+        .filter-section { background: #FDFCFA; border-radius: 14px; padding: 18px; margin-bottom: 12px; border: 1px solid #f0ece6; }
+        .filter-section:last-of-type { margin-bottom: 0; }
+        .filter-section-title { color: #3d3d3d; font-size: 0.88em; font-weight: 700; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+        .filters-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+        .filter-item { display: flex; align-items: center; background: #fff; border: 1.5px solid #e0dcd6; padding: 8px 14px; border-radius: 50px; cursor: pointer; transition: all 0.2s; font-size: 0.88em; color: #3d3d3d; user-select: none; touch-action: manipulation; }
+        .filter-item:hover { background: #FFF8E8; border-color: #f7ddab; }
+        .filter-item:has(input:checked) { background: #f7ddab; border-color: #f7ddab; font-weight: 700; }
+        .filter-item input { margin-right: 8px; accent-color: #3d3d3d; transform: scale(1.2); cursor: pointer; }
+        
+        .controls { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin-top: 28px; }
+        button { border: none; padding: 14px 28px; border-radius: 50px; font-family: inherit; font-weight: 700; font-size: 0.95em; cursor: pointer; transition: all 0.2s; display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-width: 200px; -webkit-tap-highlight-color: transparent; color: #3d3d3d; }
+        button:active { transform: scale(0.97); }
+        .btn-gen { background: linear-gradient(135deg, #f7ddab, #F5D08A); box-shadow: 0 6px 20px rgba(247, 221, 171, 0.5); font-size: 1.05em; padding: 16px 36px; }
+        .btn-gen:hover { box-shadow: 0 8px 28px rgba(247, 221, 171, 0.65); transform: translateY(-1px); }
+        .btn-download { background: #4CAF50; color: white; box-shadow: 0 4px 10px rgba(76, 175, 80, 0.4); }
+        .btn-download:hover { filter: brightness(1.1); }
+        .btn-copy-img { background: #2196F3; color: white; box-shadow: 0 4px 10px rgba(33, 150, 243, 0.4); }
+        .btn-copy-img:hover { filter: brightness(1.1); }
+        #copyFeedback { text-align: center; color: #3d3d3d; font-weight: 700; margin-top: 15px; font-size: 0.9em; opacity: 0; transition: opacity 0.3s; }
+        
+        .menus-area { display: none; margin-top: 40px; }
+        .option-header { font-size: 1.1em; font-weight: 800; color: #3d3d3d; text-transform: uppercase; letter-spacing: 1px; background: #f7ddab; padding: 10px 20px; margin-bottom: 0; border-radius: 12px 12px 0 0; display: inline-block; min-width: 150px; text-align: center; }
+        .menu-wrapper { margin-bottom: 40px; border-radius: 0 12px 12px 12px; background: white; border: 2px solid #f7ddab; overflow-x: auto; -webkit-overflow-scrolling: touch; width: 100%; position: relative; }
+        .menu-wrapper::-webkit-scrollbar { height: 8px; }
+        .menu-wrapper::-webkit-scrollbar-thumb { background: #f7ddab; border-radius: 4px; }
+        table { width: 100%; border-collapse: collapse; min-width: 1200px; background: white; table-layout: fixed; }
+        th, td { border: 1px solid #eee; padding: 14px 12px; font-size: 11pt; color: #2d2d2d; vertical-align: top; }
+        th { background: #f7ddab; color: #3d3d3d; text-transform: uppercase; font-weight: 800; text-align: left; letter-spacing: 0.5px; height: 45px; border-color: #eecfa1; padding-left: 15px; }
+        td.meal-cell { position: relative; background: white; transition: all 0.1s ease; cursor: pointer; user-select: none; padding: 12px; }
+        td.meal-cell:hover { background-color: #fffbf2; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+        td.meal-cell:active { background-color: #f7ddab; }
+        td.meal-cell.animate-change { background-color: white; }
+        .meal-label { display: block; font-size: 0.68em; text-transform: uppercase; font-weight: 800; color: #2d2d2d; opacity: 0.6; margin-bottom: 8px; letter-spacing: 0.7px; pointer-events: none; }
+        .recipe-image { width: 100%; height: 130px; object-fit: cover; border-radius: 10px; margin-bottom: 8px; pointer-events: none; display: block; }
+        .recipe-name { display: block; font-weight: 800; font-size: 0.95em; color: #2d2d2d; margin-bottom: 8px; line-height: 1.3; pointer-events: none; }
+        .recipe-ingredients { display: block; font-size: 0.85em; color: #333; line-height: 1.5; pointer-events: none; font-weight: 500; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-3px); } to { opacity: 1; transform: translateY(0); } }
+        .animate-change { animation: fadeIn 0.3s ease-out; }
+        .export-mode td, .export-mode td.meal-cell, .export-mode .meal-cell, .export-mode .meal-cell:hover, .export-mode .meal-cell:active, .export-mode .meal-cell:focus, .export-mode .animate-change { background: #ffffff !important; background-color: #ffffff !important; box-shadow: none !important; transform: none !important; transition: none !important; animation: none !important; }
+
+        /* === RECIPE DROPDOWN SELECTOR === */
+        .recipe-selector-toggle {
+            position: absolute; top: 8px; right: 8px; width: 28px; height: 28px;
+            background: linear-gradient(135deg, #f7ddab, #F5D08A); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer; z-index: 5; pointer-events: auto;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.15); transition: all 0.2s;
+            font-size: 0.75em; font-weight: 800; color: #5a4520; border: none;
+        }
+        .recipe-selector-toggle:hover { transform: scale(1.15); box-shadow: 0 3px 10px rgba(0,0,0,0.2); }
+        .recipe-selector-toggle:active { transform: scale(0.95); }
+
+        .recipe-dropdown {
+            display: none; position: absolute; top: 40px; right: 4px; left: 4px;
+            background: white; border: 2px solid #f7ddab; border-radius: 14px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.18); z-index: 100;
+            max-height: 420px; overflow: hidden; flex-direction: column;
+        }
+        .recipe-dropdown.open { display: flex; }
+        .recipe-dropdown-search {
+            padding: 10px 12px; border-bottom: 1px solid #f0ece6;
+        }
+        .recipe-dropdown-search input {
+            width: 100%; padding: 8px 12px; border: 1.5px solid #e0dcd6;
+            border-radius: 8px; font-family: inherit; font-size: 0.85em;
+            outline: none; transition: border-color 0.2s;
+        }
+        .recipe-dropdown-search input:focus { border-color: #f7ddab; }
+        .recipe-dropdown-search input::placeholder { color: #bbb; }
+        .recipe-dropdown-list {
+            overflow-y: auto; max-height: 340px; padding: 6px;
+        }
+        .recipe-dropdown-list::-webkit-scrollbar { width: 6px; }
+        .recipe-dropdown-list::-webkit-scrollbar-thumb { background: #f7ddab; border-radius: 3px; }
+        .recipe-dropdown-item {
+            display: flex; align-items: center; gap: 10px; padding: 8px 10px;
+            border-radius: 10px; cursor: pointer; transition: background 0.15s;
+            border: none; background: none; width: 100%; text-align: left;
+            font-family: inherit;
+        }
+        .recipe-dropdown-item:hover { background: #FFF8E8; }
+        .recipe-dropdown-item img {
+            width: 48px; height: 48px; object-fit: cover; border-radius: 8px; flex-shrink: 0;
+        }
+        .recipe-dropdown-item-info { flex: 1; min-width: 0; }
+        .recipe-dropdown-item-name {
+            font-weight: 700; font-size: 0.82em; color: #2d2d2d;
+            white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+        }
+        .recipe-dropdown-item-ingredients {
+            font-size: 0.72em; color: #888; line-height: 1.3;
+            display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+        }
+        .recipe-dropdown-header {
+            padding: 6px 12px; font-size: 0.7em; font-weight: 700;
+            color: #aaa; text-transform: uppercase; letter-spacing: 0.5px;
+        }
+        
+        @media (max-width: 768px) {
+            .main-container { padding: 12px; }
+            .hero-header { padding: 32px 20px 28px; border-radius: 20px; }
+            .hero-title { font-size: 1.5em; }
+            .kcal-section { padding-left: 0; }
+            .kcal-selector { flex-direction: row; flex-wrap: wrap; }
+            .kcal-option { min-width: 45%; }
+            .recetario-grid { flex-direction: column; align-items: center; }
+            .recetario-card { max-width: 100%; width: 100%; }
+            .controls { flex-direction: column; width: 100%; gap: 10px; }
+            button { width: 100%; }
+            .recipe-image { height: 100px; }
+            .step-desc { padding-left: 0; }
+            .recipe-dropdown { left: -50px; right: -50px; min-width: 280px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <div class="hero-header">
+            <div class="hero-icon">🥑</div>
+            <h1 class="hero-title">Generador de Menus con Recetas</h1>
+            <p class="hero-subtitle">Personaliza tu menu semanal en 3 pasos. Filtra alimentos, elige tus recetarios y genera <strong>2 planes completos</strong> al instante.</p>
+            <div class="hero-chips">
+                <span class="hero-chip">&#10024; Patrones nutricionales</span>
+                <span class="hero-chip">&#128260; Recetas intercambiables</span>
+                <span class="hero-chip">&#128248; Exporta en HD</span>
+            </div>
+        </div>
+        
+        <div class="step-card">
+            <div class="step-header"><div class="step-number">1</div><div class="step-title">Elige tu Plan Calorico</div></div>
+            
+            <div class="kcal-section">
+                <div class="kcal-section-label">&#9728;&#65039; Comidas (Almuerzo):</div>
+                <div class="kcal-selector">
+                    <div class="kcal-option active" onclick="setLunchKcal(500)" id="lunch500"><div class="kcal-icon">&#127811;</div><div class="kcal-number">~500 kcal</div><div class="kcal-label">Estandar</div></div>
+                    <div class="kcal-option" onclick="setLunchKcal(700)" id="lunch700"><div class="kcal-icon">&#128170;</div><div class="kcal-number">~700 kcal</div><div class="kcal-label">Alto Valor</div></div>
+                </div>
+            </div>
+
+            <div class="kcal-section">
+                <div class="kcal-section-label">&#127769; Cenas:</div>
+                <div class="kcal-selector">
+                    <div class="kcal-option active" onclick="setDinnerKcal(300)" id="dinner300"><div class="kcal-icon">&#127769;</div><div class="kcal-number">~300 kcal</div><div class="kcal-label">Ligera</div></div>
+                    <div class="kcal-option" onclick="setDinnerKcal(500)" id="dinner500"><div class="kcal-icon">&#127811;</div><div class="kcal-number">~500 kcal</div><div class="kcal-label">Estandar</div></div>
+                    <div class="kcal-option" onclick="setDinnerKcal(700)" id="dinner700"><div class="kcal-icon">&#128170;</div><div class="kcal-number">~700 kcal</div><div class="kcal-label">Alto Valor</div></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="step-card">
+            <div class="step-header"><div class="step-number">2</div><div class="step-title">Selecciona tus Recetarios</div></div>
+            <div class="step-desc">Elige que recetarios quieres incluir en tu menu:</div>
+            <div class="recetario-grid">
+                <label class="recetario-card"><input type="checkbox" value="Inicial" id="recetarioInicial" checked><div class="recetario-icon">&#128214;</div><div class="recetario-name">Recetario Inicial</div><div class="recetario-desc">Base de recetas saludables</div></label>
+                <label class="recetario-card"><input type="checkbox" value="Verde" id="recetarioVerde"><div class="recetario-icon">&#129367;</div><div class="recetario-name">Recetario Verde</div><div class="recetario-desc">Mas verduras y vegetales</div></label>
+                <label class="recetario-card"><input type="checkbox" value="Rojo" id="recetarioRojo"><div class="recetario-icon">&#127830;</div><div class="recetario-name">Recetario Rojo</div><div class="recetario-desc">Mas proteinas y variedad</div></label>
+            </div>
+        </div>
+        <div class="step-card">
+            <div class="step-header"><div class="step-number">3</div><div class="step-title">Filtros de Alimentos</div></div>
+            <div class="step-desc">Marca los alimentos que <strong>NO</strong> quieres en tu menu:</div>
+            <div class="filter-section"><div class="filter-section-title">&#129385; Proteinas</div><div class="filters-grid"><label class="filter-item"><input type="checkbox" value="Pollo/Pavo"> Pollo/Pavo</label><label class="filter-item"><input type="checkbox" value="Ternera/Cerdo"> Ternera/Cerdo</label><label class="filter-item"><input type="checkbox" value="Pescado blanco"> Pescado blanco</label><label class="filter-item"><input type="checkbox" value="Pescado azul"> Pescado azul</label><label class="filter-item"><input type="checkbox" value="Marisco"> Marisco</label><label class="filter-item"><input type="checkbox" value="Huevos"> Huevos</label><label class="filter-item"><input type="checkbox" value="Lacteos"> Lacteos</label><label class="filter-item"><input type="checkbox" value="Queso"> Queso</label></div></div>
+            <div class="filter-section"><div class="filter-section-title">&#127834; Carbohidratos</div><div class="filters-grid"><label class="filter-item"><input type="checkbox" value="Arroz"> Arroz</label><label class="filter-item"><input type="checkbox" value="Pasta"> Pasta</label><label class="filter-item"><input type="checkbox" value="Pan"> Pan</label><label class="filter-item"><input type="checkbox" value="Patata"> Patata</label><label class="filter-item"><input type="checkbox" value="Legumbres"> Legumbres</label></div></div>
+            <div class="filter-section"><div class="filter-section-title">&#129388; Verduras / Hortalizas</div><div class="filters-grid"><label class="filter-item"><input type="checkbox" value="Tomate"> Tomate</label><label class="filter-item"><input type="checkbox" value="Cebolla"> Cebolla</label><label class="filter-item"><input type="checkbox" value="Pimiento"> Pimiento</label><label class="filter-item"><input type="checkbox" value="Berenjena"> Berenjena</label><label class="filter-item"><input type="checkbox" value="Calabacin"> Calabacin</label><label class="filter-item"><input type="checkbox" value="Brocoli"> Brocoli</label><label class="filter-item"><input type="checkbox" value="Espinacas"> Espinacas</label><label class="filter-item"><input type="checkbox" value="Lechuga"> Lechuga</label><label class="filter-item"><input type="checkbox" value="Zanahoria"> Zanahoria</label><label class="filter-item"><input type="checkbox" value="Champinones"> Champinones</label></div></div>
+            <div class="filter-section"><div class="filter-section-title">&#129361; Grasas Saludables</div><div class="filters-grid"><label class="filter-item"><input type="checkbox" value="Aguacate"> Aguacate</label></div></div>
+            <div class="filter-section"><div class="filter-section-title">&#9888;&#65039; Alergenos / Intolerancias</div><div class="filters-grid"><label class="filter-item"><input type="checkbox" value="Gluten"> Gluten</label><label class="filter-item"><input type="checkbox" value="Lactosa"> Lactosa</label></div></div>
+            <div class="controls"><button class="btn-gen" onclick="generateWeeklyMenu()"><span>&#9889;</span> Generar 2 Planes Inteligentes</button></div>
+            <div id="copyFeedback"></div>
+        </div>
+        <div class="menus-area" id="menusArea">
+            <div class="option-header">Plan A</div>
+            <div class="menu-wrapper" id="menuWrapper1"><table id="menuTable1"><thead><tr><th>Lunes</th><th>Martes</th><th>Miercoles</th><th>Jueves</th><th>Viernes</th><th>Sabado</th><th>Domingo</th></tr></thead><tbody id="menuBody1"></tbody></table></div>
+            <div class="controls" style="margin-top:15px;"><button class="btn-download" onclick="downloadMenuAsImage('menuWrapper1','Plan_A')"><span>&#128190;</span> Descargar Plan A</button><button class="btn-copy-img" onclick="copyMenuAsImage('menuWrapper1','Plan A')"><span>&#128248;</span> Copiar Plan A</button></div>
+            <br><br>
+            <div class="option-header">Plan B</div>
+            <div class="menu-wrapper" id="menuWrapper2"><table id="menuTable2"><thead><tr><th>Lunes</th><th>Martes</th><th>Miercoles</th><th>Jueves</th><th>Viernes</th><th>Sabado</th><th>Domingo</th></tr></thead><tbody id="menuBody2"></tbody></table></div>
+            <div class="controls" style="margin-top:15px;"><button class="btn-download" onclick="downloadMenuAsImage('menuWrapper2','Plan_B')"><span>&#128190;</span> Descargar Plan B</button><button class="btn-copy-img" onclick="copyMenuAsImage('menuWrapper2','Plan B')"><span>&#128248;</span> Copiar Plan B</button></div>
+        </div>
+        <div class="content-section" id="predefinedMenusSection" style="display:none;">
+            <h2 class="section-title">&#128203; Menus Semanales Predefinidos</h2>
+            <p style="font-size:0.9em;color:#3d3d3d;margin-bottom:20px;opacity:0.8;">Prefieres un menu ya completo? Elige uno de nuestros menus semanales prediseñados en Google Docs:</p>
+            <div style="display:flex;flex-direction:column;gap:12px;max-width:700px;margin:0 auto;">
+                <a href="https://docs.google.com/document/d/1YUx4WeCVynLxlFIwc6Gx9ED8SAAgcTjMqfYaave0PKU/edit?usp=sharing" target="_blank" style="display:flex;align-items:center;justify-content:space-between;background:linear-gradient(135deg,#fff8e8 0%,#f7ddab 100%);padding:16px 24px;border-radius:15px;text-decoration:none;color:#3d3d3d;border:2px solid #f7ddab;transition:all 0.2s;box-shadow:0 2px 8px rgba(247,221,171,0.3);"><div style="display:flex;align-items:center;gap:12px;"><span style="font-size:1.8em;">&#128215;</span><div><div style="font-weight:800;font-size:1.05em;margin-bottom:4px;">Recetario Inicial</div><div style="font-size:0.85em;opacity:0.7;">Base de recetas saludables y equilibradas</div></div></div><span style="font-size:1.2em;opacity:0.6;">&rarr;</span></a>
+                <a href="https://docs.google.com/document/d/1drSlUL0HS2yltGpOU3URte-1g8rDWhBWKgIzGlDb0vU/edit?usp=sharing" target="_blank" style="display:flex;align-items:center;justify-content:space-between;background:linear-gradient(135deg,#e8f5e9 0%,#a5d6a7 100%);padding:16px 24px;border-radius:15px;text-decoration:none;color:#2d5016;border:2px solid #81c784;transition:all 0.2s;box-shadow:0 2px 8px rgba(129,199,132,0.3);"><div style="display:flex;align-items:center;gap:12px;"><span style="font-size:1.8em;">&#129367;</span><div><div style="font-weight:800;font-size:1.05em;margin-bottom:4px;">Inicial + Recetario Verde</div><div style="font-size:0.85em;opacity:0.7;">Mas opciones con verduras y vegetales frescos</div></div></div><span style="font-size:1.2em;opacity:0.6;">&rarr;</span></a>
+                <a href="https://docs.google.com/document/d/1v-W0V_4YfSpRiEB5mWsekKE3HAzP_qqhU-7IapK1ymA/edit?usp=sharing" target="_blank" style="display:flex;align-items:center;justify-content:space-between;background:linear-gradient(135deg,#ffebee 0%,#ef9a9a 100%);padding:16px 24px;border-radius:15px;text-decoration:none;color:#5d1f1f;border:2px solid #e57373;transition:all 0.2s;box-shadow:0 2px 8px rgba(229,115,115,0.3);"><div style="display:flex;align-items:center;gap:12px;"><span style="font-size:1.8em;">&#127830;</span><div><div style="font-weight:800;font-size:1.05em;margin-bottom:4px;">Inicial + Verde + Rojo</div><div style="font-size:0.85em;opacity:0.7;">Recetario completo con proteinas, verduras y mas variedad</div></div></div><span style="font-size:1.2em;opacity:0.6;">&rarr;</span></a>
+            </div>
+            <div style="margin-top:20px;padding:15px;background:#f9f9f9;border-radius:12px;border-left:4px solid #f7ddab;"><p style="font-size:0.85em;color:#666;margin:0;line-height:1.6;"><strong>&#128161; Como usar estos menus?</strong><br>Cada documento contiene <strong>6 semanas completas</strong> de menus ya organizados. Puedes <strong>copiarlos</strong> en tu Google Drive, modificarlos a tu gusto y llevarlos siempre contigo en tu movil.</p></div>
+        </div>
+    </div>
+<script>
+console.log('NUVIA 8.0 - SPLIT KCAL + RECIPE DROPDOWN SELECTOR');
+
+let currentLunchKcal = 500;
+let currentDinnerKcal = 300;
+
+function setLunchKcal(kcal) {
+    currentLunchKcal = kcal;
+    document.getElementById('lunch500').classList.toggle('active', kcal === 500);
+    document.getElementById('lunch700').classList.toggle('active', kcal === 700);
+}
+
+function setDinnerKcal(kcal) {
+    currentDinnerKcal = kcal;
+    document.getElementById('dinner300').classList.toggle('active', kcal === 300);
+    document.getElementById('dinner500').classList.toggle('active', kcal === 500);
+    document.getElementById('dinner700').classList.toggle('active', kcal === 700);
+}
+
+// ============================================================
+// === RECETAS 300 KCAL (CENAS) ===
+// ============================================================
+const recipesDinner300 = [
+    {"name":"Tortilla francesa con cebolla y maiz","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-25-a-las-17.08.15.png","ingredients":"2 huevos, cebolla, maiz, aceite y sal."},
+    {"name":"Tortilla francesa con esparragos y cherrys","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-25-a-las-17.08.48.png","ingredients":"2 huevos, esparragos trigueros, tomates cherry, aceite y sal."},
+    {"name":"Revuelto de huevos y ensalada completa","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-25-a-las-17.10.02.png","ingredients":"2 huevos, tomates, lechuga, cebolla, pepino, aceite y sal."},
+    {"name":"Tortilla francesa con champinones y ajetes","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-25-a-las-17.10.40.png","ingredients":"2 huevos, champinones, ajetes, aceite y sal."},
+    {"name":"Judias verdes salteadas y huevo cocido","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-25-a-las-17.24.02.png","ingredients":"2 huevos cocidos, judias verdes, tomate, zanahoria, aceite y sal."},
+    {"name":"Pure de verdura con huevos","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-25-a-las-17.25.22.png","ingredients":"Verduras variadas para pure, 2 huevos (cocidos o plancha), aceite y sal."},
+    {"name":"Revuelto de huevo con jamon y cherrys","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-25-a-las-17.25.57.png","ingredients":"2 huevos, tacos de jamon, tomates cherry, aceite y sal."},
+    {"name":"Tortilla francesa y gazpacho","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-25-a-las-17.26.28.png","ingredients":"2 huevos, vaso de gazpacho, aceite y sal."},
+    {"name":"Revuelto de calabacin y cebolla","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-25-a-las-17.27.03.png","ingredients":"2 huevos, calabacin, cebolla, aceite y sal."},
+    {"name":"Tortilla de espinacas","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-25-a-las-17.27.35.png","ingredients":"2 huevos, espinacas, aceite y sal."},
+    {"name":"Huevos a la plancha con pisto","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-25-a-las-17.28.11.png","ingredients":"2 huevos, mezcla de pisto (tomate, pimiento, calabacin), aceite y sal."},
+    {"name":"Huevos a la plancha con esparragos y setas","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-25-a-las-17.28.40.png","ingredients":"2 huevos, esparragos, setas variadas, aceite y sal."},
+    {"name":"Sardinas al horno con limon","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-25-a-las-17.55.03.png","ingredients":"120 g sardinas, perejil, limon, aceite y sal."},
+    {"name":"Lubina o corvina al horno","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-25-a-las-18.08.29.png","ingredients":"150 g lubina/corvina, salsa de limon, perejil, aceite y sal."},
+    {"name":"Rodaballo al vapor con verduras","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-25-a-las-18.26.35.png","ingredients":"150 g rodaballo, verduras al vapor variadas, aceite y sal."},
+    {"name":"Sepia o calamares con sopa juliana","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-25-a-las-18.27.28.png","ingredients":"200 g sepia/calamares, sopa juliana de verduras, aceite y sal."},
+    {"name":"Pimientos asados con bonito","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-25-a-las-18.29.29.png","ingredients":"Pimientos asados, 2 latas de bonito o ventresca, aceite y sal."},
+    {"name":"Menestra y emperador a la plancha","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-25-a-las-18.30.40.png","ingredients":"150 g emperador, menestra de verduras, ajo, perejil, aceite y sal."},
+    {"name":"Wok de verduras con gambas","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-25-a-las-18.31.35.png","ingredients":"200 g gambas/langostinos, verduras para wok, salsa de soja, aceite."},
+    {"name":"Merluza a la plancha con espinacas","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-25-a-las-18.32.08.png","ingredients":"150 g merluza, espinacas salteadas, aceite y sal."},
+    {"name":"Esparragos blancos con tomate y atun","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-25-a-las-18.32.56.png","ingredients":"Esparragos blancos, 2 latas de atun, tomate, aceite y sal."},
+    {"name":"Salmon con brocoli","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-25-a-las-18.34.28.png","ingredients":"120 g salmon, brocoli, aceite y sal."},
+    {"name":"Ensalada completa de atun","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-25-a-las-18.34.55.png","ingredients":"2 latas atun, lechuga, cebolla, tomate, pepino, aceite y sal."},
+    {"name":"Salpicon de marisco","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-25-a-las-18.35.26.png","ingredients":"200 g salpicon (pulpo, mejillones, gambas, pimiento, cebolla), aceite y vinagre."},
+    {"name":"Muslo de pollo/pavo al horno con ensalada","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-25-a-las-18.39.50.png","ingredients":"150 g muslo pavo/pollo, especias, ensalada de tomate y cebolla, aceite."},
+    {"name":"Salteado de verduras con pollo","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-25-a-las-18.41.06.png","ingredients":"150 g pollo, verduras variadas, aceite y sal."},
+    {"name":"Lacon con pimenton y sopa","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-25-a-las-18.41.41.png","ingredients":"100 g lacon, pimenton, aceite, sopa juliana de verduras."},
+    {"name":"Alitas de pollo y pure","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-25-a-las-18.42.19.png","ingredients":"150 g alitas de pollo, pure de verduras, aceite y sal."},
+    {"name":"Hamburguesa de pollo con pimientos","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-25-a-las-18.42.57.png","ingredients":"150 g hamburguesa pollo, pimientos asados, cebolla, aceite y sal."},
+    {"name":"Cinta de lomo con pimientos","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-25-a-las-18.45.01.png","ingredients":"150 g cinta de lomo, salteado de pimientos, aceite y sal."},
+    {"name":"Brochetas de pollo con verduras","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-25-a-las-18.51.07.png","ingredients":"150 g pollo, pimiento, tomate, cebolla, aceite y sal."},
+    {"name":"Ensalada mixta con pechuga","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-25-a-las-18.53.12.png","ingredients":"150 g pechuga pollo, tomate, lechuga, cebolla, pepino, zanahoria, aceite."},
+    {"name":"Wok de ternera y brocoli","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-25-a-las-18.56.12.png","ingredients":"120 g ternera, pimientos, brocoli, salsa de soja, aceite."},
+    {"name":"Ensalada con jamon cocido","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-25-a-las-18.56.44.png","ingredients":"100 g jamon cocido en tacos, base de ensalada variada, aceite y sal."},
+    {"name":"Sopa de pollo con verduras","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-25-a-las-18.57.32.png","ingredients":"150 g pollo, verduras para sopa, caldo, aceite y sal."},
+    {"name":"Filetes de pollo con guisantes","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-25-a-las-18.59.31.png","ingredients":"150 g pollo, guisantes, cebolla, aceite y sal."},
+    {"name":"Ensalada Caprese","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-25-a-las-19.00.30.png","ingredients":"1 bola mozzarella light, tomate, albahaca, aceite y sal."},
+    {"name":"Ensalada de queso fresco","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-25-a-las-19.01.18.png","ingredients":"1 tarrina queso fresco, lechuga, tomate, cebolla, aceite y sal."},
+    {"name":"Yogur con fresas y chocolate","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-25-a-las-19.01.55.png","ingredients":"200 g yogur, fresas, 1 onza chocolate +72%."},
+    {"name":"Macedonia con yogur griego","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-25-a-las-19.03.34.png","ingredients":"200 g yogur griego ligero/natural, fruta variada."}
+];
+
+// ===== INICIAL 500 LUNCH =====
+const inicialLunchRecipes500 = [
+{"name":"Ensalada completa","image":"https://nutricionista.io/wp-content/uploads/2026/01/Captura-de-pantalla-2026-01-23-a-las-18.14.00.png","ingredients":"2 tomates medianos, lechuga, aceitunas al gusto, 2 latas de atun al natural, zanahoria, 1 huevo, vinagre, sal y una cucharada de aceite de oliva."},
+{"name":"Ensalada campera","image":"https://nutricionista.io/wp-content/uploads/2026/01/Captura-de-pantalla-2026-01-23-a-las-18.14.43.png","ingredients":"2 tomates medianos, 1 huevo cocido, 200 g patatas, 1 lata de atun al natural, 10 aceitunas, aceite, vinagre y sal."},
+{"name":"Ensalada de patata, tomate y mozzarella","image":"https://nutricionista.io/wp-content/uploads/2026/01/Captura-de-pantalla-2026-01-23-a-las-18.22.21.png","ingredients":"10 tomates cherry, 200 g patatas, lechuga, 100 g queso mozzarella, sal, aceite y oregano."},
+{"name":"Ensalada de pasta con queso feta","image":"https://nutricionista.io/wp-content/uploads/2026/01/Captura-de-pantalla-2026-01-23-a-las-18.34.11.png","ingredients":"70 gr de pasta (preferiblemente integral), 50 gr de queso feta, rucula y tomates cherry al gusto, una cda de aceite de oliva y sal."},
+{"name":"Lentejas con verduras","image":"https://nutricionista.io/wp-content/uploads/2026/01/Captura-de-pantalla-2026-01-23-a-las-18.34.50.png","ingredients":"Lentejas, puerro, cebolla, zanahorias, patata, ajo, pimenton, agua, laurel, sal, pimienta y una cucharada de aceite de oliva."},
+{"name":"Salteado de garbanzos con verduras","image":"https://nutricionista.io/wp-content/uploads/2026/01/Captura-de-pantalla-2026-01-23-a-las-18.35.56.png","ingredients":"200 gramos de garbanzos cocidos, cebolla, pimiento rojo y verde, ajo y zanahoria, sal y aceite de oliva."},
+{"name":"Judias verdes con huevo y atun","image":"https://nutricionista.io/wp-content/uploads/2026/01/Captura-de-pantalla-2026-01-23-a-las-18.38.56.png","ingredients":"200 gramos de judias verdes, 200 g patata, cebolla, 1 huevo, 1 lata de atun al natural, zumo de limon, una cucharada de aceite de oliva, sal y pimienta."},
+{"name":"Guisantes con tacos de jamon y huevo","image":"https://nutricionista.io/wp-content/uploads/2026/01/Captura-de-pantalla-2026-01-23-a-las-18.46.27.png","ingredients":"Guisantes al gusto, 1 diente de ajo, tacos de jamon y 1 huevo."},
+{"name":"Alubias blancas con espinacas","image":"https://nutricionista.io/wp-content/uploads/2026/01/Captura-de-pantalla-2026-01-23-a-las-18.48.21.png","ingredients":"Alubias blancas al gusto, espinacas, zanahoria, cebolla, sal y una cucharada de aceite de oliva."},
+{"name":"Guisantes con gambas","image":"https://nutricionista.io/wp-content/uploads/2026/01/Captura-de-pantalla-2026-01-23-a-las-18.48.59.png","ingredients":"Guisantes, gambas peladas, cebolla, 3 cucharadas de tomate triturado al natural, 1 vasito de caldo, pimenton, sal y una cucharada de aceite de oliva."},
+{"name":"Pasta a lo estudiante","image":"https://nutricionista.io/wp-content/uploads/2026/01/Captura-de-pantalla-2026-01-23-a-las-18.53.22.png","ingredients":"70 g pasta, 1 lata atun al natural, tomate al gusto, 30 g de queso rallado, cebolla y especias al gusto."},
+{"name":"Arroz con tomate y huevos a la plancha","image":"https://nutricionista.io/wp-content/uploads/2026/01/Captura-de-pantalla-2026-01-23-a-las-18.53.53.png","ingredients":"70 g arroz, 2 huevos, salsa de tomate al gusto y una cucharada de aceite de oliva para cocinar."},
+{"name":"Arroz con calabacin y champinones","image":"https://nutricionista.io/wp-content/uploads/2026/01/Captura-de-pantalla-2026-01-23-a-las-18.55.46.png","ingredients":"70 g arroz (preferiblemente integral), 150 g de pechuga de pollo, champinones, calabacin, cebolla, sal, pimienta al gusto y una cucharada de aceite de oliva."},
+{"name":"Gnocchis con pollo y verduras","image":"https://nutricionista.io/wp-content/uploads/2026/01/Captura-de-pantalla-2026-01-23-a-las-18.57.15.png","ingredients":"125 g de gnocchis, 150 g de pechuga de pollo, 50 g de queso philadelphia light, 2 cdas de salsa de tomate, 1/2 cebolla, 1/2 calabacin, ajo en polvo, sal, pimienta, tomillo."},
+{"name":"Noodles con pollo y verduras","image":"https://nutricionista.io/wp-content/uploads/2026/01/Captura-de-pantalla-2026-01-23-a-las-18.58.09.png","ingredients":"50 gramos de noodles, 150 gramos de pollo, verduras y especias al gusto y una cda de aceite de oliva."},
+{"name":"Pasta con carne picada","image":"https://nutricionista.io/wp-content/uploads/2026/01/Captura-de-pantalla-2026-01-23-a-las-19.01.21.png","ingredients":"70 g de pasta, 120 g de carne picada (pollo o alguna carne magra), salsa de tomate, 1 diente ajo, cebolla, oregano, albahaca, sal y aceite."},
+{"name":"Arroz al estilo fajitas","image":"https://nutricionista.io/wp-content/uploads/2026/01/Captura-de-pantalla-2026-01-23-a-las-19.03.08.png","ingredients":"70 g arroz, 120 g de pechuga de pollo, pimiento rojo y verde, aceite y especias."},
+{"name":"Pasta con jamon y champinones","image":"https://nutricionista.io/wp-content/uploads/2026/01/Captura-de-pantalla-2026-01-23-a-las-19.03.51.png","ingredients":"70 g de pasta, champinones al gusto, 3-4 lonchas de jamon, ajo, sal, pimienta y una cda de aceite de oliva."},
+{"name":"Salteado de verduras con pechuga de pollo","image":"https://nutricionista.io/wp-content/uploads/2026/01/Captura-de-pantalla-2026-01-23-a-las-19.16.05.png","ingredients":"150 g de pechuga de pollo, verduras al gusto, 2 cdas de salsa de soja y una cucharada de aceite de oliva."},
+{"name":"Salteado de pavo con verduras","image":"https://nutricionista.io/wp-content/uploads/2026/01/Captura-de-pantalla-2026-01-23-a-las-19.16.52.png","ingredients":"150 g pechuga de pavo, 150 g patata, brocoli, zanahoria, ajo, aceite de oliva, sal, pimienta negra."},
+{"name":"Menestra de verduras con ternera","image":"https://nutricionista.io/wp-content/uploads/2026/01/Captura-de-pantalla-2026-01-23-a-las-19.17.23.png","ingredients":"150 g de ternera para guisar, cebolla, champinones, judias verdes, alcachofas, zanahoria, ajo, un chorrito de vino tinto, una cda de aceite, caldo de carne."},
+{"name":"Lomo de cerdo a la plancha con patata","image":"https://nutricionista.io/wp-content/uploads/2026/01/Captura-de-pantalla-2026-01-23-a-las-19.17.54.png","ingredients":"150 g de lomo de cerdo, 150 g de patata, tomate y lechuga."},
+{"name":"Asado de pollo con patatas y verduras","image":"https://nutricionista.io/wp-content/uploads/2026/01/Captura-de-pantalla-2026-01-23-a-las-19.18.32.png","ingredients":"150 g de pollo, 150 g patatas y verduras al gusto, aceite de oliva, tomillo, romero, sal, pimienta y vino blanco dulce."},
+{"name":"Emperador al papillote con patatas","image":"https://nutricionista.io/wp-content/uploads/2026/01/Captura-de-pantalla-2026-01-23-a-las-19.19.01.png","ingredients":"120 g emperador, 150 g batata o patata, judias verdes al gusto."},
+{"name":"Merluza a la plancha con arroz y brocoli","image":"https://nutricionista.io/wp-content/uploads/2026/01/Captura-de-pantalla-2026-01-23-a-las-19.19.34.png","ingredients":"150 g merluza, 70 g arroz, verduras al gusto."},
+{"name":"Salmon al horno con patatas","image":"https://nutricionista.io/wp-content/uploads/2026/01/Captura-de-pantalla-2026-01-23-a-las-19.20.09.png","ingredients":"120 g salmon, 150 g patata, cebolla, sal y una cucharada de aceite de oliva."},
+{"name":"Pisto manchego con arroz y bacalao","image":"https://nutricionista.io/wp-content/uploads/2026/01/Captura-de-pantalla-2026-01-23-a-las-19.20.33.png","ingredients":"Verduras (berenjena, calabacin, pimiento, tomate), 150 g de bacalao, 50 g de arroz (1 vasito de microondas)."},
+{"name":"Hummus con verduras","image":"https://nutricionista.io/wp-content/uploads/2026/01/Captura-de-pantalla-2026-01-23-a-las-18.47.42.png","ingredients":"250 gramos de garbanzos cocidos, una cucharada de aceite, verduras crudas (zanahoria, pepino, pimiento), salsa tahini (opcional), ajo, limon, comino, pimenton dulce y sal."}
+];
+
+// ===== INICIAL 500 WEEKDAY DINNER =====
+const inicialWeekdayDinnerRecipes500 = [
+{"name":"Ensalada de pollo, aguacate y tomate","image":"https://nutricionista.io/wp-content/uploads/2026/01/Captura-de-pantalla-2026-01-23-a-las-18.24.19.png","ingredients":"150 g pechuga de pollo, medio aguacate (100 g aprox.), tomate, cebolla y lechuga u otra base al gusto."},
+{"name":"Ensalada rapida de judias blancas","image":"https://nutricionista.io/wp-content/uploads/2026/01/Captura-de-pantalla-2026-01-23-a-las-18.25.20.png","ingredients":"Alubias blancas al gusto, 1 lata de atun al natural, pimientos de piquillo, tomate, cebolla y una cda de aceite de oliva."},
+{"name":"Ensalada de caballa con tomate y cebolla","image":"https://nutricionista.io/wp-content/uploads/2026/01/Captura-de-pantalla-2026-01-23-a-las-18.31.51.png","ingredients":"1 lata de caballa en aceite de oliva, 2 tomates, cebolla al gusto."},
+{"name":"Setas y/o champinones con jamon","image":"https://nutricionista.io/wp-content/uploads/2026/01/Captura-de-pantalla-2026-01-23-a-las-18.49.55.png","ingredients":"Champinones y setas al gusto, jamon en tacos, ajo."},
+{"name":"Tortilla francesa rellena de tomate y aguacate","image":"https://nutricionista.io/wp-content/uploads/2026/01/Captura-de-pantalla-2026-01-23-a-las-19.08.32.png","ingredients":"2 huevos, 1/2 aguacate (100 g aprox.), tomate al gusto, 1 rebanada de pan wasa, pimienta, sal y una cucharada de aceite de oliva."},
+{"name":"Huevos revueltos con champinones","image":"https://nutricionista.io/wp-content/uploads/2026/01/Captura-de-pantalla-2026-01-23-a-las-19.10.38.png","ingredients":"3 huevos, 50 g pan, champinones, puerro, cebolla, ajo, sal, pimienta y aceite de oliva."},
+{"name":"Tortilla francesa con atun y pimientos","image":"https://nutricionista.io/wp-content/uploads/2026/01/Captura-de-pantalla-2026-01-23-a-las-19.11.09.png","ingredients":"2 huevos, 1 lata de atun al natural, pimiento al gusto, sal, pimienta y una cda de aceite de oliva y una rebanada de pan wasa."},
+{"name":"Tortilla de berenjena y queso","image":"https://nutricionista.io/wp-content/uploads/2026/01/Captura-de-pantalla-2026-01-23-a-las-19.12.05.png","ingredients":"2 huevos, berenjena al gusto, 100 gr de queso fresco de cabra, sal, pimienta y una cucharada de aceite de oliva."},
+{"name":"Revuelto de espinacas y gambas","image":"https://nutricionista.io/wp-content/uploads/2026/01/Captura-de-pantalla-2026-01-23-a-las-19.12.56.png","ingredients":"Espinacas frescas al gusto, 100 gr de gambas peladas, 2 huevos, 1/2 diente de ajo, aceite de oliva, pimienta, sal y 2 rebanadas de pan wasa."},
+{"name":"Cazuela de huevos con verdura","image":"https://nutricionista.io/wp-content/uploads/2026/01/Captura-de-pantalla-2026-01-23-a-las-19.13.56.png","ingredients":"3 huevos, 50 g pan, calabacin, berenjena, cebolla, pimiento rojo y verde, tomate natural triturado, sal, pimienta y aceite de oliva."},
+{"name":"Huevos con jamon cocido y queso","image":"https://nutricionista.io/wp-content/uploads/2026/01/Captura-de-pantalla-2026-01-23-a-las-19.14.51.png","ingredients":"2 huevos, 5 lonchas de jamon cocido, 30 gramos de queso y ensalada / verduras al gusto."},
+{"name":"Revuelto con tomates cherry y mozzarella","image":"https://nutricionista.io/wp-content/uploads/2026/01/Captura-de-pantalla-2026-01-23-a-las-19.15.32.png","ingredients":"3 huevos, 50 g de mozzarella, tomates cherry y albahaca al gusto, sal y pimienta negra."},
+{"name":"Chipirones o sepia a la plancha","image":"https://nutricionista.io/wp-content/uploads/2026/01/Captura-de-pantalla-2026-01-23-a-las-19.21.07.png","ingredients":"200 gramos de sepia o chipirones, ajo, perejil, una cucharada de aceite de oliva, sal y limon."},
+{"name":"Lubina al horno","image":"https://nutricionista.io/wp-content/uploads/2026/01/Captura-de-pantalla-2026-01-23-a-las-19.21.47.png","ingredients":"Lubina, medio vaso de vino blanco, ajo en polvo, cebolla en polvo, hierbas provenzales, sal en escamas, mezcla de pimientas."}
+];
+
+// ===== INICIAL 500 WEEKEND DINNER =====
+const inicialWeekendDinnerRecipes500 = [
+{"name":"Bocadillo de jamon y queso","image":"https://nutricionista.io/wp-content/uploads/2026/01/Captura-de-pantalla-2026-01-23-a-las-19.22.19.png","ingredients":"100 gramos de pan, 60 gramos de jamon serrano y 30 de tu queso favorito."},
+{"name":"Hamburguesa con queso y huevo","image":"https://nutricionista.io/wp-content/uploads/2026/01/Captura-de-pantalla-2026-01-23-a-las-19.22.49.png","ingredients":"1 pan de hamburguesa, una carne de pollo, ternera magra o pavo, 1 loncha de tu queso favorito, 1 huevo y verduras al gusto."},
+{"name":"Fajitas de pollo con verduras","image":"https://nutricionista.io/wp-content/uploads/2026/01/Captura-de-pantalla-2026-01-23-a-las-19.23.23.png","ingredients":"2 tortillas de trigo, 150 gr de pechuga de pollo o pavo, verduras y especias al gusto, sal y una cda de aceite de oliva."},
+{"name":"Sandwich de atun con tomate","image":"https://nutricionista.io/wp-content/uploads/2026/01/Captura-de-pantalla-2026-01-23-a-las-19.23.58.png","ingredients":"3 rebanadas de pan de molde, 2 latas de atun al natural, 2 tomates y 1 sobre de mayonesa."},
+{"name":"Tostada de queso fresco, atun y tomate","image":"https://nutricionista.io/wp-content/uploads/2026/01/Captura-de-pantalla-2026-01-23-a-las-19.24.26.png","ingredients":"2 rebanadas de pan de molde (o 60 g en pan de barra), tomate, 100 g queso fresco de cabra y 1 lata de atun al natural."},
+{"name":"Burrito de aguacate y salmon","image":"https://nutricionista.io/wp-content/uploads/2026/01/Captura-de-pantalla-2026-01-23-a-las-19.25.13.png","ingredients":"1 tortilla Maxi de trigo, 100 g aguacate, 50 g salmon ahumado, 40 g queso philadelphia light, cebolla y tomate al gusto."},
+{"name":"Pizza con base de piadina","image":"https://nutricionista.io/wp-content/uploads/2026/01/Captura-de-pantalla-2026-01-23-a-las-19.25.46.png","ingredients":"Pan de piadina, salsa de tomate, queso mozzarella y los ingredientes que desees."},
+{"name":"Tostada de sardinas con tomate y cebolla","image":"https://nutricionista.io/wp-content/uploads/2026/01/Captura-de-pantalla-2026-01-23-a-las-19.26.22.png","ingredients":"2 rebanadas de pan, 1 lata de sardinas, tomate, cebolla y aceite de oliva."}
+];
+
+// ===== INICIAL 700 LUNCH =====
+const inicialLunchRecipes700 = [
+{"name":"Ensalada completa","image":"https://nutricionista.io/wp-content/uploads/2026/01/Captura-de-pantalla-2026-01-23-a-las-18.14.00.png","ingredients":"3 tomates medianos, lechuga, 1 lata de aceitunas, 2 latas de atun al natural, 50 gr de tu queso favorito, zanahoria, 1 huevo, vinagre, sal y una cucharada de aceite de oliva. Para acompanar 50 g de pan."},
+{"name":"Ensalada campera","image":"https://nutricionista.io/wp-content/uploads/2026/01/Captura-de-pantalla-2026-01-23-a-las-18.14.43.png","ingredients":"2 tomates medianos, 2 huevos cocidos, base de lechuga, 400 gramos de patatas, 1 lata de atun al natural, aceite, vinagre y sal."},
+{"name":"Ensalada de patata, tomate y mozzarella","image":"https://nutricionista.io/wp-content/uploads/2026/01/Captura-de-pantalla-2026-01-23-a-las-18.22.21.png","ingredients":"10 tomates cherry, 400 g patatas, lechuga, 100 g mozzarella, sal, aceite y oregano."},
+{"name":"Ensalada de pasta con queso feta","image":"https://nutricionista.io/wp-content/uploads/2026/01/Captura-de-pantalla-2026-01-23-a-las-18.34.11.png","ingredients":"100 gr de pasta (preferiblemente integral), 50 gr de queso feta, 1 lata de atun al natural, rucula y tomates cherry al gusto, una cda de aceite de oliva y sal."},
+{"name":"Lentejas con verduras","image":"https://nutricionista.io/wp-content/uploads/2026/01/Captura-de-pantalla-2026-01-23-a-las-18.34.50.png","ingredients":"Lentejas, puerro, cebolla, zanahorias, patata, ajo, pimenton, agua, laurel, sal, pimienta y una cucharada de aceite de oliva."},
+{"name":"Salteado de garbanzos con verduras","image":"https://nutricionista.io/wp-content/uploads/2026/01/Captura-de-pantalla-2026-01-23-a-las-18.35.56.png","ingredients":"200 gramos de garbanzos cocidos, cebolla, pimiento rojo y verde, ajo y zanahoria, sal y aceite de oliva."},
+{"name":"Judias verdes con huevo y atun","image":"https://nutricionista.io/wp-content/uploads/2026/01/Captura-de-pantalla-2026-01-23-a-las-18.38.56.png","ingredients":"200 gramos de judias verdes, cebolla, 1 huevo, 2 latas de atun al natural, zumo de limon, una cucharada de aceite de oliva, sal y pimienta."},
+{"name":"Guisantes con tacos de jamon y huevo","image":"https://nutricionista.io/wp-content/uploads/2026/01/Captura-de-pantalla-2026-01-23-a-las-18.46.27.png","ingredients":"1 bote de guisantes (250 gramos), 1 diente de ajo, 50 gramos de tacos de jamon y 2 huevos."},
+{"name":"Alubias blancas con espinacas","image":"https://nutricionista.io/wp-content/uploads/2026/01/Captura-de-pantalla-2026-01-23-a-las-18.48.21.png","ingredients":"Alubias blancas al gusto, espinacas, zanahoria, cebolla, sal y una cucharada de aceite de oliva."},
+{"name":"Guisantes con gambas","image":"https://nutricionista.io/wp-content/uploads/2026/01/Captura-de-pantalla-2026-01-23-a-las-18.48.59.png","ingredients":"250 g de guisantes, 100-150 g de gambas peladas, cebolla, 3 cucharadas de tomate triturado al natural, 1 vasito de caldo, pimenton, sal y una cucharada de aceite de oliva."},
+{"name":"Pasta a lo estudiante","image":"https://nutricionista.io/wp-content/uploads/2026/01/Captura-de-pantalla-2026-01-23-a-las-18.53.22.png","ingredients":"120 gramos de pasta, 2 latas de atun al natural, salsa de tomate al gusto, 30 gramos de queso rallado, cebolla y especias al gusto."},
+{"name":"Arroz con tomate y huevos a la plancha","image":"https://nutricionista.io/wp-content/uploads/2026/01/Captura-de-pantalla-2026-01-23-a-las-18.53.53.png","ingredients":"100 gramos de arroz, 2 huevos y salsa de tomate al gusto. Para mejorar la cantidad de proteina anadiremos un yogur + proteina."},
+{"name":"Arroz con calabacin y champinones","image":"https://nutricionista.io/wp-content/uploads/2026/01/Captura-de-pantalla-2026-01-23-a-las-18.55.46.png","ingredients":"120 g arroz (preferiblemente integral), 150 g de pechuga de pollo, champinones, calabacin, cebolla, sal y pimienta al gusto."},
+{"name":"Gnocchis con pollo y verduras","image":"https://nutricionista.io/wp-content/uploads/2026/01/Captura-de-pantalla-2026-01-23-a-las-18.57.15.png","ingredients":"250 g de gnocchis, 150 g de pechuga de pollo, 50 g de queso philadelphia light, 2 cdas de salsa de tomate, 1/2 cebolla, 1/2 calabacin, ajo en polvo, sal, pimienta, tomillo."},
+{"name":"Noodles con pollo y verduras","image":"https://nutricionista.io/wp-content/uploads/2026/01/Captura-de-pantalla-2026-01-23-a-las-18.58.09.png","ingredients":"100 gramos de noodles, 150 gramos de pollo, verduras y especias al gusto."},
+{"name":"Pasta con carne picada","image":"https://nutricionista.io/wp-content/uploads/2026/01/Captura-de-pantalla-2026-01-23-a-las-19.01.21.png","ingredients":"120 gramos de pasta, 120 gramos de carne picada, salsa de tomate al gusto, un diente de ajo, cebolla, oregano, albahaca, sal y aceite."},
+{"name":"Arroz al estilo fajitas","image":"https://nutricionista.io/wp-content/uploads/2026/01/Captura-de-pantalla-2026-01-23-a-las-19.03.08.png","ingredients":"120 g arroz (preferiblemente integral), 150 g de pechuga de pollo, pimiento rojo y verde y especias."},
+{"name":"Pasta con jamon y champinones","image":"https://nutricionista.io/wp-content/uploads/2026/01/Captura-de-pantalla-2026-01-23-a-las-19.03.51.png","ingredients":"120 g de pasta, champinones al gusto, 4-5 lonchas de jamon, ajo, sal y pimienta. Para mejorar la receta anadiremos un yogur + proteina."},
+{"name":"Salteado de verduras con pechuga de pollo","image":"https://nutricionista.io/wp-content/uploads/2026/01/Captura-de-pantalla-2026-01-23-a-las-19.16.05.png","ingredients":"150 gramos de pechuga de pollo, verduras al gusto, salsa de soja y una cucharada de aceite de oliva. Elige entre: 100 g arroz/pasta o 120 de pan o 250 de patata."},
+{"name":"Salteado de pavo con verduras","image":"https://nutricionista.io/wp-content/uploads/2026/01/Captura-de-pantalla-2026-01-23-a-las-19.16.52.png","ingredients":"150 g pechuga de pavo, una fuente de hidratos (elige entre 100 g arroz/pasta o 120 de pan o 250 de patata), brocoli, zanahoria, ajo, aceite de oliva, sal, pimienta negra."},
+{"name":"Menestra de verduras con ternera","image":"https://nutricionista.io/wp-content/uploads/2026/01/Captura-de-pantalla-2026-01-23-a-las-19.17.23.png","ingredients":"150 g de carne de ternera para guisar, cebolla, champinones, judias verdes, alcachofas en conserva, zanahoria, ajo, vino tinto, caldo de carne y 50 gr de pan."},
+{"name":"Lomo de cerdo a la plancha con patata","image":"https://nutricionista.io/wp-content/uploads/2026/01/Captura-de-pantalla-2026-01-23-a-las-19.17.54.png","ingredients":"150 g de lomo de cerdo, 400 g de patata, tomate y lechuga."},
+{"name":"Asado de pollo con patatas y verduras","image":"https://nutricionista.io/wp-content/uploads/2026/01/Captura-de-pantalla-2026-01-23-a-las-19.18.32.png","ingredients":"150 g de pollo, 400 g patatas y verduras al gusto, aceite de oliva, tomillo, romero, sal, pimienta y vino blanco dulce."},
+{"name":"Emperador al papillote con patatas","image":"https://nutricionista.io/wp-content/uploads/2026/01/Captura-de-pantalla-2026-01-23-a-las-19.19.01.png","ingredients":"120 g emperador, 400 g batata o patata, judias verdes al gusto (puedes anadir otras verduras)."},
+{"name":"Merluza a la plancha con arroz y brocoli","image":"https://nutricionista.io/wp-content/uploads/2026/01/Captura-de-pantalla-2026-01-23-a-las-19.19.34.png","ingredients":"150 g merluza, 120 g arroz, verduras al gusto."},
+{"name":"Salmon al horno con patatas","image":"https://nutricionista.io/wp-content/uploads/2026/01/Captura-de-pantalla-2026-01-23-a-las-19.20.09.png","ingredients":"120 g salmon, 400 g patata, cebolla, sal y una cucharada de aceite de oliva."},
+{"name":"Pisto manchego con arroz y bacalao","image":"https://nutricionista.io/wp-content/uploads/2026/01/Captura-de-pantalla-2026-01-23-a-las-19.20.33.png","ingredients":"Verduras (berenjena, calabacin, pimiento, tomate), 150 g de bacalao, 100 g de arroz (2 vasitos de microondas)."},
+{"name":"Hummus con pan Wasa","image":"https://nutricionista.io/wp-content/uploads/2026/01/Captura-de-pantalla-2026-01-23-a-las-18.47.42.png","ingredients":"200 gramos de garbanzos cocidos, una cucharada de aceite, salsa tahini (opcional), ajo, limon, comino, pimenton dulce y sal. 3 rebanadas de pan Wasa para acompanar."}
+];
+
+// ===== INICIAL 700 WEEKDAY DINNER =====
+const inicialWeekdayDinnerRecipes700 = [
+{"name":"Ensalada de pollo, aguacate y tomate","image":"https://nutricionista.io/wp-content/uploads/2026/01/Captura-de-pantalla-2026-01-23-a-las-18.24.19.png","ingredients":"150 gr de pechuga de pollo, medio aguacate, tomate, cebolla, lechuga o cualquier otra base al gusto y 50 gr queso (tu favorito). Sal, pimienta, una cda de aceite de oliva y especias al gusto."},
+{"name":"Ensalada rapida de judias blancas","image":"https://nutricionista.io/wp-content/uploads/2026/01/Captura-de-pantalla-2026-01-23-a-las-18.25.20.png","ingredients":"200 g alubias blancas, 1 lata de atun al natural, pimientos de piquillo, cebolla."},
+{"name":"Ensalada de caballa con tomate y cebolla","image":"https://nutricionista.io/wp-content/uploads/2026/01/Captura-de-pantalla-2026-01-23-a-las-18.31.51.png","ingredients":"2 latas de caballa en aceite de oliva, 2 tomates, cebolla al gusto. Puedes anadir cualquier otro tipo de vegetal."},
+{"name":"Setas y/o champinones con jamon","image":"https://nutricionista.io/wp-content/uploads/2026/01/Captura-de-pantalla-2026-01-23-a-las-18.49.55.png","ingredients":"Champinones y setas al gusto (cantidad que desees), 50 gramos de jamon en tacos, ajo."},
+{"name":"Tortilla francesa rellena de tomate y aguacate","image":"https://nutricionista.io/wp-content/uploads/2026/01/Captura-de-pantalla-2026-01-23-a-las-19.08.32.png","ingredients":"3 huevos, cantidad al gusto de tomate y 100 gr de aguacate y 50 gr de pan."},
+{"name":"Huevos revueltos con champinones","image":"https://nutricionista.io/wp-content/uploads/2026/01/Captura-de-pantalla-2026-01-23-a-las-19.10.38.png","ingredients":"3 huevos, champinones laminados, puerro, cebolla y ajo y 80 gr de pan para acompanar."},
+{"name":"Tortilla francesa con atun y pimientos","image":"https://nutricionista.io/wp-content/uploads/2026/01/Captura-de-pantalla-2026-01-23-a-las-19.11.09.png","ingredients":"2 huevos, 1 lata de atun al natural, pimiento al gusto (o pimientos asados), una cucharada de aceite de oliva y un vasito de arroz al microondas o 50 gr de arroz o 80 gr de pan."},
+{"name":"Tortilla de berenjena y queso","image":"https://nutricionista.io/wp-content/uploads/2026/01/Captura-de-pantalla-2026-01-23-a-las-19.12.05.png","ingredients":"2 huevos, berenjena al gusto, 40 gr de tu queso favorito y 80 gr de pan."},
+{"name":"Revuelto de espinacas y gambas","image":"https://nutricionista.io/wp-content/uploads/2026/01/Captura-de-pantalla-2026-01-23-a-las-19.12.56.png","ingredients":"Espinacas frescas al gusto, 100 gr de gambas peladas, 2 huevos, 80 gr de pan, 1/2 diente de ajo, aceite de oliva, pimienta y sal."},
+{"name":"Cazuela de huevos con verdura","image":"https://nutricionista.io/wp-content/uploads/2026/01/Captura-de-pantalla-2026-01-23-a-las-19.13.56.png","ingredients":"3 huevos, 80 g pan, 30 g jamon, calabacin, berenjena, cebolla, pimiento rojo y verde, tomate natural triturado, sal, pimienta y aceite de oliva."},
+{"name":"Huevos con jamon cocido y queso","image":"https://nutricionista.io/wp-content/uploads/2026/01/Captura-de-pantalla-2026-01-23-a-las-19.14.51.png","ingredients":"2 huevos, 4 lonchas de jamon cocido, 30 gramos de queso (el que prefieras) y 80 gr de pan."},
+{"name":"Revuelto con tomates cherry y mozzarella","image":"https://nutricionista.io/wp-content/uploads/2026/01/Captura-de-pantalla-2026-01-23-a-las-19.15.32.png","ingredients":"3 huevos, 50 g de mozzarella fresca, 80 gr de pan, tomates cherry y albahaca al gusto, sal y pimienta negra."},
+{"name":"Chipirones / Sepia a la plancha","image":"https://nutricionista.io/wp-content/uploads/2026/01/Captura-de-pantalla-2026-01-23-a-las-19.21.07.png","ingredients":"200 gramos de sepia o chipirones, ajo, perejil, una cucharada de aceite de oliva, sal y limon."},
+{"name":"Lubina al horno","image":"https://nutricionista.io/wp-content/uploads/2026/01/Captura-de-pantalla-2026-01-23-a-las-19.21.47.png","ingredients":"150 g lubina, 400 g patata, medio vaso de vino blanco, ajo en polvo, cebolla en polvo, hierbas provenzales, sal en escamas, mezcla de pimientas. Anade verduras al gusto."}
+];
+
+// ===== INICIAL 700 WEEKEND DINNER =====
+const inicialWeekendDinnerRecipes700 = [
+{"name":"Bocadillo de jamon y queso","image":"https://nutricionista.io/wp-content/uploads/2026/01/Captura-de-pantalla-2026-01-23-a-las-19.22.19.png","ingredients":"120 gramos de pan (viene a ser media barra), 60 gramos de jamon serrano y 50 de tu queso favorito."},
+{"name":"Hamburguesa con queso y huevo","image":"https://nutricionista.io/wp-content/uploads/2026/01/Captura-de-pantalla-2026-01-23-a-las-19.22.49.png","ingredients":"1 pan de hamburguesa, 2 carnes de pollo, 1 huevo y una loncha de queso."},
+{"name":"Fajitas de pollo con verduras","image":"https://nutricionista.io/wp-content/uploads/2026/01/Captura-de-pantalla-2026-01-23-a-las-19.23.23.png","ingredients":"2 tortillas grandes de trigo, 150 gr de pechuga de pollo o pavo, verduras y especias al gusto."},
+{"name":"Sandwich de atun con tomate","image":"https://nutricionista.io/wp-content/uploads/2026/01/Captura-de-pantalla-2026-01-23-a-las-19.23.58.png","ingredients":"6 rebanadas de pan de molde, 2 latas de atun al natural, 3 tomates y 1 sobre de mayonesa."},
+{"name":"Tostada de queso fresco, atun y tomate","image":"https://nutricionista.io/wp-content/uploads/2026/01/Captura-de-pantalla-2026-01-23-a-las-19.24.26.png","ingredients":"4 rebanadas de pan de molde (o 120 g en pan de barra), tomate, 100 g queso fresco de cabra y 1 lata de atun en aceite."},
+{"name":"Burrito de aguacate y salmon","image":"https://nutricionista.io/wp-content/uploads/2026/01/Captura-de-pantalla-2026-01-23-a-las-19.25.13.png","ingredients":"2 tortilla Maxi de trigo, 100 g aguacate, 50 g salmon ahumado, 40 g queso philadelphia light, cebolla y tomate al gusto."},
+{"name":"Pizza con base de piadina","image":"https://nutricionista.io/wp-content/uploads/2026/01/Captura-de-pantalla-2026-01-23-a-las-19.25.46.png","ingredients":"1 base de pizza extrafina, unas cucharadas de salsa de tomate, 50 gr de queso rallado, 8-10 lonchas de jamon cocido o pavo y verduras al gusto."},
+{"name":"Tostada de sardinas con tomate y cebolla","image":"https://nutricionista.io/wp-content/uploads/2026/01/Captura-de-pantalla-2026-01-23-a-las-19.26.22.png","ingredients":"2 latas de sardinas con tomate, 4 rebanadas de pan de molde (o 120 g barra), tomate y cebolla."},
+{"name":"Wrap de pollo con aguacate","image":"https://nutricionista.io/wp-content/uploads/2026/01/Captura-de-pantalla-2026-01-23-a-las-19.23.23.png","ingredients":"2 tortillas de trigo, 150 g pechuga de pollo, aguacate, lechuga, tomate, queso y salsa al gusto."},
+{"name":"Bocadillo de lomo y queso","image":"https://nutricionista.io/wp-content/uploads/2026/01/Captura-de-pantalla-2026-01-23-a-las-19.22.19.png","ingredients":"120 g pan, 60 g lomo embuchado, 50 g queso curado, tomate y aceite de oliva."}
+];
+
+// ===== VERDE 500 LUNCH =====
+const verdeLunchRecipes500 = [
+{"name":"Bowl de arroz, ternera y pimientos","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-03-a-las-13.26.03.png","ingredients":"70 g arroz, 120 g ternera, pimientos rojos y verdes, cebolla, ajo, sal, pimienta y aceite de oliva."},
+{"name":"Bowl de salmon con judias verdes y pure de patata","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-03-a-las-13.29.40.png","ingredients":"120 g salmon, judias verdes, 150 g patata para pure, ajo, leche, sal, pimienta y aceite de oliva."},
+{"name":"Guiso de garbanzos y arroz","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-03-a-las-13.32.42.png","ingredients":"200 g garbanzos cocidos, 50 g arroz, cebolla, tomate, pimiento, ajo, pimenton, sal y aceite de oliva."},
+{"name":"Patatas guisadas con cebolla y huevo","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-03-a-las-13.33.19.png","ingredients":"200 g patatas, cebolla, 2 huevos, tomate, ajo, laurel, sal, pimienta y aceite de oliva."},
+{"name":"Noquis cremosos con pollo y espinacas","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-03-a-las-13.34.02.png","ingredients":"125 g noquis, 150 g pechuga de pollo, espinacas frescas, 50 g queso philadelphia light, ajo, sal y pimienta."},
+{"name":"Arroz con jamon, zanahoria y guisantes","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-03-a-las-13.34.43.png","ingredients":"70 g arroz, tacos de jamon, zanahoria, guisantes, cebolla, ajo, sal y aceite de oliva."},
+{"name":"Noodles con ternera y pimientos salteados","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-03-a-las-13.35.24.png","ingredients":"50 g noodles, 120 g ternera en tiras, pimientos rojo y verde, cebolla, salsa de soja, ajo y aceite."},
+{"name":"Noodles con langostinos","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-03-a-las-13.36.07.png","ingredients":"50 g noodles, 150 g langostinos, verduras variadas, salsa de soja, ajo, jengibre y aceite."},
+{"name":"Tortilla de patatas en microondas","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-03-a-las-13.39.37.png","ingredients":"3 huevos, 150 g patatas, cebolla, sal y aceite de oliva."},
+{"name":"Pollo caprese con patatas","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-03-a-las-13.41.04.png","ingredients":"150 g pechuga de pollo, 150 g patatas, mozzarella, tomate, albahaca, sal y aceite de oliva."},
+{"name":"Solomillo de cerdo con cebolla","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-03-a-las-13.41.36.png","ingredients":"150 g solomillo de cerdo, cebolla, ajo, vino blanco, sal, pimienta y aceite de oliva."},
+{"name":"Pollo en salsa con champinones y pimiento","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-03-a-las-13.42.50.png","ingredients":"150 g pechuga de pollo, champinones, pimiento rojo, cebolla, nata ligera, sal, pimienta y aceite."},
+{"name":"Ternera con calabacin y pimientos","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-03-a-las-13.43.26.png","ingredients":"150 g ternera, calabacin, pimientos, cebolla, ajo, sal, pimienta y aceite de oliva."},
+{"name":"Dorada con pasta y verdura","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-03-a-las-13.48.01.png","ingredients":"1 dorada, 70 g pasta, verduras variadas, ajo, limon, sal y aceite de oliva."},
+{"name":"Merluza con patata, calabaza y brocoli","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-03-a-las-13.48.58.png","ingredients":"150 g merluza, 100 g patata, calabaza, brocoli, ajo, limon, sal y aceite de oliva."}
+];
+const verdeWeekdayDinnerRecipes500 = [
+{"name":"Bowl de salmon ahumado, patata y aguacate","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-03-a-las-13.28.54.png","ingredients":"100 g salmon ahumado, 150 g patata, medio aguacate, lechuga, tomate cherry, limon y aceite de oliva."},
+{"name":"Ensalada de arroz, garbanzos y cebolla","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-03-a-las-13.28.20.png","ingredients":"70 g arroz, 100 g garbanzos cocidos, cebolla, tomate, pepino, aceite, vinagre y sal."},
+{"name":"Ensalada de quinoa, tomate y huevo","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-03-a-las-13.31.02.png","ingredients":"70 g quinoa, 2 huevos cocidos, tomate, pepino, cebolla morada, aceite, limon y sal."},
+{"name":"Ensalada de pollo, cottage y tomate","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-03-a-las-13.31.45.png","ingredients":"150 g pechuga de pollo, 100 g queso cottage, tomate, lechuga, zanahoria, aceite y sal."},
+{"name":"Sarten de berenjenas con tomate y huevo","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-03-a-las-13.37.01.png","ingredients":"Berenjena, tomate triturado, 2 huevos, cebolla, ajo, pimenton, sal y aceite de oliva."},
+{"name":"Huevos revueltos con cebolla y maiz","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-03-a-las-13.37.42.png","ingredients":"3 huevos, 50 g pan, cebolla, maiz dulce, sal, pimienta y aceite de oliva."},
+{"name":"Frittata de calabacin y setas","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-03-a-las-13.38.21.png","ingredients":"3 huevos, calabacin, setas, cebolla, queso rallado, sal, pimienta y aceite de oliva."},
+{"name":"Huevos rotos con jamon","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-03-a-las-13.39.02.png","ingredients":"2 huevos, 150 g patatas fritas, tacos de jamon, sal y aceite de oliva."},
+{"name":"Berenjenas a la plancha con carne picada","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-03-a-las-13.42.08.png","ingredients":"Berenjena, 120 g carne picada, tomate, cebolla, ajo, queso rallado, sal y aceite de oliva."},
+{"name":"Berenjenas rellenas de atun en freidora","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-03-a-las-13.49.47.png","ingredients":"Berenjena, 2 latas de atun al natural, tomate, cebolla, queso rallado, sal y especias."},
+{"name":"Tostada de burrata y tomates cherry","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-03-a-las-13.44.10.png","ingredients":"2 rebanadas de pan, 100 g burrata, tomates cherry, rucula, aceite de oliva y sal."},
+{"name":"Tosta de atun y huevo duro","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-03-a-las-13.45.00.png","ingredients":"2 rebanadas de pan, 1 lata de atun al natural, 1 huevo duro, tomate, lechuga y mayonesa light."},
+{"name":"Tostada de huevo, rucula y tomate","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-03-a-las-13.46.02.png","ingredients":"2 rebanadas de pan, 2 huevos, rucula, tomate, aguacate, sal, pimienta y aceite de oliva."}
+];
+const verdeWeekendDinnerRecipes500 = [
+{"name":"Patatas rellenas de carne y queso","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-03-a-las-13.40.20.png","ingredients":"2 patatas grandes, 100 g carne picada, queso rallado, cebolla, tomate, sal y especias."},
+{"name":"Tacos de pavo con calabacin","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-03-a-las-13.47.07.png","ingredients":"2 tortillas de maiz, 150 g pavo, calabacin, cebolla, tomate, aguacate, limon y especias."}
+];
+
+// ===== VERDE 700 LUNCH =====
+const verdeLunchRecipes700 = [
+{"name":"Bowl de arroz, ternera y pimientos","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-03-a-las-13.26.03.png","ingredients":"100 g arroz, 120 g de ternera, 1/2 cebolla, 1/2 pimiento amarillo y 1/2 pimiento rojo, sal, 1 cda de aceite y otra de soja."},
+{"name":"Bowl de salmon con judias verdes y pure de patata","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-03-a-las-13.29.40.png","ingredients":"70 g de salmon, judias verdes al gusto, 300 g patata, 2 rebanadas de pan wasa, 1 cda de aceite de oliva y sal."},
+{"name":"Guiso de garbanzos con arroz","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-03-a-las-13.32.42.png","ingredients":"180 g de garbanzos cocidos, 1 ajo picado, 40 g de jamon en taquitos, 100 g de arroz, caldo de pollo o verduras, 1 cda de aceite de oliva."},
+{"name":"Patatas guisadas con cebolla y huevos","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-03-a-las-13.33.19.png","ingredients":"3 huevos, 400 g patata, cebolla, pimiento rojo, tomate, 1 diente de ajo, una pizca de pimenton dulce, una cucharada de aceite de oliva y sal."},
+{"name":"Noquis cremosos con pollo y espinacas","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-03-a-las-13.34.02.png","ingredients":"250 g de noquis, 150 g de pechuga de pollo, cebolla y champinones al gusto, 1 cucharada de queso cottage, un chorrito de leche y un punado de espinacas frescas."},
+{"name":"Arroz con jamon, zanahoria y guisantes","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-03-a-las-13.34.43.png","ingredients":"120 g arroz, 40 g jamon, cebolla morada, zanahoria, 1 taza de agua, ajo, guisantes al gusto, sal y una cda de aceite."},
+{"name":"Noodles con ternera y pimientos salteados","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-03-a-las-13.35.24.png","ingredients":"100 g de noodles, 120 g de ternera, 1/2 pimiento rojo, 1/2 cebolla, judias verdes, 1 cda de aceite de oliva, 1 cda de salsa de soja, 1/2 cdita de ajo en polvo."},
+{"name":"Noodles con langostinos","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-03-a-las-13.36.07.png","ingredients":"100 g noodles, pimiento verde, 1/2 cdita de jengibre, 10 langostinos, 1/2 cebolla, 1 ajo, 3 cdas de salsa de soja, 1 cda vinagre, 1 cda de aceite de oliva."},
+{"name":"Tortilla de patata en microondas","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-03-a-las-13.39.37.png","ingredients":"450 g patata, 3 huevos, cebolla, una cucharada de aceite y sal."},
+{"name":"Pollo caprese con patatas","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-03-a-las-13.41.04.png","ingredients":"150 g de pechuga de pollo, 300 g patata, 50 g de mozzarella, tomate y 10 g de aceite de oliva."},
+{"name":"Solomillo de cerdo con cebolla","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-03-a-las-13.41.36.png","ingredients":"150 g de solomillo de cerdo, 200 g patata, cebolla, 1 vaso de vino blanco, 2 pizcas de pimienta negra, 1 cda de maicena, sal y 1 cda de aceite de oliva."},
+{"name":"Pollo en salsa con champinones y pimiento","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-03-a-las-13.42.50.png","ingredients":"150 g pechuga de pollo, champis, ajo, cebolla, pimiento, sal, aceite, 1 cda de harina y media taza de leche y 100 g pan."},
+{"name":"Ternera con calabacin y pimientos","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-03-a-las-13.43.26.png","ingredients":"120 g ternera, 80 g pan o 50 g arroz, calabacin, ajo, pimiento rojo y amarillo, medio vaso de agua, 1 cda de vino blanco, 1/2 cda de soja, 1 cda de maicena, sal, jengibre y aceite."},
+{"name":"Dorada con pasta y verduras","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-03-a-las-13.48.01.png","ingredients":"120 g pasta, 120 g dorada, brocoli, champinon, ajo, sal y una cucharada de aceite de oliva."},
+{"name":"Merluza con patata, calabaza y brocoli","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-03-a-las-13.48.58.png","ingredients":"150 g merluza, 400 g patatas, calabaza, brocoli, cebolla, tomate, una cda de aceite, sal y pimienta negra."}
+];
+const verdeWeekdayDinnerRecipes700 = [
+{"name":"Bowl de salmon ahumado, patata y aguacate","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-03-a-las-13.28.54.png","ingredients":"50 g salmon ahumado, 400 g patata, 100 g aguacate, lechuga o cualquier otra base al gusto, sal y aceite de oliva."},
+{"name":"Ensalada de arroz, garbanzos y zanahoria","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-03-a-las-13.28.20.png","ingredients":"100 g arroz, ajo, zanahoria y otras verduras al gusto, 200 garbanzos cocidos, sal y una cucharada de aceite de oliva."},
+{"name":"Ensalada de quinoa, tomate y huevo","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-03-a-las-13.31.02.png","ingredients":"2 huevos cocidos, lechuga o cualquier otra base al gusto, 10 tomates cherry, 80 g quinoa, sal y una cda de aceite de oliva."},
+{"name":"Ensalada de pollo, cottage y tomate","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-03-a-las-13.31.45.png","ingredients":"Tomate y lechuga al gusto, 100 g queso cottage, 150 g pechuga de pollo, 2 cdas de aceite de oliva a base de alino y 3 pan wasa."},
+{"name":"Sarten de berenjenas con tomate y huevos","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-03-a-las-13.37.01.png","ingredients":"3 huevos, 80 g pan, 30 g jamon, 1/2 cebolla, 1/2 berenjena, 300 g tomates, sal y aceite de oliva."},
+{"name":"Huevos revueltos con cebolla y maiz","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-03-a-las-13.37.42.png","ingredients":"3 huevos, 1 cebolla, 1 cda de aceite de oliva, sal, una lata pequena de maiz y 3 rebanadas de pan wasa."},
+{"name":"Frittata de calabacin y setas","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-03-a-las-13.38.21.png","ingredients":"3 huevos, 1 cebolla, 1 cda de aceite de oliva, sal, calabacin y setas al gusto y 4 rebanadas de pan wasa."},
+{"name":"Huevos rotos con jamon","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-03-a-las-13.39.02.png","ingredients":"300 g de patata, 3 huevos, 50 g de jamon, aceite de oliva y sal."},
+{"name":"Berenjenas a la plancha con carne picada","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-03-a-las-13.42.08.png","ingredients":"150 g carne picada (pollo o carne magra), 1 berenjena, aceite de oliva, pimienta negra, una cda de tomate frito y sal. 70 g de arroz o 300 g patata o 100 g pan."},
+{"name":"Berenjenas rellenas de atun en freidora","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-03-a-las-13.49.47.png","ingredients":"1 berenjena, 2 latas de atun al natural, 1/2 ajo, 1/2 cebolla, 1/2 pimiento rojo, 3 cdas de tomate frito, 1 cda de aceite."},
+{"name":"Tostada de burrata y tomates cherry","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-03-a-las-13.44.10.png","ingredients":"3 rebanadas de pan de molde o 90 g de pan, 150 g burrata (una unidad), tomates cherry, ajo, 1 cucharada de aceite de oliva y perejil."},
+{"name":"Tosta de atun y huevo duro","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-03-a-las-13.45.00.png","ingredients":"4 rebanadas de pan o 120 g pan, tomate, cebolla, 2 huevos cocidos, 2 latas de atun al natural, pimienta negra, 1 sobre de mayonesa y sal."},
+{"name":"Tostada de huevo, rucula y tomate","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-03-a-las-13.46.02.png","ingredients":"3 rebanadas de pan de molde, rucula, tomate, 3 huevos, 50 g queso, sal, aceite, pimienta."}
+];
+const verdeWeekendDinnerRecipes700 = [
+{"name":"Patatas rellenas de carne y queso","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-03-a-las-13.40.20.png","ingredients":"400 g patata, 120 g carne picada (pollo o carne magra), 30 g queso, cebolla, ajo, zanahoria, champinon, sal, cda de aceite, pimienta negra, oregano y cda de tomate triturado."},
+{"name":"Tacos de pavo con calabacin","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-03-a-las-13.47.07.png","ingredients":"4 mini tortitas de trigo, 120 g pavo, 60 g de guacamole o aguacate, 1 diente de ajo, cebolla, pimiento y calabacin, 100 g tomate triturado, una pizca de sal y una cda de aceite de oliva."}
+];
+
+// ============================================================
+// === RECETARIO ROJO 500 KCAL ===
+// ============================================================
+const rojoLunchRecipes500 = [
+{"name":"Bowl de lentejas y garbanzos","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-05-a-las-10.59.28.png","ingredients":"100 g de lentejas en conserva, 100 g de garbanzos en conserva, 50 g de arroz, cebolla, calabacin, pimiento rojo, apio, 50 g tomate triturado, una cda de aceite y una pizca de sal."},
+{"name":"Bowl de espinacas, atun y batata","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-05-a-las-11.01.50.png","ingredients":"Espinacas al gusto, 300 g batata, 2 latas de atun al natural, una cucharada de aceite y sal."},
+{"name":"Ensalada de pasta con atun y brocoli","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-05-a-las-11.02.27.png","ingredients":"70 g de pasta, 2 latas de atun al natural, brocoli, tomates cherry al gusto, sal y una cda de aceite de oliva."},
+{"name":"Bowl de langostinos con arroz y judias verdes","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-05-a-las-11.14.44.png","ingredients":"50 g arroz, judias verdes, 6 langostinos, 2 dientes de ajo, 1 cdita de jengibre, 1 limon, 1/2 cebolla, 1 cda de aceite, 1 rebanada de pan wasa, 1 cda de salsa de soja y sal."},
+{"name":"Ensalada de pasta con verdura asada y queso feta","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-05-a-las-11.16.52.png","ingredients":"50 g de pasta, 50 g de queso feta, calabacin, pimiento rojo, zanahoria, tomates cherry, limon, 1 cda de aceite de oliva, sal y pimienta negra"},
+{"name":"Bowl de pollo, aguacate y manzana","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-05-a-las-11.18.09.png","ingredients":"150 g de pechuga de pollo, 2 tomates, 1/2 aguacate (100 g aprox), lechuga, 1 manzana, 1 cda de aceite de oliva y sal."},
+{"name":"Alubias con calabacin y maiz","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-05-a-las-11.18.59.png","ingredients":"Pimiento, tomate, cebolla, ajo y calabacin, 1 lata pequena de maiz dulce, aceite, sal, 50 g arroz, 100 g alubias pintas."},
+{"name":"Judias blancas con patata y brocoli","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-05-a-las-11.20.27.png","ingredients":"200 g alubia cocida, 200 g patata, brocoli, cebolla, cda de tomate frito, 1 taza de caldo de verduras, sal y aceite."},
+{"name":"Batata con garbanzos","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-05-a-las-11.21.16.png","ingredients":"200 g batata, 200 g garbanzos cocidos, sal, una cucharada de aceite de oliva y vinagre balsamico."},
+{"name":"Salteado de pollo, brocoli y arroz","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-05-a-las-11.21.49.png","ingredients":"150 g pechuga de pollo, brocoli, judias verdes, pimiento rojo, ajo, 70 g arroz, 1 cda de aceite de oliva y sal."},
+{"name":"Arroz con gambas y verduras","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-05-a-las-11.23.40.png","ingredients":"70 g arroz, 100 g gambas, pimiento rojo, cebolla morada, zanahoria, ajo, sal y aceite de oliva."},
+{"name":"Ensalada de pasta, pollo y pina","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-05-a-las-11.24.28.png","ingredients":"70 g pasta, 150 g pollo, 50 g pina, rucula, limon, 1 cda de aceite de oliva y una pizca de sal."},
+{"name":"Pasta con ternera, espinacas y champinones","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-05-a-las-11.25.02.png","ingredients":"50 g pasta, 120 g ternera, cebolla, champinones, espinacas, pimiento verde y rojo, 200 g tomate triturado, sal y una cda de aceite de oliva."},
+{"name":"Frittata de espinacas y calabaza","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-05-a-las-11.25.53.png","ingredients":"2 huevos, 50 g pan, cebolla, espinacas y calabaza, sal y aceite de oliva."},
+{"name":"Solomillo de cerdo asado a la mostaza con verduras y patatas","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-05-a-las-11.28.33.png","ingredients":"150 g de solomillo de cerdo, cebolla, zanahoria, 200 g de patata, un chorrito de vino tinto, 1 cucharada de mostaza, sal, pimienta, 1 cucharadita de aceite de oliva"},
+{"name":"Salteado de ternera con berenjena y espinacas","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-05-a-las-11.29.17.png","ingredients":"120 g ternera, berenjena, zanahoria, ajo, espinaca, salsa de soja y aceite de oliva y 40 g pan."},
+{"name":"Ternera con salsa de champinones","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-05-a-las-11.30.04.png","ingredients":"120 g ternera, 60 g pan, cebolla, champinon, una cda harina, 2 cda vino blanco, sal, una cda de aceite de oliva y ajo."},
+{"name":"Pollo con calabacines","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-05-a-las-11.30.36.png","ingredients":"150 pechuga de pollo, 1/2 cebolla, 1 calabacin, limon. 1 cda de aceite, sal y 50 g de arroz o 70 g pan."},
+{"name":"Pavo con pure de patatas y judias verdes","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-05-a-las-11.31.09.png","ingredients":"150 g pechuga de pavo, 200 g patata, judias verdes, champinones, cebolla, sal, 1 cucharada de aceite de oliva."},
+{"name":"Ternera con brocoli, patata y zanahoria","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-05-a-las-11.31.47.png","ingredients":"120 g ternera, 200 g patata, zanahoria, cebolla, brocoli, 1 chorrito de vino blanco, aceite de oliva y sal."},
+{"name":"Bacalao con pimientos y patatas","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-05-a-las-11.32.26.png","ingredients":"150 g bacalao, 250 g patata, 100 g tomate triturado, cebolla, pimiento, 1/2 ajo y 1 cda de aceite de oliva y sal."},
+{"name":"Salmon con tomate y aguacate","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-05-a-las-11.32.58.png","ingredients":"120 g salmon, 1/2 aguacate, tomates cherry, cebolla morada, 1 cda de aceite de oliva, sal, limon y perejil."},
+{"name":"Lubina con patatas y calabaza","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-05-a-las-11.33.34.png","ingredients":"150 g lubina, 300 g patatas, cebolla, calabacin, tomate, una cda de aceite y sal."},
+{"name":"Berenjenas rellenas de atun","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-05-a-las-11.34.06.png","ingredients":"2 latas de atun al natural, 2 rebanadas de pan wasa, 1 berenjena, cebolla, ajo, pimiento, 3 cda de tomate frito, aceite."},
+{"name":"Merluza en salsa de tomate y pimientos de piquillo","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-05-a-las-11.34.45.png","ingredients":"200 gramos de merluza, cebolla, ajo, pimientos de piquillo y tomate natural triturado, sal, pimienta y aceite de oliva. Puedes acompanar de 200 g patata"}
+];
+const rojoWeekdayDinnerRecipes500 = [
+{"name":"Sarten de huevos con tomate","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-05-a-las-11.27.08.png","ingredients":"2 huevos, tomate, ajo, 2 rebanadas de pan de molde o 60 g de pan, sal y una cucharadita de aceite de oliva"},
+{"name":"Tortilla de espinacas con queso y jamon","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-05-a-las-11.27.53.png","ingredients":"2 huevos, 50 g jamon cocido, 50 g queso, una cucharada de aceite, sal y espinacas."}
+];
+const rojoWeekendDinnerRecipes500 = [
+{"name":"Tacos de pollo con guacamole","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-05-a-las-11.35.40.png","ingredients":"2 mini tortitas de trigo, 150 g pechuga de pollo, 50 g guacamole, tomate, cebolla, sal, una cda de aceite de oliva y limon."},
+{"name":"Tacos de pollo con champinones y queso","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-05-a-las-11.36.45.png","ingredients":"3 tortitas de maiz, 150 g pollo, cebolla, champinon y pimiento rojo, una cda de tomate triturado, 1 cda de aceite de oliva y sal."},
+{"name":"Tostada de pollo con tomate y queso","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-05-a-las-11.38.22.png","ingredients":"2 rebanadas de pan de molde o 60 g de pan de barra, 150 g pollo, 50 g queso fresco de vaca tomate, una cucharada de aceite y sal."}
+];
+
+// ============================================================
+// === RECETARIO ROJO 700 KCAL ===
+// ============================================================
+const rojoLunchRecipes700 = [
+{"name":"Bowl de lentejas y garbanzos","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-05-a-las-10.59.28.png","ingredients":"100 g de lentejas cocidas, 100 g de garbanzos cocidos, 100 g de arroz, cebolla, calabacin, pimiento rojo, apio, 50 g tomate triturado, una cda de aceite y una pizca de sal."},
+{"name":"Bowl de espinacas, atun y batata","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-05-a-las-11.01.50.png","ingredients":"Espinacas al gusto, 300 g batata, 2 latas de atun en aceite de oliva, 2 rebanadas de pan wasa y sal."},
+{"name":"Ensalada de pasta con atun y brocoli","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-05-a-las-11.02.27.png","ingredients":"120 g de pasta, 2 latas de atun al natural, brocoli, tomates cherry al gusto, sal y una cda de aceite de oliva."},
+{"name":"Bowl de langostinos con arroz y judias verdes","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-05-a-las-11.14.44.png","ingredients":"80 g arroz, judias verdes, 10 langostinos, 2 dientes de ajo, 1 cdita de jengibre, 1 limon, 1/2 cebolla, 1 cda de aceite, 1 rebanada de pan wasa, 1 cda de salsa de soja y sal."},
+{"name":"Ensalada de pasta con verdura asada y queso feta","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-05-a-las-11.16.52.png","ingredients":"100 g de pasta (en crudo), 50 g de queso feta, calabacin, pimiento rojo, zanahoria, tomates cherry, limon, 1 cda de aceite de oliva, sal y pimienta negra."},
+{"name":"Bowl de pollo, aguacate y manzana","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-05-a-las-11.18.09.png","ingredients":"150 g de pechuga de pollo, 2 tomates, 1/2 aguacate (100 g aprox), lechuga o cualquier otro tipo de base al gusto, 1 manzana, 3 rebanadas de pan wasa, 1 cda de aceite de oliva y sal."},
+{"name":"Alubias con calabacin y maiz","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-05-a-las-11.18.59.png","ingredients":"Pimiento, tomate, cebolla, ajo y calabacin, 1 lata pequena de maiz dulce, aceite, sal, 70 g arroz, 200 g alubias pintas."},
+{"name":"Judias blancas con patata y brocoli","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-05-a-las-11.20.27.png","ingredients":"200 g alubias cocidas, 400 g patata, cebolla, brocoli, cda de tomate frito, 1 taza de caldo de verduras, sal y aceite."},
+{"name":"Batata con garbanzos","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-05-a-las-11.21.16.png","ingredients":"300 g batata, 300 g garbanzos cocidos, sal, una cucharada de aceite de oliva y vinagre balsamico."},
+{"name":"Salteado de pollo y brocoli con arroz","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-05-a-las-11.21.49.png","ingredients":"150 g pechuga de pollo, brocoli, judias verdes al gusto, pimiento rojo, ajo, 120 g arroz, 1 cda de aceite de oliva y sal."},
+{"name":"Arroz con gambas y verduras","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-05-a-las-11.23.40.png","ingredients":"120 g arroz, 100 g gambas, pimiento rojo, cebolla morada, zanahoria, ajo, sal y aceite de oliva."},
+{"name":"Ensalada de pasta, pollo y pina","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-05-a-las-11.24.28.png","ingredients":"120 g pasta, 150 g pollo, 50 g pina, rucula, limon, 1 cda de aceite de oliva y una pizca de sal."},
+{"name":"Pasta con ternera, espinacas y champinones","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-05-a-las-11.25.02.png","ingredients":"100 g pasta, 120 g ternera, cebolla, champinones, espinacas, pimiento verde y rojo, 200 g tomate triturado, sal y una cda de aceite de oliva."},
+{"name":"Frittata de espinacas y calabaza","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-05-a-las-11.25.53.png","ingredients":"3 huevos, 50 g pan, 30 g jamon, cebolla, espinacas y calabaza, sal y aceite de oliva."},
+{"name":"Solomillo de cerdo asado a la mostaza con verduras y patatas","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-05-a-las-11.28.33.png","ingredients":"150 g de solomillo de cerdo, cebolla, zanahoria, 400 g de patata, un chorrito de vino tinto, 1 cucharada de mostaza, sal, pimienta, 1 cucharadita de aceite de oliva."},
+{"name":"Salteado de ternera con espinacas y berenjenas","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-05-a-las-11.29.17.png","ingredients":"150 g ternera, berenjena, zanahoria, ajo, espinaca, salsa de soja y aceite de oliva y 100 g pan."},
+{"name":"Ternera con salsa de champinones","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-05-a-las-11.30.04.png","ingredients":"150 g ternera, 100 g pan, cebolla, champinon, una cda harina, 2 cda vino blanco, sal, una cda de aceite de oliva y ajo."},
+{"name":"Pollo con calabacines","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-05-a-las-11.30.36.png","ingredients":"150 pechuga de pollo, 1/2 cebolla, 1 calabacin, limon. 1 cda de aceite, sal y 100 g de arroz o 140 g pan."},
+{"name":"Pavo con pure de patatas y judias verdes","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-05-a-las-11.31.09.png","ingredients":"150 g pechuga de pavo, 400 g patata, judias verdes, champinones, cebolla, sal, 1 cucharada de aceite de oliva."},
+{"name":"Ternera con brocoli, patata y zanahoria","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-05-a-las-11.31.47.png","ingredients":"120 g ternera, 400 g patata, zanahoria, cebolla, brocoli, 1 chorrito de vino blanco, aceite de oliva y sal."},
+{"name":"Bacalao con patatas y pimientos","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-05-a-las-11.32.26.png","ingredients":"150 g bacalao, 400 g patata, 100 g tomate triturado, 1 rebanada de pan wasa, cebolla, pimiento, 1/2 ajo y 1 cda de aceite de oliva y sal."},
+{"name":"Salmon con tomate y aguacate","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-05-a-las-11.32.58.png","ingredients":"120 g salmon, 50 g arroz o 200 g patata, 1/2 aguacate, tomates cherry, cebolla morada, 1 cda de aceite de oliva, sal, limon y perejil."},
+{"name":"Lubina con patatas y calabaza","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-05-a-las-11.33.34.png","ingredients":"150 g lubina, 300 g patatas, 50 g aguacate, cebolla, calabacin, tomate, una cda de aceite y sal."},
+{"name":"Berenjenas rellenas de atun","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-05-a-las-11.34.06.png","ingredients":"2 latas de atun al natural, 200 g patata y 2 pan wasa, 1 berenjena, cebolla, ajo, pimiento, 3 cda de tomate frito, aceite."},
+{"name":"Merluza en salsa de tomate y pimientos de piquillo","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-05-a-las-11.34.45.png","ingredients":"200 gramos de merluza, cebolla, ajo, pimientos de piquillo y tomate natural triturado (cantidad al gusto), sal, pimienta y aceite de oliva. Puedes acompanar de 400 g patata."}
+];
+const rojoWeekdayDinnerRecipes700 = [
+{"name":"Sarten de huevos con tomate","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-05-a-las-11.27.08.png","ingredients":"3 huevos, tomate, ajo, 3 rebanadas de pan de molde o 90 g de pan, sal y una cucharadita de aceite de oliva."},
+{"name":"Tortilla de espinacas con queso y jamon","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-05-a-las-11.27.53.png","ingredients":"2 huevos, 50 g jamon cocido, 50 g queso, 100 g pan, una cucharada de aceite, sal y espinacas."}
+];
+const rojoWeekendDinnerRecipes700 = [
+{"name":"Tacos de pollo con guacamole","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-05-a-las-11.35.40.png","ingredients":"4 mini tortitas de trigo, 150 g pechuga de pollo, 50 g guacamole, tomate, cebolla, sal, una cda de aceite de oliva y limon."},
+{"name":"Tacos de pollo con champinones y queso","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-05-a-las-11.36.45.png","ingredients":"4 tortitas de maiz, 150 g pollo, 30 g queso, cebolla, champinon y pimiento rojo, una cda de tomate triturado, 1 cda de aceite de oliva y sal."},
+{"name":"Tostada de pollo con tomate y queso fresco","image":"https://nutricionista.io/wp-content/uploads/2026/02/Captura-de-pantalla-2026-02-05-a-las-11.38.22.png","ingredients":"3 rebanadas de pan de molde o 90 g de pan de barra, 150 g pollo, 80 g queso fresco de cabra, tomate, una cucharada de aceite y sal."}
+];
+
+// === LOGIC FUNCTIONS ===
+function getActiveLunchRecipes() {
+    const is7 = currentLunchKcal === 700;
+    const i = document.getElementById('recetarioInicial').checked, v = document.getElementById('recetarioVerde').checked, r = document.getElementById('recetarioRojo').checked;
+    let rr = [];
+    if (i) rr = rr.concat(is7 ? inicialLunchRecipes700 : inicialLunchRecipes500);
+    if (v) rr = rr.concat(is7 ? verdeLunchRecipes700 : verdeLunchRecipes500);
+    if (r) rr = rr.concat(is7 ? rojoLunchRecipes700 : rojoLunchRecipes500);
+    return rr.length > 0 ? rr : (is7 ? inicialLunchRecipes700 : inicialLunchRecipes500);
+}
+function getActiveWeekdayDinnerRecipes() {
+    if (currentDinnerKcal === 300) return recipesDinner300;
+    const i = document.getElementById('recetarioInicial').checked, v = document.getElementById('recetarioVerde').checked, r = document.getElementById('recetarioRojo').checked;
+    const is7 = currentDinnerKcal === 700;
+    let rr = [];
+    if (i) rr = rr.concat(is7 ? inicialWeekdayDinnerRecipes700 : inicialWeekdayDinnerRecipes500);
+    if (v) rr = rr.concat(is7 ? verdeWeekdayDinnerRecipes700 : verdeWeekdayDinnerRecipes500);
+    if (r) rr = rr.concat(is7 ? rojoWeekdayDinnerRecipes700 : rojoWeekdayDinnerRecipes500);
+    return rr.length > 0 ? rr : (is7 ? inicialWeekdayDinnerRecipes700 : inicialWeekdayDinnerRecipes500);
+}
+function getActiveWeekendDinnerRecipes() {
+    if (currentDinnerKcal === 300) return recipesDinner300;
+    const i = document.getElementById('recetarioInicial').checked, v = document.getElementById('recetarioVerde').checked, r = document.getElementById('recetarioRojo').checked;
+    const is7 = currentDinnerKcal === 700;
+    let rr = [];
+    if (i) rr = rr.concat(is7 ? inicialWeekendDinnerRecipes700 : inicialWeekendDinnerRecipes500);
+    if (v) rr = rr.concat(is7 ? verdeWeekendDinnerRecipes700 : verdeWeekendDinnerRecipes500);
+    if (r) rr = rr.concat(is7 ? rojoWeekendDinnerRecipes700 : rojoWeekendDinnerRecipes500);
+    return rr.length > 0 ? rr : (is7 ? inicialWeekendDinnerRecipes700 : inicialWeekendDinnerRecipes500);
+}
+
+const keywords = {"Pollo/Pavo":["pollo","pollos","pavo","pavos","pechuga","pechugas"],"Ternera/Cerdo":["ternera","cerdo","jamon","jamones","lomo","lomos","carne picada","carne magra","solomillo"],"Pescado blanco":["merluza","merluzas","bacalao","bacalaos","lubina","lubinas","emperador","dorada","doradas"],"Pescado azul":["salmon","salmones","atun","sardina","sardinas","caballa","caballas"],"Marisco":["gamba","gambas","sepia","sepias","chipirones","marisco","mariscos","langostinos"],"Huevos":["huevo","huevos","tortilla","tortillas","revuelto","revueltos","frittata"],"Lacteos":["leche","yogur","yogures"],"Queso":["queso","quesos","mozzarella","feta","philadelphia","burrata","cottage"],"Pasta":["pasta","pastas","gnocchi","gnocchis","noodles","noquis"],"Pan":["pan","panes","tostada","tostadas","bocadillo","bocadillos","sandwich","tortilla de trigo","wasa","hamburguesa","piadina","burrito","fajitas","tosta","wrap","tacos"],"Arroz":["arroz","arroces"],"Patata":["patata","patatas","batata","batatas"],"Legumbres":["lenteja","lentejas","garbanzo","garbanzos","alubia","alubias","judia blanca","judias blancas","guisante","guisantes","hummus","quinoa"],"Cebolla":["cebolla","cebollas","puerro","puerros"],"Pimiento":["pimiento","pimientos","piquillo","piquillos"],"Brocoli":["brocoli"],"Espinacas":["espinaca","espinacas"],"Lechuga":["lechuga","lechugas","rucula","brotes"],"Zanahoria":["zanahoria","zanahorias"],"Tomate":["tomate","tomates","cherry","cherries"],"Berenjena":["berenjena","berenjenas"],"Calabacin":["calabacin","calabacines"],"Champinones":["champinon","champinones","seta","setas"],"Aguacate":["aguacate","aguacates","guacamole"],"Gluten":["pasta","gnocchi","noodles","pan","tostada","bocadillo","sandwich","tortilla","wasa","hamburguesa","piadina","noquis"],"Lactosa":["queso","mozzarella","feta","philadelphia","leche","yogur","burrata","cottage"]};
+const dayNames = ["Lunes","Martes","Miercoles","Jueves","Viernes","Sabado","Domingo"];
+
+function containsDisliked(recipe, dl) { if (!dl||dl.length===0) return false; const t=(recipe.name+" "+recipe.ingredients).toLowerCase(); for(let f of dl){const kl=keywords[f];if(!kl)continue;for(let kw of kl){if(new RegExp('\\b'+kw.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+'\\b','i').test(t))return true;}} return false; }
+function getProteinType(r) { const t=(r.name+" "+r.ingredients).toLowerCase(); if(/\b(pollo|pavo|pechuga)\b/.test(t))return'ave';if(/\b(ternera|cerdo|lomo|jamon)\b/.test(t))return'carne';if(/\b(pescado|merluza|salmon|atun|emperador|lubina|bacalao|caballa|sardina|dorada)\b/.test(t))return'pescado';if(/\b(gamba|marisco|sepia|chipiron|langostinos)\b/.test(t))return'marisco';if(/\b(huevo|tortilla|revuelto|frittata)\b/.test(t))return'huevo';if(/\b(lenteja|garbanzo|alubia|quinoa)\b/.test(t))return'legumbre';return'mixto'; }
+function getSubstitute(type,dl,cur,used,di,lp){let pool=type==='lunch'?getActiveLunchRecipes():(di>=0&&di<=3)?getActiveWeekdayDinnerRecipes():getActiveWeekendDinnerRecipes();for(let a=0;a<30;a++){const v=pool.filter(r=>!containsDisliked(r,dl)&&r.name!==cur.name&&!used.has(r.name));if(v.length===0){const fb=pool.filter(r=>!containsDisliked(r,dl));return fb.length>0?fb[Math.floor(Math.random()*fb.length)]:{"name":"Opcion libre equilibrada","image":"https://nutricionista.io/wp-content/uploads/2026/01/placeholder.png","ingredients":"Elige tus alimentos favoritos equilibrando proteinas, carbohidratos y verduras."};}const c=v[Math.floor(Math.random()*v.length)];if(lp&&v.length>3&&getProteinType(c)===lp&&getProteinType(c)!=='mixto')continue;return c;}const fb=pool.filter(r=>!containsDisliked(r,dl));return fb.length>0?fb[Math.floor(Math.random()*fb.length)]:pool[0];}
+
+// === GET ALL RECIPES FOR DROPDOWN ===
+function getAllRecipesForMealType(mealType, dayIndex) {
+    if (mealType === 'lunch') return getActiveLunchRecipes();
+    if (dayIndex >= 0 && dayIndex <= 3) return getActiveWeekdayDinnerRecipes();
+    return getActiveWeekendDinnerRecipes();
+}
+
+// === CLOSE ALL DROPDOWNS ===
+function closeAllDropdowns(except) {
+    document.querySelectorAll('.recipe-dropdown.open').forEach(function(dd) {
+        if (dd !== except) dd.classList.remove('open');
+    });
+}
+
+// Close dropdowns when clicking outside
+document.addEventListener('click', function(e) {
+    if (!e.target.closest('.recipe-dropdown') && !e.target.closest('.recipe-selector-toggle')) {
+        closeAllDropdowns();
+    }
+});
+
+function renderTable(tid,mL,mD,dl){const tb=document.getElementById(tid);tb.innerHTML='';const trL=document.createElement('tr');const uL=new Set();let lLP=null;mL.forEach(function(r,i){let d=containsDisliked(r,dl)?getSubstitute('lunch',dl,r,uL,i,lLP):r;uL.add(d.name);lLP=getProteinType(d);trL.appendChild(createCell(d,'COMIDA','lunch',dl,i));});tb.appendChild(trL);const trD=document.createElement('tr');const uD=new Set();let lDP=null;mD.forEach(function(r,i){let d=containsDisliked(r,dl)?getSubstitute('dinner',dl,r,uD,i,lDP):r;uD.add(d.name);lDP=getProteinType(d);trD.appendChild(createCell(d,'CENA','dinner',dl,i));});tb.appendChild(trD);}
+
+function generateWeeklyMenu(){const iC=document.getElementById('recetarioInicial').checked,vC=document.getElementById('recetarioVerde').checked,rC=document.getElementById('recetarioRojo').checked;if(!iC&&!vC&&!rC){alert('Debes seleccionar al menos un recetario.');return;}const ck=document.querySelectorAll('input[type="checkbox"]:checked:not(#recetarioInicial):not(#recetarioVerde):not(#recetarioRojo)');const dl=Array.from(ck).map(function(c){return c.value;});const aL=getActiveLunchRecipes(),aWD=getActiveWeekdayDinnerRecipes(),aWE=getActiveWeekendDinnerRecipes();function pick(arr,n){let a=[...arr],r=[];while(r.length<n&&a.length>0){const i=Math.floor(Math.random()*a.length);r.push(a[i]);a.splice(i,1);}return r;}const m1L=pick(aL,7);let m1D=pick(aWD,4).concat(pick(aWE,3));const m2L=pick(aL.filter(function(r){return!m1L.includes(r);}),7);let m2D=pick(aWD.filter(function(r){return!m1D.includes(r);}),4).concat(pick(aWE.filter(function(r){return!m1D.includes(r);}),3));renderTable('menuBody1',m1L,m1D,dl);renderTable('menuBody2',m2L,m2D,dl);document.getElementById('menusArea').style.display='block';document.getElementById('predefinedMenusSection').style.display='block';document.getElementById('copyFeedback').style.opacity=0;document.getElementById('menusArea').scrollIntoView({behavior:'smooth',block:'start'});}
+
+function captureMenu(wrapper){return new Promise(function(resolve){const clone=wrapper.cloneNode(true);clone.style.position='absolute';clone.style.left='-9999px';clone.style.top='0';clone.style.width=wrapper.offsetWidth+'px';clone.style.background='#ffffff';clone.querySelectorAll('td').forEach(function(c){c.style.background='#ffffff';c.style.backgroundColor='#ffffff';c.style.boxShadow='none';c.style.transform='none';c.style.transition='none';c.style.animation='none';c.style.cursor='default';c.onclick=null;c.onmouseover=null;c.onmouseout=null;c.classList.remove('animate-change');});clone.querySelectorAll('.recipe-selector-toggle, .recipe-dropdown').forEach(function(el){el.remove();});document.body.appendChild(clone);requestAnimationFrame(function(){html2canvas(clone,{scale:4,backgroundColor:'#ffffff',logging:false,useCORS:true,allowTaint:true,imageTimeout:0,removeContainer:true}).then(function(cv){document.body.removeChild(clone);resolve(cv);}).catch(function(){document.body.removeChild(clone);resolve(null);});});});}
+
+async function downloadMenuAsImage(wid,pn){const w=document.getElementById(wid);const fb=document.getElementById('copyFeedback');fb.textContent="Generando imagen...";fb.style.opacity=1;const cv=await captureMenu(w);if(!cv){fb.textContent="Error";setTimeout(function(){fb.style.opacity=0;},3000);return;}cv.toBlob(function(b){const u=URL.createObjectURL(b);const l=document.createElement('a');l.download=pn+'_Menu_L'+currentLunchKcal+'_D'+currentDinnerKcal+'_HD.png';l.href=u;l.click();URL.revokeObjectURL(u);fb.textContent=pn+' descargado!';setTimeout(function(){fb.style.opacity=0;},3000);},'image/png',1.0);}
+
+async function copyMenuAsImage(wid,pn){const w=document.getElementById(wid);const fb=document.getElementById('copyFeedback');fb.textContent="Copiando imagen...";fb.style.opacity=1;const cv=await captureMenu(w);if(!cv){fb.textContent="Error";setTimeout(function(){fb.style.opacity=0;},3000);return;}cv.toBlob(async function(b){try{await navigator.clipboard.write([new ClipboardItem({'image/png':b})]);fb.textContent=pn+' copiado!';}catch(e){fb.textContent="Tu navegador no soporta copiar imagenes.";}setTimeout(function(){fb.style.opacity=0;},3000);},'image/png',1.0);}
+
+// === CREATE CELL WITH DROPDOWN SELECTOR ===
+function createCell(recipe, labelText, mealType, dislikedList, dayIndex) {
+    const td = document.createElement('td');
+    td.className = 'meal-cell';
+    td.setAttribute('data-day', dayNames[dayIndex]);
+    td.setAttribute('data-meal-type', mealType);
+    td.setAttribute('data-day-index', dayIndex);
+    td.title = "Haz clic para cambiar o usa la flecha para elegir";
+
+    let usedInRow = new Set();
+    let lastProtein = getProteinType(recipe);
+    let currentRecipe = recipe;
+
+    // Function to update cell content
+    function updateCellContent(newRecipe) {
+        currentRecipe = newRecipe;
+        lastProtein = getProteinType(newRecipe);
+        imgEl.src = newRecipe.image;
+        nameEl.textContent = newRecipe.name;
+        ingredientsEl.textContent = newRecipe.ingredients;
+        td.classList.remove('animate-change');
+        void td.offsetWidth;
+        td.classList.add('animate-change');
+    }
+
+    // Click on cell = random change (original behavior)
+    td.onclick = function(e) {
+        if (e.target.closest('.recipe-selector-toggle') || e.target.closest('.recipe-dropdown')) return;
+        const ci = parseInt(td.getAttribute('data-day-index'));
+        const row = td.parentElement;
+        const cells = row.querySelectorAll('.meal-cell');
+        usedInRow.clear();
+        cells.forEach(function(cell) {
+            const ns = cell.querySelector('.recipe-name');
+            if (ns && cell !== td) usedInRow.add(ns.textContent);
+        });
+        const nr = getSubstitute(mealType, dislikedList, currentRecipe, usedInRow, ci, lastProtein);
+        updateCellContent(nr);
+    };
+
+    // Meal label
+    const ls = document.createElement('span');
+    ls.className = 'meal-label';
+    ls.textContent = labelText;
+
+    // Recipe image
+    const imgEl = document.createElement('img');
+    imgEl.className = 'recipe-image';
+    imgEl.src = recipe.image;
+    imgEl.alt = recipe.name;
+    imgEl.loading = 'lazy';
+
+    // Recipe name
+    const nameEl = document.createElement('span');
+    nameEl.className = 'recipe-name';
+    nameEl.textContent = recipe.name;
+
+    // Recipe ingredients
+    const ingredientsEl = document.createElement('span');
+    ingredientsEl.className = 'recipe-ingredients';
+    ingredientsEl.textContent = recipe.ingredients;
+
+    // === DROPDOWN TOGGLE BUTTON (arrow) ===
+    const toggleBtn = document.createElement('button');
+    toggleBtn.className = 'recipe-selector-toggle';
+    toggleBtn.innerHTML = '&#9660;';
+    toggleBtn.title = 'Elegir receta de la lista';
+    toggleBtn.type = 'button';
+
+    // === DROPDOWN CONTAINER ===
+    const dropdown = document.createElement('div');
+    dropdown.className = 'recipe-dropdown';
+
+    // Search box
+    const searchBox = document.createElement('div');
+    searchBox.className = 'recipe-dropdown-search';
+    const searchInput = document.createElement('input');
+    searchInput.type = 'text';
+    searchInput.placeholder = 'Buscar receta...';
+    searchInput.onclick = function(e) { e.stopPropagation(); };
+    searchBox.appendChild(searchInput);
+
+    // Recipe list container
+    const listContainer = document.createElement('div');
+    listContainer.className = 'recipe-dropdown-list';
+
+    dropdown.appendChild(searchBox);
+    dropdown.appendChild(listContainer);
+
+    // Build dropdown items
+    function buildDropdownList(filterText) {
+        listContainer.innerHTML = '';
+        const allRecipes = getAllRecipesForMealType(mealType, dayIndex);
+        const filtered = filterText
+            ? allRecipes.filter(function(r) {
+                const searchLower = filterText.toLowerCase();
+                return r.name.toLowerCase().indexOf(searchLower) !== -1 ||
+                       r.ingredients.toLowerCase().indexOf(searchLower) !== -1;
+              })
+            : [];
+
+        // If no search text, show 5 random suggestions
+        let toShow;
+        if (!filterText) {
+            const available = allRecipes.filter(function(r) {
+                return r.name !== currentRecipe.name && !containsDisliked(r, dislikedList);
+            });
+            // Shuffle and pick 5
+            const shuffled = available.sort(function() { return 0.5 - Math.random(); });
+            toShow = shuffled.slice(0, 5);
+
+            const header = document.createElement('div');
+            header.className = 'recipe-dropdown-header';
+            header.textContent = 'Sugerencias';
+            listContainer.appendChild(header);
+        } else {
+            toShow = filtered.slice(0, 15);
+            if (toShow.length === 0) {
+                const noResults = document.createElement('div');
+                noResults.className = 'recipe-dropdown-header';
+                noResults.textContent = 'Sin resultados';
+                noResults.style.textAlign = 'center';
+                noResults.style.padding = '20px';
+                listContainer.appendChild(noResults);
+                return;
+            }
+            const header = document.createElement('div');
+            header.className = 'recipe-dropdown-header';
+            header.textContent = toShow.length + ' resultado(s)';
+            listContainer.appendChild(header);
+        }
+
+        toShow.forEach(function(r) {
+            const item = document.createElement('button');
+            item.className = 'recipe-dropdown-item';
+            item.type = 'button';
+
+            const img = document.createElement('img');
+            img.src = r.image;
+            img.alt = r.name;
+            img.loading = 'lazy';
+
+            const info = document.createElement('div');
+            info.className = 'recipe-dropdown-item-info';
+
+            const itemName = document.createElement('div');
+            itemName.className = 'recipe-dropdown-item-name';
+            itemName.textContent = r.name;
+
+            const itemIngredients = document.createElement('div');
+            itemIngredients.className = 'recipe-dropdown-item-ingredients';
+            itemIngredients.textContent = r.ingredients;
+
+            info.appendChild(itemName);
+            info.appendChild(itemIngredients);
+            item.appendChild(img);
+            item.appendChild(info);
+
+            item.onclick = function(e) {
+                e.stopPropagation();
+                updateCellContent(r);
+                dropdown.classList.remove('open');
+                searchInput.value = '';
+            };
+
+            listContainer.appendChild(item);
+        });
+    }
+
+    // Toggle dropdown
+    toggleBtn.onclick = function(e) {
+        e.stopPropagation();
+        const wasOpen = dropdown.classList.contains('open');
+        closeAllDropdowns();
+        if (!wasOpen) {
+            dropdown.classList.add('open');
+            searchInput.value = '';
+            buildDropdownList('');
+            setTimeout(function() { searchInput.focus(); }, 100);
+        }
+    };
+
+    // Search input handler
+    let searchTimeout;
+    searchInput.oninput = function() {
+        clearTimeout(searchTimeout);
+        searchTimeout = setTimeout(function() {
+            buildDropdownList(searchInput.value.trim());
+        }, 200);
+    };
+
+    // Assemble cell
+    td.appendChild(ls);
+    td.appendChild(toggleBtn);
+    td.appendChild(imgEl);
+    td.appendChild(nameEl);
+    td.appendChild(ingredientsEl);
+    td.appendChild(dropdown);
+
+    return td;
+}
+</script>
+</body>
+</html>
