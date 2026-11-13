@@ -1,0 +1,6 @@
+---
+import Icon from './Icon.astro';
+const { compact = false } = Astro.props;
+---
+<a href="https://wa.me/34916146770?text=Hola%2C+me+gustar%C3%ADa+pedir+cita+en+Cl%C3%ADnica+Dos+de+Mayo." target="_blank" rel="noopener" class:list={['whatsapp-link', {compact}]} aria-label="Escribir por WhatsApp a Clínica Dos de Mayo"><Icon name="chat" size={19}/><span>{compact ? 'WhatsApp' : 'Escribir por WhatsApp'}</span></a>
+<style>.whatsapp-link{display:inline-flex;align-items:center;justify-content:center;gap:9px;color:var(--green);font-size:13px;font-weight:600;min-height:44px;text-decoration:underline;text-underline-offset:4px}.whatsapp-link.compact{flex-direction:column;gap:3px;font-size:10px;min-width:72px;border:1px solid var(--line);border-radius:12px;text-decoration:none}.whatsapp-link:hover{opacity:.8}</style>

@@ -1,54 +1,7 @@
 ---
-interface Props {
-  titulo?: string;
-  subtitulo?: string;
-}
-
-const { titulo = 'Necesitas un podologo en Mostoles?', subtitulo = 'Pide tu cita en Clinica Dos de Mayo. Estamos en C/ Soria 2, Mostoles.' } = Astro.props;
+import WhatsAppLink from './WhatsAppLink.astro';
+import Icon from './Icon.astro';
+const { titulo = 'Demos el primer paso.', subtitulo = 'Llámanos para pedir cita en Clínica Dos de Mayo, Móstoles.' } = Astro.props;
 ---
-<section class="cta-final">
-  <div class="container cta-inner">
-    <h2>{titulo}</h2>
-    <p>{subtitulo}</p>
-    <a href="tel:+34916146770" class="btn btn-cta btn-cta-large">📞 Llamar al 916 14 67 70</a>
-  </div>
-</section>
-
-<style>
-  .cta-final {
-    background: linear-gradient(135deg, var(--primary-dark), var(--primary));
-    padding: 4rem 0;
-    text-align: center;
-  }
-  .cta-inner h2 {
-    color: var(--white);
-    margin-bottom: 1rem;
-  }
-  .cta-inner p {
-    color: rgba(255,255,255,0.85);
-    font-size: 1.1rem;
-    margin-bottom: 2rem;
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  .btn-cta-large {
-    padding: 1rem 2.5rem;
-    font-size: 1.15rem;
-  }
-  @media (max-width: 768px) {
-    .cta-final {
-      padding: 3rem 0;
-    }
-    .cta-inner p {
-      font-size: 1rem;
-      margin-bottom: 1.5rem;
-    }
-    .btn-cta-large {
-      width: 100%;
-      max-width: 320px;
-      padding: 1rem 1.5rem;
-      font-size: 1.05rem;
-    }
-  }
-</style>
+<section class="call-close" id="contacto"><div class="container close-inner"><div><span class="eyebrow light">TU CITA, CON UNA LLAMADA</span><h2>{titulo}</h2><p>{subtitulo}</p></div><div class="close-actions"><a href="tel:+34916146770" class="close-number"><Icon size={26} /><span><small>Llamar para pedir cita</small>916 14 67 70</span><Icon name="arrow" size={26} /></a><div class="close-whatsapp"><WhatsAppLink /></div></div></div></section>
+<style>.close-whatsapp{margin-top:14px;filter:brightness(0) invert(1);opacity:.85}.call-close{background:var(--plum);color:white;padding:78px 0}.close-inner{display:flex;justify-content:space-between;align-items:center;gap:3rem}.call-close h2{color:white;font-size:clamp(2.3rem,4vw,3.7rem);margin:14px 0}.call-close p{color:#dcd7df;max-width:440px;font-size:16px}.close-number{display:flex;align-items:center;gap:22px;color:white;white-space:nowrap;font-size:33px;letter-spacing:-1px}.close-number small{display:block;font-size:13px;letter-spacing:0;margin-bottom:6px;color:#cfc6d4}.close-number:hover{color:#c9ddcc}@media(max-width:800px){.call-close{padding:56px 0}.close-inner{display:block}.close-number{margin-top:30px;font-size:28px;gap:15px}.call-close h2{font-size:38px}}</style>
