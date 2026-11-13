@@ -47,3 +47,11 @@ Preparación para revisión, 13 de noviembre de 2026. No publicado. No fusionar 
 
 ## Aclaración WhatsApp, 13 noviembre 2026 16:42
 Antonio confirma directamente que 916146770 también recibe WhatsApp. CTA secundario en portada, cierre de todas las páginas y barra móvil; llamada sigue siendo principal. Enlace con consulta genérica editable antes del envío. Sin mensajes de prueba ni contacto con terceros.
+
+## Preparación para publicación autorizada, 13 noviembre 2026 18:12
+
+Antonio aprueba publicar el rediseño y mantener las páginas de tratamiento/zona con textos breves sin promesas clínicas no verificadas. Se conserva la portada, se sustituyen las 18 subpáginas por fichas neutrales con contacto, y se eliminan de ellas plazos, resultados, cifras y credenciales sin evidencia. Los textos originales quedan recuperables en el historial anterior; REVISION-CLINICA-PENDIENTE.md es un inventario histórico, no texto vigente que deba publicarse como afirmación.
+
+El destino actual de producción verificado en Vercel es clinicadosdemayo-es.vercel.app. Canonicals, OpenGraph, JSON-LD, sitemap y robots pasan a ese destino. No se modifica DNS, configuración Vercel ni dominios externos.
+
+Antonio confirma directamente a18:13:50 que el titular/política es el mismo de Fisiomed. Se incorpora FISIOMED2001SL, NIFB84605740, y enlace a política oficial https://fisiomed2001.com/politica-de-privacidad/ verificada hoy. La preparación no equivale a publicación hecha. Dependencias originales conservadas, auditoría técnica separada.

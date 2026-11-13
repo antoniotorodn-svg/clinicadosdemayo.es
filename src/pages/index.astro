@@ -5,16 +5,16 @@ import Icon from '../components/Icon.astro';
 import CtaFinal from '../components/CtaFinal.astro';
 import ResenasGrid from '../components/ResenasGrid.astro';
 const treatments = [
- {n:'01',title:'Quiropodia',text:'Cuidado de durezas, callos y otras molestias habituales de los pies.',url:'/quiropodia'},
- {n:'02',title:'Uñas encarnadas',text:'Valoración y tratamiento de la uña y las molestias que provoca.',url:'/unas-encarnadas-mostoles'},
- {n:'03',title:'Estudio de la pisada',text:'Análisis biomecánico para conocer cómo apoyas y caminas.',url:'/estudio-biomecanico-mostoles'},
- {n:'04',title:'Plantillas a medida',text:'Ortopodología y plantillas personalizadas para adultos y niños.',url:'/plantillas-ortopedicas-mostoles'},
- {n:'05',title:'Cirugía del pie',text:'Valoración de patologías del pie y cirugía percutánea MIS.',url:'/cirugia-pie-mostoles'},
- {n:'06',title:'Podología deportiva',text:'Atención a las necesidades del pie relacionadas con el deporte.',url:'/podologia-deportiva-mostoles'},
+ {n:'01',title:'Quiropodia',text:'Cuidado de durezas, callos y otras molestias habituales de los pies.',url:'/quiropodia/'},
+ {n:'02',title:'Uñas encarnadas',text:'Valoración y tratamiento de la uña y las molestias que provoca.',url:'/unas-encarnadas-mostoles/'},
+ {n:'03',title:'Estudio de la pisada',text:'Análisis biomecánico para conocer cómo apoyas y caminas.',url:'/estudio-biomecanico-mostoles/'},
+ {n:'04',title:'Plantillas a medida',text:'Ortopodología y plantillas personalizadas para adultos y niños.',url:'/plantillas-ortopedicas-mostoles/'},
+ {n:'05',title:'Cirugía del pie',text:'Valoración de patologías del pie y cirugía percutánea MIS.',url:'/cirugia-pie-mostoles/'},
+ {n:'06',title:'Podología deportiva',text:'Atención a las necesidades del pie relacionadas con el deporte.',url:'/podologia-deportiva-mostoles/'},
 ];
-const schema = JSON.stringify({'@context':'https://schema.org','@type':'MedicalClinic','@id':'https://clinicadosdemayo.com/#business','name':'Clínica Dos de Mayo','telephone':'+34916146770','url':'https://clinicadosdemayo.com','address':{'@type':'PostalAddress','streetAddress':'Calle Soria 2','addressLocality':'Móstoles','postalCode':'28934','addressRegion':'Madrid','addressCountry':'ES'},'medicalSpecialty':'Podiatry','openingHours':['Mo-Tu 09:30-19:00','We 09:30-19:30','Th-Fr 09:30-13:30']});
+const schema = JSON.stringify({'@context':'https://schema.org','@type':'MedicalClinic','@id':'https://clinicadosdemayo-es.vercel.app/#business','name':'Clínica Dos de Mayo','telephone':'+34916146770','url':'https://clinicadosdemayo-es.vercel.app','address':{'@type':'PostalAddress','streetAddress':'Calle Soria 2','addressLocality':'Móstoles','postalCode':'28934','addressRegion':'Madrid','addressCountry':'ES'},'medicalSpecialty':'Podiatry','openingHours':['Mo-Tu 09:30-19:00','We 09:30-19:30','Th-Fr 09:30-13:30']});
 ---
-<Layout title="Clínica Dos de Mayo | Podología en Móstoles | Pide tu cita" description="Cuidado de tus pies en Clínica Dos de Mayo, Móstoles. Quiropodia, estudio de la pisada, plantillas y cirugía del pie. Pide cita en el 916 14 67 70." canonical="https://clinicadosdemayo.com" schema={schema}>
+<Layout title="Clínica Dos de Mayo | Podología en Móstoles | Pide tu cita" description="Cuidado de tus pies en Clínica Dos de Mayo, Móstoles. Quiropodia, estudio de la pisada, plantillas y cirugía del pie. Pide cita en el 916 14 67 70." canonical="https://clinicadosdemayo-es.vercel.app" schema={schema}>
   <section class="home-hero">
    <div class="container hero-layout">
     <div class="home-hero-copy">
@@ -38,7 +38,7 @@ const schema = JSON.stringify({'@context':'https://schema.org','@type':'MedicalC
    <div class="container">
     <div class="section-heading"><div><p class="eyebrow">CADA PIE, SU CUIDADO</p><h2>¿En qué podemos ayudarte?</h2></div><p>Desde las molestias del día a día hasta un estudio de la pisada. Encuentra información sobre tu tratamiento.</p></div>
     <div class="treatment-grid">{treatments.map(t=><a class="treatment" href={t.url}><div class="treatment-top"><span>{t.n}</span><Icon name="arrow" size={22}/></div><h3>{t.title}</h3><p>{t.text}</p><span class="treatment-link">Conocer el tratamiento</span></a>)}</div>
-    <div class="treatment-other"><p>También atendemos <a href="/papilomas-plantares-mostoles">papilomas</a>, <a href="/pie-diabetico-mostoles">pie diabético</a>, <a href="/juanetes-mostoles">juanetes</a> y <a href="/espolon-calcaneo-mostoles">dolor en el talón</a>.</p><a href="tel:+34916146770">¿Tienes dudas? Llámanos <Icon name="arrow" size={17}/></a></div>
+    <div class="treatment-other"><p>También atendemos <a href="/papilomas-plantares-mostoles/">papilomas</a>, <a href="/pie-diabetico-mostoles/">pie diabético</a>, <a href="/juanetes-mostoles/">juanetes</a> y <a href="/espolon-calcaneo-mostoles/">dolor en el talón</a>.</p><a href="tel:+34916146770">¿Tienes dudas? Llámanos <Icon name="arrow" size={17}/></a></div>
    </div>
   </section>
 
