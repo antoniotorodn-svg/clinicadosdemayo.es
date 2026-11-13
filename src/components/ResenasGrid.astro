@@ -1,40 +1,6 @@
 ---
-import ResenaCard from './ResenaCard.astro';
-import resenas from '../data/resenas.json';
-
-interface Props {
-  limit?: number;
-  indices?: number[];
-}
-
-const { limit = 9, indices } = Astro.props;
-const items = indices ? indices.map(i => resenas[i]) : resenas.slice(0, limit);
+import Icon from './Icon.astro';
 ---
-<section class="section">
-  <div class="container">
-    <h2 class="section-title">Lo que dicen nuestros pacientes</h2>
-    <div class="resenas-grid">
-      {items.map(r => (
-        <ResenaCard nombre={r.nombre} inicial={r.inicial} estrellas={r.estrellas} texto={r.texto} />
-      ))}
-    </div>
-  </div>
-</section>
-
-<style>
-  .resenas-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.25rem;
-  }
-  @media (max-width: 1024px) {
-    .resenas-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-  @media (max-width: 640px) {
-    .resenas-grid {
-      grid-template-columns: 1fr;
-    }
-  }
+<section class="review-invitation"><div class="container review-inner"><div><p class="eyebrow">OPINIONES EN GOOGLE</p><h2>Conoce otras experiencias.</h2><p>Lee las reseñas de la clínica directamente en Google.</p></div><a href="https://www.google.com/search?q=Cl%C3%ADnica+Dos+de+Mayo+Pod%C3%B3logo+M%C3%B3stoles&hl=es" target="_blank" rel="noopener"><strong>4,6<span>/5</span></strong><small>134 reseñas en Google <Icon name="arrow" size={16}/></small></a></div></section>
+<style>.review-invitation{padding:65px 0;background:var(--sand)}.review-inner{display:flex;align-items:center;justify-content:space-between;gap:35px}.review-inner h2{font-size:34px;margin:15px 0}.review-inner p:not(.eyebrow){font-size:14px;color:var(--muted)}.review-inner>a{color:var(--green)}.review-inner strong{font-family:'DM Serif Display',Georgia,serif;font-weight:400;font-size:63px;letter-spacing:-2px;display:block}.review-inner strong span{font-size:28px}.review-inner small{display:flex;align-items:center;gap:12px;font-size:12px}@media(max-width:800px){.review-inner{display:block}.review-inner>a{display:block;margin-top:25px}.review-inner h2{font-size:30px}}
 </style>

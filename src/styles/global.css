@@ -250,3 +250,20 @@ button {
   clip: rect(0, 0, 0, 0);
   border: 0;
 }
+
+/* Dos de Mayo visual system */
+:root{--ink:#302935;--plum:#32243d;--green:#205d4e;--green-pale:#e9efea;--paper:#faf9f6;--muted:#69676a;--line:#dedcd7;--primary:var(--green);--primary-dark:#174637;--primary-pale:var(--green-pale);--text:var(--ink);--text-light:var(--muted);--cream:var(--paper);--gold:var(--green);--gold-light:#e9efea;--sand:#f1efeb;--sand-dark:#e9e5df;--radius:14px}
+body{background:var(--paper)}
+h1,h2,h3,h4{color:var(--ink);font-weight:400}
+a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid #8e6cab;outline-offset:5px}
+.btn{border-radius:10px}
+.btn-cta{background:var(--green);color:white}
+.btn-cta:hover{background:var(--plum)}
+.btn-outline{border:1px solid var(--green);color:var(--green);font-size:14px}
+.btn-outline:hover{background:var(--green);color:white}
+.container{max-width:1200px;padding-left:32px;padding-right:32px}
+.eyebrow{font-size:10px;font-weight:600;letter-spacing:1.8px;color:var(--green);display:flex;align-items:center;gap:9px}
+.eyebrow.light{color:#d2c8da}
+.status-dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--green)}
+section[id]{scroll-margin-top:110px}
+@media(max-width:800px){.container{padding-left:22px;padding-right:22px}body{padding-bottom:calc(78px + env(safe-area-inset-bottom))}section[id]{scroll-margin-top:94px}.eyebrow{font-size:9px;letter-spacing:1.5px}}
